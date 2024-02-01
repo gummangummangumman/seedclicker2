@@ -1,5 +1,10 @@
 <script lang="ts">
-	export let name: string;
+	import type { Item } from '../types/item';
+	export let item: Item;
 </script>
 
-<section>{name}</section>
+<div class="border">
+	{item.name}
+	<br />
+	{item.cost}
+</div>

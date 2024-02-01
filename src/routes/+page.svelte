@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Item from '../components/Item.svelte';
+	import { items } from '../types/item';
 
 	let seeds = 0;
 	let clicks = 0;
@@ -27,13 +28,13 @@
 
 <section class="p-2 py-8 text-center">
 	<button on:click={click}>
-		<img src="https://gumman.one/pics/gumman.jpg" alt="sunflower" class={imgClass} />
+		<img src="https://gumman.one/pics/gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
 		<h1>Seeds: {seeds}</h1>
 	</button>
 
 	<div class="grid">
-		{#each { length: 3 } as _, i}
-			<Item name="lmfsdg" />
+		{#each items as item}
+			<Item {item} />
 		{/each}
 	</div>
 </section>
