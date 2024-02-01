@@ -5,10 +5,11 @@
 	let clicks = 0;
 	let imgClass = 'transform: scaleX';
 
-	function click() {
+	function click(this: HTMLButtonElement) {
 		seeds += 1;
 		clicks += 1;
 		imgClass = getClass(clicks);
+		this.blur();
 	}
 
 	function getClass(clicks: number) {
