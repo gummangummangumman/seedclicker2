@@ -28,7 +28,7 @@
 
 <section class="p-2 py-8 text-center bg-bg dark:bg-bg-dark">
 	<button on:click={click}>
-		<img src="/gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
+		<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
 		<h1 class="dark:text-white">Seeds: {seeds}</h1>
 	</button>
 

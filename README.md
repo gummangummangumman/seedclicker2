@@ -7,3 +7,13 @@ Sequel to [seedclicker](https://github.com/gummangummangumman/seedclicker).
 -   `npm install`
 
 -   `npm start`
+
+## Building and deploying
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+Upload the files in the `build` folder to your preferred server.
