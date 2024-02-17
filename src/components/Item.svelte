@@ -3,7 +3,7 @@
 	export let item: Item;
 </script>
 
-<div class="border">
+<div class="border border-black">
 	{item.name}
 	<br />
 	{item.cost}

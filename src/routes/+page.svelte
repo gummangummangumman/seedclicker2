@@ -26,10 +26,10 @@
 	<title>Seedclicker 2 | {seeds}</title>
 </svelte:head>
 
-<section class="p-2 py-8 text-center">
+<section class="p-2 py-8 text-center bg-bg dark:bg-bg-dark">
 	<button on:click={click}>
-		<img src="https://gumman.one/pics/gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
-		<h1>Seeds: {seeds}</h1>
+		<img src="/gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
+		<h1 class="dark:text-white">Seeds: {seeds}</h1>
 	</button>
 
 	<div class="grid">
