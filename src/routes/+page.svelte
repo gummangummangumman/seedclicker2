@@ -2,6 +2,7 @@
 	import Item from '../components/Item.svelte';
 	import { items } from '../types/item';
 
+	//TODO replace state with gameState
 	let seeds = 0;
 	let clicks = 0;
 	let imgClass = 'transform: scaleX';
