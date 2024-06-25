@@ -1,16 +1,14 @@
 <script lang="ts">
 	import Item from '../components/Item.svelte';
 	import { items } from '../types/item';
+	import { gameState } from '../store/store'
 
-	//TODO replace state with gameState
-	let seeds = 0;
-	let clicks = 0;
 	let imgClass = 'transform: scaleX';
 
 	function click(this: HTMLButtonElement) {
-		seeds += 1;
-		clicks += 1;
-		imgClass = getClass(clicks);
+		$gameState.clicks++;
+		$gameState.seeds++;
+		imgClass = getClass($gameState.clicks);
 		this.blur();
 	}
 
@@ -24,18 +22,18 @@
 </script>
 
 <svelte:head>
-	<title>Seedclicker 2 | {seeds}</title>
+	<title>Seedclicker 2 | {$gameState.seeds}</title>
 </svelte:head>
 
 <section class="p-2 py-8 text-center bg-bg dark:bg-bg-dark">
 	<button on:click={click}>
 		<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
-		<h1 class="dark:text-white">Seeds: {seeds}</h1>
+		<h1 class="dark:text-white">Seeds: {$gameState.seeds}</h1>
 	</button>
 
 	<div class="grid">
-		{#each items as item}
-			<Item {item} />
+		{#each items as item, index}
+			<Item {item} {index} />
 		{/each}
 	</div>
 </section>

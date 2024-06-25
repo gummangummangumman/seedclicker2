@@ -4,10 +4,10 @@ export interface Item {
 }
 
 export const items: Item[] = [
-	{ name: 'Water can', cost: 2 },
-	{ name: 'Fertilizer Bag', cost: 2 },
-	{ name: 'Sprinkler', cost: 2 },
-	{ name: 'Tractor', cost: 2 },
-	{ name: 'Plantation', cost: 2 },
-	{ name: 'Sun', cost: 2 },
+	{ name: 'Water can', cost: 5 },
+	{ name: 'Fertilizer Bag', cost: 15 },
+	{ name: 'Sprinkler', cost: 400 },
+	{ name: 'Tractor', cost: 12_000 },
+	{ name: 'Plantation', cost: 500_000 },
+	{ name: 'Sun', cost: 9_999_999 },
 ];

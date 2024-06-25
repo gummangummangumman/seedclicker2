@@ -1,14 +1,19 @@
 <script lang="ts">
 	import type { Item } from '../types/item';
+	import { gameState } from '../store/store';
 	export let item: Item;
+	export let index: number;
 
-	let number: number = 0; //TODO replace with gameState
+	function buyItem() {
+		//TODO ...
+		$gameState.items[index]++;
+	}
 </script>
 
 <div class="border border-black">
-	<button on:click={() => number++}>Buy {item.name}</button>
+	<button on:click={() => buyItem()}>Buy {item.name}</button>
 	<br />
 	Cost: <strong>{item.cost}</strong> seeds
 	<br />
-	You have <strong>{number}</strong> {item.name}s
+	You have <strong>{$gameState.items[index]}</strong> {item.name}s
 </div>
