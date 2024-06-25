@@ -2,6 +2,7 @@
 	import Item from '../components/Item.svelte';
 	import { items } from '../types/item';
 	import { gameState } from '../store/store'
+	import type { GameState } from '../types/gameState';
 
 	let imgClass = 'transform: scaleX';
 
@@ -23,11 +24,15 @@
 	setInterval( () => grantseeds(), 1000);
 
 	function grantseeds() {
-		$gameState.seeds += $gameState.items.reduce(
+		$gameState.seeds += total_sps($gameState);
+    }
+
+	function total_sps(gameState: GameState) {
+		return gameState.items.reduce(
 			(accumulator, amountOfCurrentItem, index) => accumulator + items[index].sps * amountOfCurrentItem,
   			0,
 		);
-    }
+	}
 </script>
 
 <svelte:head>
@@ -38,6 +43,7 @@
 	<button on:click={click}>
 		<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
 		<h1 class="dark:text-white">Seeds: {$gameState.seeds}</h1>
+		<h1 class="dark:text-white">Sps: {total_sps($gameState)}</h1>
 	</button>
 
 	<div class="grid">

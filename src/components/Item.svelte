@@ -22,6 +22,6 @@
 	You have <strong>{$gameState.items[index]}</strong> {item.name}s
 	{#if $gameState.items[index] > 0}
 	<br />
-	Generating {$gameState.items[index] * item.sps} seeds per second
+	Generating {$gameState.items[index] * item.sps} <span title="seeds per second">sps</span>
 	{/if}
 </div>
