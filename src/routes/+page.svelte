@@ -19,6 +19,15 @@
 		}
 		return clicks % 2 == 1 ? 'flipped' : '';
 	}
+
+	setInterval( () => grantseeds(), 1000);
+
+	function grantseeds() {
+		$gameState.seeds += $gameState.items.reduce(
+			(accumulator, amountOfCurrentItem, index) => accumulator + items[index].sps * amountOfCurrentItem,
+  			0,
+		);
+    }
 </script>
 
 <svelte:head>

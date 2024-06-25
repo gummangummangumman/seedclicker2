@@ -5,7 +5,11 @@
 	export let index: number;
 
 	function buyItem() {
-		//TODO ...
+		const price = item.basePrice
+		if ($gameState.seeds < price) {
+			return;
+		}
+		$gameState.seeds -= price;
 		$gameState.items[index]++;
 	}
 </script>
@@ -13,7 +17,11 @@
 <div class="border border-black">
 	<button on:click={() => buyItem()}>Buy {item.name}</button>
 	<br />
-	Cost: <strong>{item.cost}</strong> seeds
+	Cost: <strong>{item.basePrice}</strong> seeds
 	<br />
 	You have <strong>{$gameState.items[index]}</strong> {item.name}s
+	{#if $gameState.items[index] > 0}
+	<br />
+	Generating {$gameState.items[index] * item.sps} seeds per second
+	{/if}
 </div>
