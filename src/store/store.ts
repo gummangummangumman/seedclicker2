@@ -6,4 +6,5 @@ export const gameState: Writable<GameState> = writable({
 	clicks: 0,
 	seeds: 0,
 	items: Array(items.length).fill(0),
+	clickPower: 1,
 });

@@ -8,7 +8,7 @@
 
 	function click(this: HTMLButtonElement) {
 		$gameState.clicks++;
-		$gameState.seeds++;
+		$gameState.seeds += $gameState.clickPower;
 		imgClass = getClass($gameState.clicks);
 		this.blur();
 	}
