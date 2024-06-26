@@ -1,8 +1,9 @@
 <script lang="ts">
 	import Item from '../components/Item.svelte';
 	import { items } from '../types/item';
-	import { gameState } from '../store/store'
+	import { gameState } from '../store/store';
 	import type { GameState } from '../types/gameState';
+	import { format } from '../util/number_formatting';
 
 	let imgClass = 'transform: scaleX';
 
@@ -21,16 +22,16 @@
 		return clicks % 2 == 1 ? 'flipped' : '';
 	}
 
-	setInterval( () => grantseeds(), 1000);
+	setInterval(() => grantseeds(), 1000);
 
 	function grantseeds() {
 		$gameState.seeds += total_sps($gameState);
-    }
+	}
 
 	function total_sps(gameState: GameState) {
 		return gameState.items.reduce(
 			(accumulator, amountOfCurrentItem, index) => accumulator + items[index].sps * amountOfCurrentItem,
-  			0,
+			0,
 		);
 	}
 </script>
@@ -42,8 +43,8 @@
 <section class="p-2 py-8 text-center bg-bg dark:bg-bg-dark">
 	<button on:click={click}>
 		<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
-		<h1 class="dark:text-white">Seeds: {$gameState.seeds}</h1>
-		<h1 class="dark:text-white">Sps: {total_sps($gameState)}</h1>
+		<h1 class="dark:text-white">Seeds: {format($gameState.seeds)}</h1>
+		<h1 class="dark:text-white">Sps: {format(total_sps($gameState))}</h1>
 	</button>
 
 	<div class="grid">
