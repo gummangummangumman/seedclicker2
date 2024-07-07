@@ -1,13 +1,36 @@
 <script lang="ts">
-	import Item from '../components/Item.svelte';
 	import { items } from '../types/item';
 	import { gameState } from '../store/store';
 	import { addSeeds, type GameState } from '../types/gameState';
 	import { format } from '../util/number_formatting';
 	import { onMount } from 'svelte';
-	import Stats from '../components/Stats.svelte';
+	import Stats from '../pages/Stats.svelte';
+	import Items from '../pages/Items.svelte';
+	import type { Page } from '../types/page';
+	import What from '../pages/What.svelte';
+	import Prestige from '../pages/Prestige.svelte';
 
 	let imgClass = 'transform: scaleX';
+
+	const pages: Page[] = [
+		{
+			name: 'Items',
+			component: Items,
+		},
+		{
+			name: 'Stats',
+			component: Stats,
+		},
+		{
+			name: 'What',
+			component: What,
+		},
+		{
+			name: 'Prestige',
+			component: Prestige,
+		},
+	];
+	let currentPage = pages[0];
 
 	function click(this: HTMLButtonElement) {
 		$gameState.clicks++;
@@ -28,6 +51,7 @@
 
 	function grantseeds() {
 		$gameState = addSeeds($gameState, total_sps($gameState));
+		$gameState.seconds++;
 	}
 
 	function total_sps(gameState: GameState) {
@@ -66,13 +90,18 @@
 		<h1 class="dark:text-white">Sps: {format(total_sps($gameState))}</h1>
 	</button>
 
-	<div class="grid">
-		{#each items as item, index}
-			<Item {item} {index} />
+	<div class="my-2">
+		{#each pages as page}
+			<button
+				class="p-2 border border-bg-dark {currentPage == page ? 'bg-bg-dark' : ''}"
+				on:click={() => (currentPage = page)}
+			>
+				{page.name}
+			</button>
 		{/each}
 	</div>
 
-	<Stats />
+	<svelte:component this={currentPage.component} />
 </section>
 
 <style>
@@ -83,7 +112,6 @@
 	.flipped {
 		transform: scaleX(-1);
 	}
-
 	.crazy {
 		transform: scaleY(-1);
 	}

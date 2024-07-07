@@ -5,6 +5,7 @@ export interface GameState {
 	totalLifetimeSeeds: number;
 	items: [string, number][]; //name, amount
 	clickPower: number;
+	seconds: number;
 }
 
 export function addSeeds(gameState: GameState, seeds: number): GameState {

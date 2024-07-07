@@ -9,4 +9,5 @@ export const gameState: Writable<GameState> = writable({
 	totalLifetimeSeeds: 0,
 	items: items.map((item) => [item.name, 0]),
 	clickPower: 1,
+	seconds: 0,
 });
