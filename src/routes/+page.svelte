@@ -7,8 +7,9 @@
 	import Stats from '../pages/Stats.svelte';
 	import Items from '../pages/Items.svelte';
 	import type { Page } from '../types/page';
-	import What from '../pages/What.svelte';
-	import Prestige from '../pages/Prestige.svelte';
+	import Upgrades from '../pages/Upgrades.svelte';
+	import Harvest from '../pages/Harvest.svelte';
+	import SaveAndLoad from '../pages/SaveAndLoad.svelte';
 
 	let imgClass = 'transform: scaleX';
 
@@ -22,12 +23,16 @@
 			component: Stats,
 		},
 		{
-			name: 'What',
-			component: What,
+			name: 'Talents',
+			component: Upgrades,
 		},
 		{
-			name: 'Prestige',
-			component: Prestige,
+			name: 'Harvest',
+			component: Harvest,
+		},
+		{
+			name: 'Save',
+			component: SaveAndLoad,
 		},
 	];
 	let currentPage = pages[0];
@@ -73,6 +78,9 @@
 					break;
 				case 'å':
 					$gameState = addSeeds($gameState, 5_000_000);
+					break;
+				case 's':
+					console.log($gameState);
 					break;
 			}
 		});

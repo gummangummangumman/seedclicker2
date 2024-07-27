@@ -10,4 +10,5 @@ export const gameState: Writable<GameState> = writable({
 	items: items.map((item) => [item.name, 0]),
 	clickPower: 1,
 	seconds: 0,
+	talents: [],
 });

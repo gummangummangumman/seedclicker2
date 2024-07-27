@@ -6,6 +6,7 @@ export interface GameState {
 	items: [string, number][]; //name, amount
 	clickPower: number;
 	seconds: number;
+	talents: string[];
 }
 
 export function addSeeds(gameState: GameState, seeds: number): GameState {
