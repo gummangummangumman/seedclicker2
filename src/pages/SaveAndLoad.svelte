@@ -1,11 +1,13 @@
 <script lang="ts">
-	import { gameState } from '../store/store';
+	import { gameState, initialGameState } from '../store/store';
 
 	let loadFile: HTMLInputElement;
 	let loadText: HTMLTextAreaElement;
 
 	function hardReset() {
-		alert('not implemented yet');
+		gameState.update(() => {
+			return structuredClone(initialGameState);
+		});
 	}
 
 	function handleFileChange(event: Event) {
@@ -73,7 +75,7 @@
 			document.body.removeChild(link);
 		}}
 	>
-		Save as a text file
+		Save as file
 	</button>
 	<br />
 	<div id="load" class="m-4 p-2 border border-black">
@@ -98,15 +100,18 @@
 		>
 			Load
 		</button>
+		<br />
 	</div>
 	<button
 		class="border border-black p-2 bg-red-600"
 		on:click={() => {
-			if (window.confirm('Are you SURE???????')) {
+			if (window.confirm('Are you sure?')) {
 				hardReset();
 			}
-		}}>Hard reset</button
+		}}
 	>
+		Hard reset 💀
+	</button>
 </div>
 
 <style>
