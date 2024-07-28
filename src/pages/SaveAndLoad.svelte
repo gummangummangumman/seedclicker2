@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { gameState, initialGameState } from '../store/store';
+	import type { GameState } from '../types/gameState';
 
 	let loadFile: HTMLInputElement;
 	let loadText: HTMLTextAreaElement;
@@ -31,6 +32,18 @@
 
 	function handleTextChange() {
 		loadFile.value = '';
+	}
+
+	function load() {
+		//TODO put parse in try catch
+		const save: GameState = JSON.parse(loadText.value);
+		console.log('loading save', save);
+		//TODO verify that save is a proper GameState object
+		gameState.update(() => {
+			return save;
+		});
+		loadFile.value = '';
+		loadText.value = '';
 	}
 </script>
 
@@ -93,9 +106,9 @@
 		<button
 			class="border border-black p-2"
 			on:click={() => {
-				const save = JSON.parse(loadText.value);
-				console.log('loading save', loadText.value, save);
-				alert('not implemented');
+				if (window.confirm('Are you sure? Please note that this will remove your progress.')) {
+					load();
+				}
 			}}
 		>
 			Load
