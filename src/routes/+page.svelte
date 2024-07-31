@@ -25,10 +25,13 @@
 		{
 			name: 'Talents',
 			component: Upgrades,
+			requirement: (gameState: GameState) => gameState.peakLifetimeSeeds > 15_000_000,
 		},
 		{
 			name: 'Harvest',
 			component: Harvest,
+			requirement: (gameState: GameState) =>
+				gameState.harvested.harvestCount > 0 || gameState.peakLifetimeSeeds > 5_000,
 		},
 		{
 			name: 'Save',
@@ -100,12 +103,14 @@
 
 	<div class="my-2">
 		{#each pages as page}
-			<button
-				class="p-2 border border-bg-dark {currentPage == page ? 'bg-bg-dark' : ''}"
-				on:click={() => (currentPage = page)}
-			>
-				{page.name}
-			</button>
+			{#if !page.requirement || page.requirement($gameState)}
+				<button
+					class="p-2 border border-bg-dark {currentPage == page ? 'bg-bg-dark' : ''}"
+					on:click={() => (currentPage = page)}
+				>
+					{page.name}
+				</button>
+			{/if}
 		{/each}
 	</div>
 
