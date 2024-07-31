@@ -7,6 +7,14 @@ export interface GameState {
 	clickPower: number;
 	seconds: number;
 	talents: string[];
+	harvested: HarvestedGameState;
+}
+
+export interface HarvestedGameState {
+	harvestCount: number;
+	clicks: number;
+	seeds: number;
+	seconds: number;
 }
 
 export function addSeeds(gameState: GameState, seeds: number): GameState {
