@@ -1,4 +1,10 @@
 export interface GameState {
+	current: CurrentGameState;
+	harvested: HarvestedGameState;
+	antiCheatToken?: string;
+}
+
+export interface CurrentGameState {
 	clicks: number;
 	seeds: number;
 	peakLifetimeSeeds: number;
@@ -7,7 +13,6 @@ export interface GameState {
 	clickPower: number;
 	seconds: number;
 	talents: string[];
-	harvested: HarvestedGameState;
 }
 
 export interface HarvestedGameState {
@@ -18,11 +23,14 @@ export interface HarvestedGameState {
 }
 
 export function addSeeds(gameState: GameState, seeds: number): GameState {
-	const newSeedAmount = gameState.seeds + seeds;
+	const newSeedAmount = gameState.current.seeds + seeds;
 	return {
 		...gameState,
-		seeds: newSeedAmount,
-		peakLifetimeSeeds: Math.max(gameState.peakLifetimeSeeds, newSeedAmount),
-		totalLifetimeSeeds: gameState.totalLifetimeSeeds + seeds,
+		current: {
+			...gameState.current,
+			seeds: newSeedAmount,
+			peakLifetimeSeeds: Math.max(gameState.current.peakLifetimeSeeds, newSeedAmount),
+			totalLifetimeSeeds: gameState.current.totalLifetimeSeeds + seeds,
+		},
 	};
 }

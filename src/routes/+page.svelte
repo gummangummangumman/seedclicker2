@@ -25,13 +25,13 @@
 		{
 			name: 'Talents',
 			component: Upgrades,
-			requirement: (gameState: GameState) => gameState.peakLifetimeSeeds > 15_000_000,
+			requirement: (gameState: GameState) => gameState.current.peakLifetimeSeeds > 15_000_000,
 		},
 		{
 			name: 'Harvest',
 			component: Harvest,
 			requirement: (gameState: GameState) =>
-				gameState.harvested.harvestCount > 0 || gameState.peakLifetimeSeeds > 5_000,
+				gameState.harvested.harvestCount > 0 || gameState.current.peakLifetimeSeeds > 5_000,
 		},
 		{
 			name: 'Save',
@@ -41,9 +41,9 @@
 	let currentPage = pages[0];
 
 	function click(this: HTMLButtonElement) {
-		$gameState.clicks++;
-		$gameState = addSeeds($gameState, $gameState.clickPower);
-		imgClass = getClass($gameState.clicks);
+		$gameState.current.clicks++;
+		$gameState = addSeeds($gameState, $gameState.current.clickPower);
+		imgClass = getClass($gameState.current.clicks);
 		this.blur();
 	}
 
@@ -59,11 +59,11 @@
 
 	function grantseeds() {
 		$gameState = addSeeds($gameState, total_sps($gameState));
-		$gameState.seconds++;
+		$gameState.current.seconds++;
 	}
 
 	function total_sps(gameState: GameState) {
-		return gameState.items.reduce(
+		return gameState.current.items.reduce(
 			(accumulator, amountOfCurrentItem, index) => accumulator + items[index].sps * amountOfCurrentItem[1],
 			0,
 		);
@@ -91,13 +91,13 @@
 </script>
 
 <svelte:head>
-	<title>Seedclicker 2 | {format($gameState.seeds)}</title>
+	<title>Seedclicker 2 | {format($gameState.current.seeds)}</title>
 </svelte:head>
 
 <section class="p-2 py-8 text-center bg-bg dark:bg-bg-dark">
 	<button on:click={click}>
 		<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
-		<h1 class="dark:text-white">Seeds: {format($gameState.seeds)}</h1>
+		<h1 class="dark:text-white">Seeds: {format($gameState.current.seeds)}</h1>
 		<h1 class="dark:text-white">Sps: {format(total_sps($gameState))}</h1>
 	</button>
 

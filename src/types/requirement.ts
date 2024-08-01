@@ -10,14 +10,14 @@ export class Requirement {
 	}
 
 	shouldHideFully(gameState: GameState) {
-		return this.requirementToShowOutline > gameState.peakLifetimeSeeds;
+		return this.requirementToShowOutline > gameState.current.peakLifetimeSeeds;
 	}
 
 	shouldOnlyShowOutline(gameState: GameState) {
 		if (typeof this.requirementToBuy == 'number') {
-			return this.requirementToBuy > gameState.peakLifetimeSeeds;
+			return this.requirementToBuy > gameState.current.peakLifetimeSeeds;
 		}
-		const item = gameState.items.find((i) => i?.[0] == this.requirementToBuy);
+		const item = gameState.current.items.find((i) => i?.[0] == this.requirementToBuy);
 		if (!item) {
 			return false;
 		}

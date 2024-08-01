@@ -1,7 +1,6 @@
 <script lang="ts">
 	import HarvestQuote from '../components/HarvestQuote.svelte';
-	import { gameState } from '../store/store';
-	import { items } from '../types/item';
+	import { gameState, initialCurrentGameState } from '../store/store';
 
 	function harvest() {
 		if (!confirm('are you sure?')) {
@@ -9,17 +8,12 @@
 		}
 		$gameState = {
 			...$gameState,
-			seeds: 0,
-			peakLifetimeSeeds: 0,
-			totalLifetimeSeeds: 0,
-			items: items.map((item) => [item.name, 0]) as [string, number][],
-			clickPower: 1,
-			talents: [],
+			current: structuredClone(initialCurrentGameState),
 			harvested: {
 				harvestCount: $gameState.harvested.harvestCount + 1,
-				clicks: $gameState.harvested.clicks + $gameState.clicks,
-				seeds: $gameState.harvested.seeds + $gameState.totalLifetimeSeeds,
-				seconds: $gameState.harvested.seconds + $gameState.seconds,
+				clicks: $gameState.harvested.clicks + $gameState.current.clicks,
+				seeds: $gameState.harvested.seeds + $gameState.current.totalLifetimeSeeds,
+				seconds: $gameState.harvested.seconds + $gameState.current.seconds,
 			},
 		};
 	}
@@ -30,7 +24,11 @@
 
 	<HarvestQuote />
 
-	<button class="p-2 border border-bg-dark bg-bg" on:click={harvest} disabled={$gameState.totalLifetimeSeeds == 0}>
+	<button
+		class="p-2 border border-bg-dark bg-bg"
+		on:click={harvest}
+		disabled={$gameState.current.totalLifetimeSeeds == 0}
+	>
 		Harvest
 	</button>
 </div>

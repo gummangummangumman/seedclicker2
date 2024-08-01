@@ -1,8 +1,8 @@
 import { writable, type Writable } from 'svelte/store';
 import { items } from '../types/item';
-import type { GameState } from '../types/gameState';
+import type { CurrentGameState, GameState } from '../types/gameState';
 
-export const initialGameState: GameState = {
+export const initialCurrentGameState: CurrentGameState = {
 	clicks: 0,
 	seeds: 0,
 	peakLifetimeSeeds: 0,
@@ -11,6 +11,10 @@ export const initialGameState: GameState = {
 	clickPower: 1,
 	seconds: 0,
 	talents: [],
+};
+
+export const initialGameState: GameState = {
+	current: structuredClone(initialCurrentGameState),
 	harvested: {
 		harvestCount: 0,
 		clicks: 0,

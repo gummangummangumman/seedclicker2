@@ -8,19 +8,19 @@
 
 	function buyItem(gameState: GameState) {
 		const price = getPrice(gameState);
-		if (gameState.seeds < price) {
+		if (gameState.current.seeds < price) {
 			return;
 		}
-		$gameState.seeds -= price;
-		$gameState.items[index][1]++;
+		$gameState.current.seeds -= price;
+		$gameState.current.items[index][1]++;
 	}
 
 	function canBuy(gameState: GameState) {
-		return gameState.seeds >= getPrice(gameState);
+		return gameState.current.seeds >= getPrice(gameState);
 	}
 
 	function getPrice(gameState: GameState) {
-		const numberOfItems = gameState.items[index];
+		const numberOfItems = gameState.current.items[index];
 		return Math.floor(item.basePrice * Math.pow(item.priceScaling, numberOfItems[1]));
 	}
 
@@ -46,11 +46,12 @@
 			<br />
 			Cost: <strong>{format(getPrice($gameState))}</strong> seeds
 			<br />
-			You have <strong>{format($gameState.items[index][1])}</strong>
+			You have <strong>{format($gameState.current.items[index][1])}</strong>
 			{getName($gameState)}
-			{#if $gameState.items[index][1] > 0}
+			{#if $gameState.current.items[index][1] > 0}
 				<br />
-				Generating {format($gameState.items[index][1] * item.sps)} <span title="seeds per second">sps</span>
+				Generating {format($gameState.current.items[index][1] * item.sps)}
+				<span title="seeds per second">sps</span>
 			{/if}
 		{/if}
 	</div>

@@ -6,7 +6,7 @@
 	import { format } from '../util/number_formatting';
 
 	function getTalentCost(gameState: GameState) {
-		return Math.pow(15_000_000, 1 + gameState.talents.length);
+		return Math.pow(15_000_000, 1 + gameState.current.talents.length);
 	}
 </script>
 
