@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { gameState, initialGameState } from '../store/store';
 	import type { GameState } from '../types/gameState';
+	import { hash, verifyGameSave } from '../util/hash';
 
 	let loadFile: HTMLInputElement;
 	let loadText: HTMLTextAreaElement;
@@ -39,6 +40,8 @@
 		const save: GameState = JSON.parse(loadText.value);
 		console.log('loading save', save);
 		//TODO verify that save is a proper GameState object
+		console.log('save anti-cheat verified', verifyGameSave(save));
+		//TODO handle cheating case
 		gameState.update(() => {
 			return save;
 		});
@@ -65,7 +68,7 @@
 		class="border border-black p-2 cursor-copy"
 		on:click={() => {
 			navigator.clipboard
-				.writeText(JSON.stringify($gameState))
+				.writeText(JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) }))
 				.then(() => {
 					console.log('Copied to clipboard successfully!');
 				})
