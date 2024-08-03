@@ -6,6 +6,8 @@
 	let loadFile: HTMLInputElement;
 	let loadText: HTMLTextAreaElement;
 
+	let errorMessage: string = '';
+
 	function hardReset() {
 		gameState.update(() => {
 			return structuredClone(initialGameState);
@@ -28,25 +30,40 @@
 			};
 
 			reader.readAsText(file);
+			errorMessage = '';
 		}
 	}
 
 	function handleTextChange() {
+		errorMessage = '';
 		loadFile.value = '';
 	}
 
 	function load() {
-		//TODO put parse in try catch
-		const save: GameState = JSON.parse(loadText.value);
+		let save: GameState;
+		try {
+			save = JSON.parse(loadText.value);
+		} catch (e) {
+			errorMessage = '⚠️ Something went wrong trying to read the save! ⚠️';
+			return;
+		}
 		console.log('loading save', save);
-		//TODO verify that save is a proper GameState object
-		console.log('save anti-cheat verified', verifyGameSave(save));
-		//TODO handle cheating case
-		gameState.update(() => {
-			return save;
-		});
-		loadFile.value = '';
-		loadText.value = '';
+		//TODO first verify that save is a proper GameState object, so that the cheating errorMessage is justifiably given
+		if (!verifyGameSave(save)) {
+			errorMessage = '💀 Cheating detected! 💀';
+			return;
+		}
+		if (
+			window.confirm(
+				'Are you sure? Please note that this will remove your current progress and overwrite with your save file.',
+			)
+		) {
+			gameState.update(() => {
+				return save;
+			});
+			loadFile.value = '';
+			loadText.value = '';
+		}
 	}
 </script>
 
@@ -82,7 +99,9 @@
 	<button
 		class="border border-black p-2"
 		on:click={() => {
-			const blob = new Blob([JSON.stringify($gameState)], { type: 'text/plain' });
+			const blob = new Blob([JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) })], {
+				type: 'text/plain',
+			});
 			const link = document.createElement('a');
 			link.href = URL.createObjectURL(blob);
 			link.download = 'save.seed'; //filename
@@ -106,16 +125,10 @@
 			class="resize my-4"
 		/>
 		<br />
-		<button
-			class="border border-black p-2"
-			on:click={() => {
-				if (window.confirm('Are you sure? Please note that this will remove your progress.')) {
-					load();
-				}
-			}}
-		>
-			Load
-		</button>
+		<p class="text-red-800 font-bold">
+			{errorMessage}
+		</p>
+		<button class="border border-black p-2" disabled={!!errorMessage} on:click={load}> Load </button>
 		<br />
 	</div>
 	<button
