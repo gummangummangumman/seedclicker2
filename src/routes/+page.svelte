@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { items } from '../types/item';
 	import { gameState } from '../store/store';
-	import { addSeeds, type GameState } from '../types/gameState';
+	import { addSeeds, click, oneSecondPassing, total_sps, type GameState } from '../types/gameState';
 	import { format } from '../util/number_formatting';
 	import { onMount } from 'svelte';
 	import Stats from '../pages/Stats.svelte';
@@ -40,9 +39,8 @@
 	];
 	let currentPage = pages[0];
 
-	function click(this: HTMLButtonElement) {
-		$gameState.current.clicks++;
-		$gameState = addSeeds($gameState, $gameState.current.clickPower);
+	function onClick(this: HTMLButtonElement) {
+		$gameState = click($gameState);
 		imgClass = getClass($gameState.current.clicks);
 		this.blur();
 	}
@@ -55,18 +53,10 @@
 		return clicks % 2 == 1 ? 'flipped' : '';
 	}
 
-	setInterval(() => grantseeds(), 1000);
+	setInterval(() => secondPassed(), 1000);
 
-	function grantseeds() {
-		$gameState = addSeeds($gameState, total_sps($gameState));
-		$gameState.current.seconds++;
-	}
-
-	function total_sps(gameState: GameState) {
-		return gameState.current.items.reduce(
-			(accumulator, amountOfCurrentItem, index) => accumulator + items[index].sps * amountOfCurrentItem[1],
-			0,
-		);
+	function secondPassed() {
+		$gameState = oneSecondPassing($gameState);
 	}
 
 	onMount(() => {
@@ -95,10 +85,14 @@
 </svelte:head>
 
 <section class="p-2 py-8 text-center bg-bg dark:bg-bg-dark">
-	<button on:click={click}>
+	<button on:click={onClick}>
 		<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
-		<h1 class="dark:text-white">Seeds: {format($gameState.current.seeds)}</h1>
-		<h1 class="dark:text-white">Sps: {format(total_sps($gameState))}</h1>
+		<h1 class="dark:text-white">
+			Seeds: <span title={$gameState.current.seeds.toString()}>{format($gameState.current.seeds)}</span>
+		</h1>
+		<h1 class="dark:text-white">
+			Sps: <span title={total_sps($gameState).toString()}>{format(total_sps($gameState))}</span>
+		</h1>
 	</button>
 
 	<div class="my-2">

@@ -134,7 +134,11 @@
 	<button
 		class="border border-black p-2 bg-red-600"
 		on:click={() => {
-			if (window.confirm('Are you sure?')) {
+			if (
+				window.confirm(
+					'Are you sure? It might be a good idea to save before doing this, in case you change your mind',
+				)
+			) {
 				hardReset();
 			}
 		}}

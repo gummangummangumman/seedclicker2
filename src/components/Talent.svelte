@@ -5,20 +5,20 @@
 	export let talent: Talent;
 
 	function buyTalent(gameState: GameState) {
-		gameState.talents.push(talent.name);
+		gameState.current.talents.push(talent.name);
 	}
 
 	function owned(gameState: GameState): Boolean {
-		return gameState.talents.includes(talent.name);
+		return gameState.current.talents.includes(talent.name);
 	}
 
 	function requirementFulfilled(gameState: GameState): Boolean {
-		return !talent.requires || gameState.talents.includes(talent.requires);
+		return !talent.requires || gameState.current.talents.includes(talent.requires);
 	}
 </script>
 
 <button
-	disabled={$gameState.talents.includes(talent.name)}
+	disabled={$gameState.current.talents.includes(talent.name)}
 	on:click={() => buyTalent($gameState)}
 	class="
             {requirementFulfilled($gameState) ? 'mt-2 border border-black' : 'hidden'}
