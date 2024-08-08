@@ -99,6 +99,10 @@
 			quote: 'Never look directly at the sun. Instead, look at the sunflower',
 			source: 'Vera Nazarian',
 		},
+		{
+			quote: 'Så la meg få slippe å leve lenger nå, i mitt neste liv vil jeg bli en blomst som du kan lukte på',
+			source: 'Lars Kilevold',
+		},
 	];
 
 	// Pick a random quote
