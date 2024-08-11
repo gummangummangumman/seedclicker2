@@ -1,5 +1,6 @@
 <script lang="ts">
 	import HarvestQuote from '../components/HarvestQuote.svelte';
+	import { harvest_multiplier } from '../game_logic/gameLogic';
 	import { gameState, initialCurrentGameState } from '../store/store';
 
 	function harvest() {
@@ -21,6 +22,12 @@
 
 <div class="my-8">
 	<p>Harvest your seeds and abandon all of your earthly upgrades for deeper knowledge about the seed.</p>
+
+	<p>
+		Current income multiplier is <strong>{harvest_multiplier($gameState.harvested.seeds)}</strong>. If you harvest
+		now, you'll have
+		<strong>{harvest_multiplier($gameState.harvested.seeds + $gameState.current.seeds)}</strong>
+	</p>
 
 	<HarvestQuote />
 

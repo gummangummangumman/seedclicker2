@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { gameState } from '../store/store';
-	import { addSeeds, click, oneSecondPassing, total_sps, type GameState } from '../types/gameState';
+	import { addSeeds, oneSecondPassing } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 	import { onMount } from 'svelte';
 	import Stats from '../pages/Stats.svelte';
@@ -9,8 +9,8 @@
 	import Upgrades from '../pages/Upgrades.svelte';
 	import Harvest from '../pages/Harvest.svelte';
 	import SaveAndLoad from '../pages/SaveAndLoad.svelte';
-
-	let imgClass = 'transform: scaleX';
+	import type { GameState } from '../types/gameState';
+	import SeedClicker from '../components/SeedClicker.svelte';
 
 	const pages: Page[] = [
 		{
@@ -39,20 +39,6 @@
 	];
 	let currentPage = pages[0];
 
-	function onClick(this: HTMLButtonElement) {
-		$gameState = click($gameState);
-		imgClass = getClass($gameState.current.clicks);
-		this.blur();
-	}
-
-	function getClass(clicks: number) {
-		if (Math.random() < 0.01) {
-			//TODO tenk på å gjør dette i click, gi ekstra belønning osv
-			return 'crazy';
-		}
-		return clicks % 2 == 1 ? 'flipped' : '';
-	}
-
 	setInterval(() => secondPassed(), 1000);
 
 	function secondPassed() {
@@ -64,13 +50,13 @@
 			//midlertidig juks :^)
 			switch (event.key) {
 				case 'ø':
-					$gameState = addSeeds($gameState, 15_000);
+					$gameState = addSeeds($gameState, 15_000, false);
 					break;
 				case 'æ':
-					$gameState = addSeeds($gameState, 500_000);
+					$gameState = addSeeds($gameState, 500_000, false);
 					break;
 				case 'å':
-					$gameState = addSeeds($gameState, 5_000_000);
+					$gameState = addSeeds($gameState, 5_000_000, false);
 					break;
 				case 's':
 					console.log($gameState);
@@ -85,16 +71,7 @@
 </svelte:head>
 
 <section class="p-2 py-8 text-center bg-bg dark:bg-bg-dark">
-	<button on:click={onClick}>
-		<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
-		<h1 class="dark:text-white">
-			Seeds: <span title={$gameState.current.seeds.toString()}>{format($gameState.current.seeds)}</span>
-		</h1>
-		<h1 class="dark:text-white">
-			Sps: <span title={total_sps($gameState).toString()}>{format(total_sps($gameState))}</span>
-		</h1>
-	</button>
-
+	<SeedClicker />
 	<div class="my-2">
 		{#each pages as page}
 			{#if !page.requirement || page.requirement($gameState)}
@@ -110,16 +87,3 @@
 
 	<svelte:component this={currentPage.component} />
 </section>
-
-<style>
-	img {
-		transform: scaleX(1);
-		transform: scaleY(1);
-	}
-	.flipped {
-		transform: scaleX(-1);
-	}
-	.crazy {
-		transform: scaleY(-1);
-	}
-</style>
