@@ -6,7 +6,7 @@
 	import Stats from '../pages/Stats.svelte';
 	import Items from '../pages/Items.svelte';
 	import type { Page } from '../types/page';
-	import Upgrades from '../pages/Upgrades.svelte';
+	import Talents from '../pages/Talents.svelte';
 	import Harvest from '../pages/Harvest.svelte';
 	import SaveAndLoad from '../pages/SaveAndLoad.svelte';
 	import type { GameState } from '../types/gameState';
@@ -23,7 +23,7 @@
 		},
 		{
 			name: 'Talents',
-			component: Upgrades,
+			component: Talents,
 			requirement: (gameState: GameState) => gameState.current.peakLifetimeSeeds > 15_000_000,
 		},
 		{

@@ -1,13 +1,9 @@
 <script lang="ts">
 	import Talent from '../components/Talent.svelte';
+	import { getTalentCost } from '../game_logic/talentLogic';
 	import { gameState } from '../store/store';
-	import type { GameState } from '../types/gameState';
 	import { talentTree } from '../types/talent';
 	import { format } from '../util/number_formatting';
-
-	function getTalentCost(gameState: GameState) {
-		return Math.pow(15_000_000, 1 + gameState.current.talents.length);
-	}
 </script>
 
 <div class="my-8">

@@ -23,14 +23,24 @@ export const talentTree: TalentTree = {
 			name: 'Click',
 			talents: [
 				{ name: 'Clicky Clara', description: '2x click power', clickEffect: (clickPower) => clickPower * 2 },
-				{ name: 'Click god', description: 'smth.....', requires: 'Clicky Clara' },
+				{
+					name: 'Click god',
+					description: '3x click power',
+					requires: 'Clicky Clara',
+					clickEffect: (clickPower) => clickPower * 3,
+				},
 			],
 		},
 		{
 			name: 'Idle',
 			talents: [
 				{ name: 'Passive Peter', description: '2x seeds per second', spsEffect: (sps) => sps * 2 },
-				{ name: 'Friend of the hourglass', description: 'smth.....', requires: 'Passive Peter' },
+				{
+					name: 'Friend of the hourglass',
+					description: '3x seeds per second',
+					requires: 'Passive Peter',
+					spsEffect: (sps) => sps * 3,
+				},
 			],
 		},
 	],
