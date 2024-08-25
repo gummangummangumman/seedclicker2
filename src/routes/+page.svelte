@@ -11,6 +11,7 @@
 	import SaveAndLoad from '../pages/SaveAndLoad.svelte';
 	import type { GameState } from '../types/gameState';
 	import SeedClicker from '../components/SeedClicker.svelte';
+	import { loadFromLocalStorage, saveToLocalStorage } from '../game_logic/browserStorage';
 
 	const pages: Page[] = [
 		{
@@ -43,9 +44,11 @@
 
 	function secondPassed() {
 		$gameState = oneSecondPassing($gameState);
+		saveToLocalStorage($gameState);
 	}
 
 	onMount(() => {
+		$gameState = loadFromLocalStorage();
 		document.addEventListener('keyup', (event) => {
 			//midlertidig juks :^)
 			switch (event.key) {
