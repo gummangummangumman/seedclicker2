@@ -1,6 +1,7 @@
 import type { GameState } from '../types/gameState';
 import { items } from '../types/item';
 import { activeTalents } from '../types/talent';
+import { HARVEST_BASE_SEEDS } from '../util/constants';
 
 export function click(gameState: GameState): GameState {
 	const newGameState = {
@@ -25,8 +26,11 @@ export function total_sps(gameState: GameState) {
 	return activeTalents(gameState).reduce((sps, talent) => (sps = talent.spsEffect?.(sps) ?? sps), spsFromItems);
 }
 
+/**
+ * Starts going from 1 at {@link HARVEST_BASE_SEEDS} and doubles for every 10x
+ */
 export function harvest_multiplier(harvestedSeeds: number) {
-	return 1 + Math.log(Math.max(1, harvestedSeeds));
+	return 1 + Math.log10(Math.max(1, harvestedSeeds / HARVEST_BASE_SEEDS));
 }
 
 export function oneSecondPassing(gameState: GameState): GameState {

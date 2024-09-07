@@ -26,10 +26,16 @@
 		Seeds: <span title={$gameState.current.seeds.toString()}>{format($gameState.current.seeds)}</span>
 	</h1>
 	<h1 class="dark:text-white">
-		Sps: <span title={total_sps($gameState).toString()}>{format(total_sps($gameState))}</span>
+		<span title="Seeds per second">Sps</span>:
+		<span title={total_sps($gameState).toString()}>{format(total_sps($gameState))}</span>
 	</h1>
 	{#if $gameState.harvested.seeds > 0}
-		<h2 class="dark:text-white text-sm">Harvest multiplier: {harvest_multiplier($gameState.harvested.seeds)}</h2>
+		<h2 class="dark:text-white text-sm">
+			Harvest multiplier:
+			<span title={harvest_multiplier($gameState.harvested.seeds).toString()}
+				>{format(harvest_multiplier($gameState.harvested.seeds))}</span
+			>
+		</h2>
 	{/if}
 </button>
 

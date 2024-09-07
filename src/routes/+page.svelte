@@ -12,6 +12,7 @@
 	import type { GameState } from '../types/gameState';
 	import SeedClicker from '../components/SeedClicker.svelte';
 	import { loadFromLocalStorage, saveToLocalStorage } from '../game_logic/browserStorage';
+	import { HARVEST_BASE_SEEDS } from '../util/constants';
 
 	const pages: Page[] = [
 		{
@@ -31,7 +32,7 @@
 			name: 'Harvest',
 			component: Harvest,
 			requirement: (gameState: GameState) =>
-				gameState.harvested.harvestCount > 0 || gameState.current.peakLifetimeSeeds > 5_000,
+				gameState.harvested.harvestCount > 0 || gameState.current.peakLifetimeSeeds > HARVEST_BASE_SEEDS,
 		},
 		{
 			name: 'Save',
