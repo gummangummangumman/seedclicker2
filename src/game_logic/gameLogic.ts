@@ -11,19 +11,27 @@ export function click(gameState: GameState): GameState {
 			clicks: gameState.current.clicks + 1,
 		},
 	};
-	const effectiveClickPower: number = activeTalents(gameState).reduce(
-		(clickPower, talent) => (clickPower = talent.clickEffect?.(clickPower) ?? clickPower),
-		gameState.current.clickPower,
-	);
-	return addSeeds(newGameState, effectiveClickPower);
+	return addSeeds(newGameState, total_clickpower(gameState));
 }
 
 export function total_sps(gameState: GameState) {
 	const spsFromItems: number = gameState.current.items.reduce(
-		(accumulator, amountOfCurrentItem, index) => accumulator + items[index].sps * amountOfCurrentItem[1],
+		(accumulator, amountOfCurrentItem, index) => accumulator + (items[index].sps ?? 0) * amountOfCurrentItem[1],
 		0,
 	);
 	return activeTalents(gameState).reduce((sps, talent) => (sps = talent.spsEffect?.(sps) ?? sps), spsFromItems);
+}
+
+export function total_clickpower(gameState: GameState) {
+	const clickpowerFromItems: number = gameState.current.items.reduce(
+		(accumulator, amountOfCurrentItem, index) =>
+			accumulator + (items[index].clickpower ?? 0) * amountOfCurrentItem[1],
+		1,
+	);
+	return activeTalents(gameState).reduce(
+		(clickpower, talent) => (clickpower = talent.clickEffect?.(clickpower) ?? clickpower),
+		clickpowerFromItems,
+	);
 }
 
 /**

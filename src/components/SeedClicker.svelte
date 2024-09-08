@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { gameState } from '../store/store';
-	import { click, harvest_multiplier, total_sps } from '../game_logic/gameLogic';
+	import { click, harvest_multiplier, total_clickpower, total_sps } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 
 	let imgClass = 'transform: scaleX';
@@ -28,6 +28,10 @@
 	<h1 class="dark:text-white">
 		<span title="Seeds per second">Sps</span>:
 		<span title={total_sps($gameState).toString()}>{format(total_sps($gameState))}</span>
+	</h1>
+	<h1 class="dark:text-white">
+		Clickpower:
+		<span title={total_clickpower($gameState).toString()}>{format(total_clickpower($gameState))}</span>
 	</h1>
 	{#if $gameState.harvested.seeds > 0}
 		<h2 class="dark:text-white text-sm">

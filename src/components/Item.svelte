@@ -26,7 +26,7 @@
 
 	function getName(gameState: GameState) {
 		if (!item.requirement?.shouldOnlyShowOutline(gameState)) {
-			return item.name + 's';
+			return item.name;
 		} else {
 			return '???';
 		}
@@ -47,11 +47,14 @@
 			Cost: <strong>{format(getPrice($gameState))}</strong> seeds
 			<br />
 			You have <strong>{format($gameState.current.items[index][1])}</strong>
-			{getName($gameState)}
-			{#if $gameState.current.items[index][1] > 0}
+			{#if $gameState.current.items[index][1] > 0 && item.sps}
 				<br />
-				Generating {format($gameState.current.items[index][1] * item.sps)}
+				Generating <strong>{format($gameState.current.items[index][1] * item.sps)}</strong>
 				<span title="seeds per second">sps</span>
+			{/if}
+			{#if $gameState.current.items[index][1] > 0 && item.clickpower}
+				<br />
+				Giving <strong>{format($gameState.current.items[index][1] * item.clickpower)}</strong> clickpower
 			{/if}
 		{/if}
 	</div>
