@@ -18,3 +18,16 @@ export function format(num: number, digits: number = 3) {
 	}
 	return (num / si[i].value).toFixed(digits).replace(rx, '$1') + si[i].symbol;
 }
+
+/**
+ * hh:mm:ss
+ */
+export function formatSeconds(seconds: number) {
+	return `${Math.floor(seconds / 3600)
+		.toString()
+		.padStart(2, '0')}:${Math.floor((seconds % 3600) / 60)
+		.toString()
+		.padStart(2, '0')}:${Math.floor((seconds % 3600) % 60)
+		.toString()
+		.padStart(2, '0')}`;
+}
