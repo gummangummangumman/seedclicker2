@@ -37,25 +37,40 @@
 	}
 </script>
 
-{#if !item.requirement?.shouldHideFully($gameState)}
-	<div class="border border-black">
-		<button on:click={() => buyItem($gameState)} disabled={!canBuy($gameState)} class="disabled:line-through"
-			>Buy {getName($gameState)}</button
-		>
-		{#if !isOutLine($gameState)}
-			<br />
-			Cost: <strong>{format(getPrice($gameState))}</strong> seeds
-			<br />
-			You have <strong>{format($gameState.current.items[index][1])}</strong>
-			{#if $gameState.current.items[index][1] > 0 && item.sps}
-				<br />
-				Generating <strong>{format($gameState.current.items[index][1] * item.sps)}</strong>
-				<span title="seeds per second">sps</span>
+<button
+	on:click={() => buyItem($gameState)}
+	disabled={!canBuy($gameState)}
+	class="block w-full border border-black disabled:line-through p-2 rounded-md my-1"
+>
+	<div class="flex items-center space-x-4 mx-auto w-full">
+		<div class="relative">
+			<img
+				src={isOutLine($gameState) ? 'gumman_mystery.webp' : 'gumman.jpg'}
+				alt={getName($gameState)}
+				width="80px"
+				class="rounded-full"
+			/>
+			{#if $gameState.current.items[index][1] > 0}
+				<span class="absolute bottom-0 right-0 text-xs p-1 bg-bg border border-bg-dark rounded-full">
+					{format($gameState.current.items[index][1])}
+				</span>
 			{/if}
-			{#if $gameState.current.items[index][1] > 0 && item.clickpower}
+		</div>
+		<div>
+			<span class="text-lg font-bold">{getName($gameState)}</span>
+			{#if !isOutLine($gameState)}
 				<br />
-				Giving <strong>{format($gameState.current.items[index][1] * item.clickpower)}</strong> clickpower
+				Cost: <strong>{format(getPrice($gameState))}</strong> seeds
+				{#if $gameState.current.items[index][1] > 0 && item.sps}
+					<br />
+					Generating <strong>{format($gameState.current.items[index][1] * item.sps)}</strong>
+					<span title="seeds per second">sps</span>
+				{/if}
+				{#if $gameState.current.items[index][1] > 0 && item.clickpower}
+					<br />
+					Giving <strong>{format($gameState.current.items[index][1] * item.clickpower)}</strong> clickpower
+				{/if}
 			{/if}
-		{/if}
+		</div>
 	</div>
-{/if}
+</button>
