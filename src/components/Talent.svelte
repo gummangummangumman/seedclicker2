@@ -19,7 +19,8 @@
 	on:click={() => ($gameState = buyTalent($gameState, talent))}
 	class="
             {requirementFulfilled($gameState) ? 'mt-2 border border-black' : 'hidden'}
-            {owned($gameState) && 'bg-bg-dark'}
+            {owned($gameState) && 'bg-secondary'}
+            {canBuy($gameState, talent) && 'bg-primary'}
         "
 >
 	<p>{talent.name}</p>

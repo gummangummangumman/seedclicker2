@@ -33,7 +33,7 @@
 	<HarvestQuote />
 
 	<button
-		class="p-2 border border-bg-dark bg-bg"
+		class="p-2 border bg-primary border-secondary rounded-sm"
 		on:click={harvest}
 		disabled={$gameState.current.totalLifetimeSeeds == 0}
 	>

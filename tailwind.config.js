@@ -5,7 +5,12 @@ export default {
 		extend: {
 			colors: {
 				bg: '#afa',
-				'bg-dark': '#060',
+				primary: '#8f8',
+				secondary: '#060',
+				//TODO consider darkmode colours
+				bgdark: '#060',
+				primarydark: '#060',
+				secondarydark: '#060',
 			},
 		},
 	},

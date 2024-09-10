@@ -82,7 +82,7 @@
 		</p>
 	</div>
 	<button
-		class="border border-black p-2 cursor-copy"
+		class="bg-primary border border-black p-2 cursor-copy"
 		on:click={() => {
 			navigator.clipboard
 				.writeText(JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) }))
@@ -97,7 +97,7 @@
 		Save to clipboard
 	</button>
 	<button
-		class="border border-black p-2"
+		class="bg-primary border border-black p-2"
 		on:click={() => {
 			const blob = new Blob([JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) })], {
 				type: 'text/plain',
@@ -122,13 +122,13 @@
 			placeholder="Save file"
 			bind:this={loadText}
 			on:change={handleTextChange}
-			class="resize my-4"
+			class="resize my-4 p-1"
 		/>
 		<br />
 		<p class="text-red-800 font-bold">
 			{errorMessage}
 		</p>
-		<button class="border border-black p-2" disabled={!!errorMessage} on:click={load}> Load </button>
+		<button class="bg-primary border border-black p-2" disabled={!!errorMessage} on:click={load}> Load </button>
 		<br />
 	</div>
 	<button

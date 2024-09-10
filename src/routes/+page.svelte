@@ -80,7 +80,7 @@
 		{#each pages as page}
 			{#if !page.requirement || page.requirement($gameState)}
 				<button
-					class="p-2 border border-bg-dark {currentPage == page ? 'bg-bg-dark' : ''}"
+					class="p-2 border border-secondary {currentPage == page ? 'bg-secondary' : 'hover:bg-primary'}"
 					on:click={() => (currentPage = page)}
 				>
 					{page.name}

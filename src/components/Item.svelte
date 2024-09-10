@@ -40,7 +40,7 @@
 <button
 	on:click={() => buyItem($gameState)}
 	disabled={!canBuy($gameState)}
-	class="block w-full border border-black disabled:line-through p-2 rounded-md my-1"
+	class="block w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
 >
 	<div class="flex items-center space-x-4 mx-auto w-full">
 		<div class="relative">
@@ -51,7 +51,7 @@
 				class="rounded-full"
 			/>
 			{#if $gameState.current.items[index][1] > 0}
-				<span class="absolute bottom-0 right-0 text-xs p-1 bg-bg border border-bg-dark rounded-full">
+				<span class="absolute bottom-0 right-0 text-xs p-1 bg-bg border border-secondary rounded-full">
 					{format($gameState.current.items[index][1])}
 				</span>
 			{/if}
