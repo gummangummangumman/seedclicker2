@@ -74,7 +74,7 @@
 	<title>Seedclicker 2 | {format($gameState.current.seeds)}</title>
 </svelte:head>
 
-<section class="p-2 py-8 text-center bg-bg dark:bg-bg-dark">
+<section class="p-2 py-8 text-center bg-bg text-text">
 	<SeedClicker />
 	<div class="my-2">
 		{#each pages as page}

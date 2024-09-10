@@ -22,19 +22,19 @@
 
 <button on:click={onClick}>
 	<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + imgClass} />
-	<h1 class="dark:text-white">
+	<h1>
 		Seeds: <span title={$gameState.current.seeds.toString()}>{format($gameState.current.seeds)}</span>
 	</h1>
-	<h1 class="dark:text-white">
+	<h1>
 		<span title="Seeds per second">Sps</span>:
 		<span title={total_sps($gameState).toString()}>{format(total_sps($gameState))}</span>
 	</h1>
-	<h1 class="dark:text-white">
+	<h1>
 		Clickpower:
 		<span title={total_clickpower($gameState).toString()}>{format(total_clickpower($gameState))}</span>
 	</h1>
 	{#if $gameState.harvested.seeds > 0}
-		<h2 class="dark:text-white text-sm">
+		<h2 class="text-sm">
 			Harvest multiplier:
 			<span title={harvest_multiplier($gameState.harvested.seeds).toString()}
 				>{format(harvest_multiplier($gameState.harvested.seeds))}</span

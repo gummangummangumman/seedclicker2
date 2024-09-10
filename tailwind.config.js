@@ -4,13 +4,13 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				bg: '#afa',
-				primary: '#8f8',
-				secondary: '#060',
-				//TODO consider darkmode colours
-				bgdark: '#060',
-				primarydark: '#060',
-				secondarydark: '#060',
+				bg: 'rgba(var(--bg))',
+				primary: 'rgba(var(--primary))',
+				secondary: 'rgba(var(--secondary))',
+				text: 'rgba(var(--text))',
+			},
+			textColor: {
+				DEFAULT: 'rgba(var(--text))',
 			},
 		},
 	},

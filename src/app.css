@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	:root {
+		--bg: 170, 255, 170;
+		--primary: 136, 255, 136;
+		--secondary: 0, 102, 0;
+		--text: 0, 0, 0;
+	}
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--bg: 0, 20, 0;
+			--primary: 0, 36, 3;
+			--secondary: 0, 50, 3;
+			--text: 255, 255, 255;
+		}
+	}
+}
