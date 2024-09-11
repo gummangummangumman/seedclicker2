@@ -24,3 +24,5 @@ export const initialGameState: GameState = {
 };
 
 export const gameState: Writable<GameState> = writable(structuredClone(initialGameState));
+
+export const settings: Writable<string> = writable('');

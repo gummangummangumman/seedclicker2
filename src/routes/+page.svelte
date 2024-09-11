@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { gameState } from '../store/store';
+	import { gameState, settings } from '../store/store';
 	import { addSeeds, click, oneSecondPassing } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 	import { onMount } from 'svelte';
@@ -13,15 +13,12 @@
 	import SeedClicker from '../components/SeedClicker.svelte';
 	import { loadFromLocalStorage, saveToLocalStorage } from '../game_logic/browserStorage';
 	import { HARVEST_BASE_SEEDS } from '../util/constants';
+	import Settings from '../pages/Settings.svelte';
 
 	const pages: Page[] = [
 		{
 			name: 'Items',
 			component: Items,
-		},
-		{
-			name: 'Stats',
-			component: Stats,
 		},
 		{
 			name: 'Talents',
@@ -35,7 +32,18 @@
 				gameState.harvested.harvestCount > 0 || gameState.current.peakLifetimeSeeds > HARVEST_BASE_SEEDS,
 		},
 		{
-			name: 'Save',
+			name: '📈',
+			description: 'Stats',
+			component: Stats,
+		},
+		{
+			name: '⚙️',
+			description: 'Settings',
+			component: Settings,
+		},
+		{
+			name: '💾',
+			description: 'Save and load',
 			component: SaveAndLoad,
 		},
 	];
@@ -78,7 +86,7 @@
 	<title>Seedclicker 2 | {format($gameState.current.seeds)}</title>
 </svelte:head>
 
-<section class="p-2 py-8 text-center bg-bg text-text">
+<section class="p-2 py-8 text-center bg-bg text-text {$settings}">
 	<SeedClicker />
 	<div class="my-2">
 		{#each pages as page}
@@ -86,6 +94,7 @@
 				<button
 					class="p-2 border border-secondary {currentPage == page ? 'bg-secondary' : 'hover:bg-primary'}"
 					on:click={() => (currentPage = page)}
+					title={page.description}
 				>
 					{page.name}
 				</button>
