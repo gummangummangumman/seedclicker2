@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { gameState } from '../store/store';
-	import { addSeeds, oneSecondPassing } from '../game_logic/gameLogic';
+	import { addSeeds, click, oneSecondPassing } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 	import { onMount } from 'svelte';
 	import Stats from '../pages/Stats.svelte';
@@ -51,8 +51,12 @@
 	onMount(() => {
 		$gameState = loadFromLocalStorage();
 		document.addEventListener('keyup', (event) => {
-			//midlertidig juks :^)
 			switch (event.key) {
+				case 'Enter':
+				case ' ':
+					$gameState = click($gameState);
+					break;
+				//midlertidig juks :^)
 				case 'ø':
 					$gameState = addSeeds($gameState, 15_000, false);
 					break;

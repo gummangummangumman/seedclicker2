@@ -3,6 +3,9 @@ import { items } from '../types/item';
 import { activeTalents } from '../types/talent';
 import { HARVEST_BASE_SEEDS } from '../util/constants';
 
+/**
+ * @returns the new gamestate
+ */
 export function click(gameState: GameState): GameState {
 	const newGameState = {
 		...gameState,
@@ -52,6 +55,9 @@ export function oneSecondPassing(gameState: GameState): GameState {
 	return addSeeds(newGameState, total_sps(gameState));
 }
 
+/**
+ * @returns the new gamestate
+ */
 export function addSeeds(gameState: GameState, seeds: number, applyMultiplier: boolean = true): GameState {
 	seeds = applyMultiplier ? Math.floor(harvest_multiplier(gameState.harvested.seeds) * seeds) : seeds;
 	const newSeedAmount = gameState.current.seeds + seeds;
