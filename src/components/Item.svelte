@@ -3,6 +3,7 @@
 	import { gameState } from '../store/store';
 	import type { GameState } from '../types/gameState';
 	import { format } from '../util/number_formatting';
+	import ButtonEffect from './ButtonEffect.svelte';
 	export let item: Item;
 	export let index: number;
 
@@ -40,8 +41,9 @@
 <button
 	on:click={() => buyItem($gameState)}
 	disabled={!canBuy($gameState)}
-	class="block w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
+	class="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
 >
+	<ButtonEffect />
 	<div class="flex items-center space-x-4 mx-auto w-full">
 		<div class="relative">
 			<img
