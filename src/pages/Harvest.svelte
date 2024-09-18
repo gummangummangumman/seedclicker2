@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '../components/Button.svelte';
 	import HarvestQuote from '../components/HarvestQuote.svelte';
 	import { harvest_multiplier } from '../game_logic/gameLogic';
 	import { gameState, initialCurrentGameState } from '../store/store';
@@ -32,13 +33,13 @@
 
 	<HarvestQuote />
 
-	<button
-		class="p-2 border bg-primary border-secondary rounded-sm"
+	<Button
+		className="p-2 border bg-primary border-secondary rounded-md"
 		on:click={harvest}
 		disabled={$gameState.current.totalLifetimeSeeds == 0}
 	>
 		Harvest
-	</button>
+	</Button>
 </div>
 
 <style>

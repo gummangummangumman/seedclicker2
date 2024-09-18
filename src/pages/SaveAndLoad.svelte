@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '../components/Button.svelte';
 	import { gameState, initialGameState } from '../store/store';
 	import type { GameState } from '../types/gameState';
 	import { hash, verifyGameSave } from '../util/hash';
@@ -81,8 +82,8 @@
 			several devices.
 		</p>
 	</div>
-	<button
-		class="bg-primary border border-black p-2 cursor-copy"
+	<Button
+		className="bg-primary border border-black p-2 cursor-copy"
 		on:click={() => {
 			navigator.clipboard
 				.writeText(JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) }))
@@ -95,9 +96,9 @@
 		}}
 	>
 		Save to clipboard
-	</button>
-	<button
-		class="bg-primary border border-black p-2"
+	</Button>
+	<Button
+		className="bg-primary border border-black p-2"
 		on:click={() => {
 			const blob = new Blob([JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) })], {
 				type: 'text/plain',
@@ -111,7 +112,7 @@
 		}}
 	>
 		Save as file
-	</button>
+	</Button>
 	<br />
 	<div id="load" class="m-4 p-2 border border-black">
 		<p>Load by pasting your save into the text field, or simply upload the file.</p>
@@ -128,11 +129,11 @@
 		<p class="text-red-800 font-bold">
 			{errorMessage}
 		</p>
-		<button class="bg-primary border border-black p-2" disabled={!!errorMessage} on:click={load}> Load </button>
+		<Button className="bg-primary border border-black p-2" disabled={!!errorMessage} on:click={load}>Load</Button>
 		<br />
 	</div>
-	<button
-		class="border border-black p-2 bg-red-600"
+	<Button
+		className="border border-black p-2 bg-red-600"
 		on:click={() => {
 			if (
 				window.confirm(
@@ -144,13 +145,10 @@
 		}}
 	>
 		Hard reset 💀
-	</button>
+	</Button>
 </div>
 
 <style>
-	button {
-		margin-bottom: 2em;
-	}
 	p {
 		margin-bottom: 0.5em;
 	}
