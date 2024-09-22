@@ -17,6 +17,7 @@
 				clicks: $gameState.harvested.clicks + $gameState.current.clicks,
 				seeds: $gameState.harvested.seeds + $gameState.current.totalLifetimeSeeds,
 				seconds: $gameState.harvested.seconds + $gameState.current.seconds,
+				talents: Array.from(new Set($gameState.harvested.talents.concat($gameState.current.talents))),
 			},
 		};
 	}

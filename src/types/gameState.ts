@@ -20,4 +20,5 @@ export interface HarvestedGameState {
 	clicks: number;
 	seeds: number;
 	seconds: number;
+	talents: string[];
 }

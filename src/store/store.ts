@@ -20,6 +20,7 @@ export const initialGameState: GameState = {
 		clicks: 0,
 		seeds: 0,
 		seconds: 0,
+		talents: [],
 	},
 };
 

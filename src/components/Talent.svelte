@@ -9,6 +9,10 @@
 		return gameState.current.talents.includes(talent.name);
 	}
 
+	function previouslyOwned(gameState: GameState): Boolean {
+		return gameState.harvested.talents.includes(talent.name);
+	}
+
 	function requirementFulfilled(gameState: GameState): Boolean {
 		return !talent.requires || gameState.current.talents.includes(talent.requires);
 	}
@@ -18,7 +22,7 @@
 	disabled={!canBuy($gameState, talent)}
 	on:click={() => ($gameState = buyTalent($gameState, talent))}
 	class="
-            {requirementFulfilled($gameState) ? 'mt-2 border border-black' : 'hidden'}
+            {requirementFulfilled($gameState) || previouslyOwned($gameState) ? 'mt-2 border border-black' : 'hidden'}
             {owned($gameState) && 'bg-secondary'}
             {canBuy($gameState, talent) && 'bg-primary'}
         "
