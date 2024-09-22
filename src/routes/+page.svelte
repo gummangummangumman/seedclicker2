@@ -15,6 +15,7 @@
 	import { HARVEST_BASE_SEEDS } from '../util/constants';
 	import Settings from '../pages/Settings.svelte';
 	import Faq from '../pages/Faq.svelte';
+	import { setBackground } from '../util/background';
 
 	const pages: Page[] = [
 		{
@@ -63,6 +64,7 @@
 	}
 
 	onMount(() => {
+		setBackground($settings);
 		$gameState = loadFromLocalStorage();
 		document.addEventListener('keyup', (event) => {
 			switch (event.key) {
@@ -82,6 +84,9 @@
 					break;
 				case 's':
 					console.log($gameState);
+					break;
+				case 'i':
+					console.log($settings);
 					break;
 			}
 		});

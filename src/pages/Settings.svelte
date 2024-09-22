@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { settings } from '../store/store';
+	import { setBackground } from '../util/background';
 
 	function handleThemeChange(event: Event) {
 		$settings = (event.target as HTMLSelectElement).value;
+		setBackground($settings);
 	}
 </script>
 
