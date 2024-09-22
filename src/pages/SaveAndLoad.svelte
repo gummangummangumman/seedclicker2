@@ -114,7 +114,7 @@
 		Save as file
 	</Button>
 	<br />
-	<div id="load" class="m-4 p-2 border border-black">
+	<div id="load" class="m-4 p-2 border border-secondary rounded-md">
 		<p>Load by pasting your save into the text field, or simply upload the file.</p>
 		<input type="file" id="loadfile" bind:this={loadFile} on:change={handleFileChange} />
 		<br />
@@ -144,7 +144,7 @@
 			}
 		}}
 	>
-		Hard reset 💀
+		💀 Hard reset 💀
 	</Button>
 </div>
 

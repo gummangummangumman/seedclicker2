@@ -29,7 +29,8 @@
 	<p>
 		Current income multiplier is <strong>{format(harvest_multiplier($gameState.harvested.seeds))}</strong>. If you
 		harvest now, you'll have
-		<strong>{format(harvest_multiplier($gameState.harvested.seeds + $gameState.current.seeds))}</strong>
+		<strong>{format(harvest_multiplier($gameState.harvested.seeds + $gameState.current.totalLifetimeSeeds))}</strong
+		>
 	</p>
 
 	<HarvestQuote />
