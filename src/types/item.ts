@@ -14,13 +14,20 @@ export const items: Item[] = [
 	{ name: 'Water can', basePrice: 50, sps: 1, priceScaling: 1.2 },
 	{ name: 'Fertilizer Bag', basePrice: 100, sps: 2, priceScaling: 1.2 },
 	{ name: 'Sprinkler', basePrice: 1_300, sps: 10, priceScaling: 1.2 },
-	{ name: 'Tractor', basePrice: 180_000, sps: 30, clickpower: 30, priceScaling: 1.2 },
+	{
+		name: 'Tractor',
+		basePrice: 180_000,
+		sps: 30,
+		clickpower: 30,
+		priceScaling: 1.2,
+		requirement: new Requirement(100, 1_000),
+	},
 	{
 		name: 'Plantation',
 		basePrice: 5_000_000,
 		sps: 20,
 		priceScaling: 1.2,
-		requirement: new Requirement(5_000, 100_000),
+		requirement: new Requirement(100_000, 1_000_000),
 	},
 	{
 		name: 'Sun',
