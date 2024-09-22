@@ -14,6 +14,7 @@
 	import { loadFromLocalStorage, saveToLocalStorage } from '../game_logic/browserStorage';
 	import { HARVEST_BASE_SEEDS } from '../util/constants';
 	import Settings from '../pages/Settings.svelte';
+	import Faq from '../pages/Faq.svelte';
 
 	const pages: Page[] = [
 		{
@@ -40,6 +41,11 @@
 			name: '⚙️',
 			description: 'Settings',
 			component: Settings,
+		},
+		{
+			name: '❓',
+			description: 'RAQ - Rarely asked questions',
+			component: Faq,
 		},
 		{
 			name: '💾',
