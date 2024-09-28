@@ -38,10 +38,10 @@ export function total_clickpower(gameState: GameState) {
 }
 
 /**
- * Starts going from 1 at {@link HARVEST_BASE_SEEDS} and doubles for every 10x
+ * Starts going from 1 at {@link HARVEST_BASE_SEEDS} and doubles for every 2x
  */
 export function harvest_multiplier(harvestedSeeds: number) {
-	return 1 + Math.log10(Math.max(1, harvestedSeeds / HARVEST_BASE_SEEDS));
+	return 1 + Math.log2(Math.max(1, harvestedSeeds / HARVEST_BASE_SEEDS));
 }
 
 export function oneSecondPassing(gameState: GameState): GameState {
