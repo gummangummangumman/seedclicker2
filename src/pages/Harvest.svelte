@@ -2,7 +2,8 @@
 	import Button from '../components/Button.svelte';
 	import HarvestQuote from '../components/HarvestQuote.svelte';
 	import { harvest_multiplier } from '../game_logic/gameLogic';
-	import { gameState, initialCurrentGameState } from '../store/store';
+	import { initialCurrentGameState } from '../game_logic/gameState';
+	import { gameState } from '../store/store';
 	import { format } from '../util/number_formatting';
 
 	function harvest() {
