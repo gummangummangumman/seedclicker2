@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { gameState } from '../store/store';
+	import { gameState, settings } from '../store/store';
 	import { click, harvest_multiplier, total_clickpower, total_sps } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 
@@ -20,21 +20,25 @@
 <button on:click={onClick}>
 	<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + getClass($gameState.current.clicks)} />
 	<h1>
-		Seeds: <span title={$gameState.current.seeds.toString()}>{format($gameState.current.seeds)}</span>
+		Seeds: <span title={$gameState.current.seeds.toString()}
+			>{format($gameState.current.seeds, $settings.formatting)}</span
+		>
 	</h1>
 	<h1>
 		<span title="Seeds per second">Sps</span>:
-		<span title={total_sps($gameState).toString()}>{format(total_sps($gameState))}</span>
+		<span title={total_sps($gameState).toString()}>{format(total_sps($gameState), $settings.formatting)}</span>
 	</h1>
 	<h1>
 		Clickpower:
-		<span title={total_clickpower($gameState).toString()}>{format(total_clickpower($gameState))}</span>
+		<span title={total_clickpower($gameState).toString()}
+			>{format(total_clickpower($gameState), $settings.formatting)}</span
+		>
 	</h1>
 	{#if $gameState.harvested.seeds > 0}
 		<h2 class="text-sm">
 			Harvest multiplier:
 			<span title={harvest_multiplier($gameState.harvested.seeds).toString()}
-				>{format(harvest_multiplier($gameState.harvested.seeds))}</span
+				>{format(harvest_multiplier($gameState.harvested.seeds), $settings.formatting)}</span
 			>
 		</h2>
 	{/if}

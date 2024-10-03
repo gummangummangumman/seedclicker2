@@ -64,7 +64,7 @@
 	}
 
 	onMount(() => {
-		setBackground($settings);
+		setBackground($settings.theme);
 		$gameState = loadFromLocalStorage();
 		document.addEventListener('keyup', (event) => {
 			switch (event.key) {
@@ -94,10 +94,10 @@
 </script>
 
 <svelte:head>
-	<title>Seedclicker 2 | {format($gameState.current.seeds)}</title>
+	<title>Seedclicker 2 | {format($gameState.current.seeds, $settings.formatting)}</title>
 </svelte:head>
 
-<section class="p-2 py-8 text-center bg-bg text-text {$settings}">
+<section class="p-2 py-8 text-center bg-bg text-text {$settings.theme}">
 	<SeedClicker />
 	<div class="my-2">
 		{#each pages as page}

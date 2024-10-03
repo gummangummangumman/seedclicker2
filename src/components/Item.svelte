@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Item } from '../types/item';
-	import { gameState } from '../store/store';
+	import { gameState, settings } from '../store/store';
 	import type { GameState } from '../types/gameState';
 	import { format } from '../util/number_formatting';
 	import Button from './Button.svelte';
@@ -53,7 +53,7 @@
 			/>
 			{#if $gameState.current.items[index][1] > 0}
 				<span class="absolute bottom-0 right-0 text-xs p-1 bg-bg border border-secondary rounded-full">
-					{format($gameState.current.items[index][1])}
+					{format($gameState.current.items[index][1], $settings.formatting)}
 				</span>
 			{/if}
 		</div>
@@ -61,15 +61,18 @@
 			<span class="text-lg font-bold">{getName($gameState)}</span>
 			{#if !isOutLine($gameState)}
 				<br />
-				Cost: <strong>{format(getPrice($gameState))}</strong> seeds
+				Cost: <strong>{format(getPrice($gameState), $settings.formatting)}</strong> seeds
 				{#if $gameState.current.items[index][1] > 0 && item.sps}
 					<br />
-					Generating <strong>{format($gameState.current.items[index][1] * item.sps)}</strong>
+					Generating
+					<strong>{format($gameState.current.items[index][1] * item.sps, $settings.formatting)}</strong>
 					<span title="seeds per second">sps</span>
 				{/if}
 				{#if $gameState.current.items[index][1] > 0 && item.clickpower}
 					<br />
-					Giving <strong>{format($gameState.current.items[index][1] * item.clickpower)}</strong> clickpower
+					Giving
+					<strong>{format($gameState.current.items[index][1] * item.clickpower, $settings.formatting)}</strong
+					> clickpower
 				{/if}
 			{/if}
 		</div>

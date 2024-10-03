@@ -123,7 +123,7 @@
 			placeholder="Save file"
 			bind:this={loadText}
 			on:change={handleTextChange}
-			class="resize my-4 p-1"
+			class="resize my-4 p-1 text-black"
 		/>
 		<br />
 		<p class="text-red-800 font-bold">
