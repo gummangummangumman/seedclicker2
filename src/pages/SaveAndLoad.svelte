@@ -69,7 +69,7 @@
 </script>
 
 <div class="my-8 w-full text-center">
-	<div class="m-8 max-w-lg md:mx-auto">
+	<div class="m-8 max-w-screen-sm sm:mx-auto">
 		<p>Seedclicker 2 will do its best to save your game automatically in your browser.</p>
 		<p>
 			This is a convenient way to store your progress, but not the safest. For example, you might clear your

@@ -3,7 +3,7 @@
 	import { format, formatSeconds } from '../util/number_formatting';
 </script>
 
-<div class="my-8">
+<div class="my-8 max-w-screen-sm sm:mx-auto">
 	{#if $gameState.harvested.harvestCount > 0}
 		<h3 class="font-bold underline text-lg">Unharvested stats</h3>
 	{/if}

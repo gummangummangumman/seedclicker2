@@ -3,7 +3,7 @@
 	import { gameState } from '../store/store';
 </script>
 
-<div class="my-8">
+<div class="my-8 max-w-screen-sm sm:mx-auto">
 	<h2>What is {GAME_NAME}?</h2>
 	<p>
 		{GAME_NAME} is a clicker/idle game. It is a sequel to
