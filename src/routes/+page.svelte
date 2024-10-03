@@ -11,7 +11,11 @@
 	import SaveAndLoad from '../pages/SaveAndLoad.svelte';
 	import type { GameState } from '../types/gameState';
 	import SeedClicker from '../components/SeedClicker.svelte';
-	import { loadFromLocalStorage, saveToLocalStorage } from '../game_logic/browserStorage';
+	import {
+		loadGameFromLocalStorage,
+		loadSettingsFromLocalStorage,
+		saveGameToLocalStorage,
+	} from '../game_logic/browserStorage';
 	import { HARVEST_BASE_SEEDS } from '../util/constants';
 	import Settings from '../pages/Settings.svelte';
 	import Faq from '../pages/Faq.svelte';
@@ -60,12 +64,13 @@
 
 	function secondPassed() {
 		$gameState = oneSecondPassing($gameState);
-		saveToLocalStorage($gameState);
+		saveGameToLocalStorage($gameState);
 	}
 
 	onMount(() => {
+		$gameState = loadGameFromLocalStorage();
+		$settings = loadSettingsFromLocalStorage();
 		setBackground($settings.theme);
-		$gameState = loadFromLocalStorage();
 		document.addEventListener('keyup', (event) => {
 			switch (event.key) {
 				case 'Enter':
