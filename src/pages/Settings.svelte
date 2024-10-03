@@ -35,7 +35,7 @@
 			value={$settings.formatting}
 		>
 			<option value={NumberFormatting.Normal}>{NumberFormatting.Normal}</option>
-			<option value={NumberFormatting.Scientific}>{NumberFormatting.Scientific}</option>
+			<option value={NumberFormatting.Engineering}>{NumberFormatting.Engineering}</option>
 		</select>
 	</p>
 </div>

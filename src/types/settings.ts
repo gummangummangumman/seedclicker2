@@ -5,7 +5,7 @@ export interface Settings {
 
 export enum NumberFormatting {
 	Normal = 'Normal',
-	Scientific = 'Scientific',
+	Engineering = 'Engineering',
 }
 
 export const initialSettings = {

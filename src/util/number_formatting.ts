@@ -24,7 +24,7 @@ const rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
 /**
  * @returns number in a human readable format
  */
-export function format(num: number, format: NumberFormatting = NumberFormatting.Normal, digits: number = 3) {
+export function format(num: number, format: NumberFormatting, digits: number = 3) {
 	let i;
 	for (i = si.length - 1; i > 0; i--) {
 		if (num >= si[i].value) {
@@ -36,7 +36,7 @@ export function format(num: number, format: NumberFormatting = NumberFormatting.
 		case NumberFormatting.Normal:
 			symbol = si[i].symbol;
 			break;
-		case NumberFormatting.Scientific:
+		case NumberFormatting.Engineering:
 			if (num < 1e3) {
 				symbol = '';
 				break;
