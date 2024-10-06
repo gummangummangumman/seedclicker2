@@ -33,15 +33,16 @@ export function format(num: number, format: NumberFormatting, digits: number = 3
 	}
 	let symbol;
 	switch (format) {
-		case NumberFormatting.Normal:
-			symbol = si[i].symbol;
-			break;
 		case NumberFormatting.Engineering:
 			if (num < 1e3) {
 				symbol = '';
 				break;
 			}
 			symbol = 'e' + Math.log10(si[i].value);
+			break;
+		case NumberFormatting.Normal:
+		default:
+			symbol = si[i].symbol;
 			break;
 	}
 	return (num / si[i].value).toFixed(digits).replace(rx, '$1') + symbol;

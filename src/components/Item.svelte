@@ -4,6 +4,9 @@
 	import type { GameState } from '../types/gameState';
 	import { format } from '../util/number_formatting';
 	import Button from './Button.svelte';
+	import ItemAmountPicture from './ItemAmountPicture.svelte';
+	import ItemAmount from './ItemAmount.svelte';
+	import { ItemView } from '../types/settings';
 	export let item: Item;
 	export let index: number;
 
@@ -44,19 +47,11 @@
 	className="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
 >
 	<div class="flex items-center space-x-4 mx-auto w-full">
-		<div class="relative">
-			<img
-				src={isOutLine($gameState) ? 'gumman_mystery.webp' : 'gumman.jpg'}
-				alt={getName($gameState)}
-				width="80px"
-				class="rounded-full"
-			/>
-			{#if $gameState.current.items[index][1] > 0}
-				<span class="absolute bottom-0 right-0 text-xs p-1 bg-bg border border-secondary rounded-full">
-					{format($gameState.current.items[index][1], $settings.formatting)}
-				</span>
-			{/if}
-		</div>
+		{#if $settings.itemView == ItemView.Picture}
+			<ItemAmountPicture {item} amount={$gameState.current.items[index][1]} isOutLine={isOutLine($gameState)} />
+		{:else}
+			<ItemAmount amount={$gameState.current.items[index][1]} />
+		{/if}
 		<div>
 			<span class="text-lg font-bold">{getName($gameState)}</span>
 			{#if !isOutLine($gameState)}
