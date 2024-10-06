@@ -43,6 +43,8 @@
 	{/if}
 	<h2>Do I have to click with my mouse?</h2>
 	<p>If you play on a computer, you can also use the space or enter key to click</p>
+	<h2>Will my game collect seeds while I don't have the game open?</h2>
+	<p>No</p>
 	<h2>What can I do if I experience a bug?</h2>
 	<p>
 		You can get in touch with me on <a class="italic underline" href="mailto:gumman@gumman.one">gumman@gumman.one</a
