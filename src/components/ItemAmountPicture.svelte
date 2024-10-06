@@ -9,7 +9,12 @@
 </script>
 
 <div class="w-20 h-20 relative">
-	<img src={isOutLine ? 'gumman_mystery.webp' : 'gumman.jpg'} alt={item.name} width="80px" class="rounded-full" />
+	<img
+		src={isOutLine ? 'gumman_mystery.webp' : `/items/${item.name.replaceAll(' ', '_').toLowerCase()}.png`}
+		alt={item.name}
+		width="80px"
+		class="rounded-full border border-secondary"
+	/>
 	{#if amount > 0}
 		<span class="absolute bottom-0 right-0 text-xs p-1 bg-bg border border-secondary rounded-full">
 			{format(amount, $settings.formatting)}
