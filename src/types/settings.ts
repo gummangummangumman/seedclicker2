@@ -4,9 +4,15 @@ export interface Settings {
 	itemView: ItemView;
 }
 
+export enum Theme {
+	System = 'System',
+	Light = 'theme-light',
+	Dark = 'theme-dark',
+}
+
 export enum NumberFormatting {
 	Normal = 'Normal',
-	Engineering = 'Engineering 🥼',
+	Engineering = 'Engineering',
 }
 
 export enum ItemView {
@@ -14,8 +20,8 @@ export enum ItemView {
 	NoPicture = 'NoPicture',
 }
 
-export const initialSettings = {
+export const initialSettings: Settings = {
 	theme: '',
 	formatting: NumberFormatting.Normal,
-	ItemView: ItemView.Picture,
+	itemView: ItemView.Picture,
 };

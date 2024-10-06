@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { saveSettingsToLocationStorage } from '../game_logic/browserStorage';
 	import { settings } from '../store/store';
-	import { ItemView, NumberFormatting } from '../types/settings';
+	import { ItemView, NumberFormatting, Theme } from '../types/settings';
 	import { setBackground } from '../util/background';
 
 	function handleThemeChange(event: Event) {
@@ -31,9 +31,9 @@
 			on:change={handleThemeChange}
 			value={$settings.theme}
 		>
-			<option value="">System 🖥️</option>
-			<option value="theme-light">Light 🌝</option>
-			<option value="theme-dark">Dark 🌚</option>
+			<option value={Theme.System}>System 🖥️</option>
+			<option value={Theme.Light}>Light 🌝</option>
+			<option value={Theme.Dark}>Dark 🌚</option>
 		</select>
 	</p>
 	<p>
