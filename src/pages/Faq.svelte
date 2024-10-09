@@ -3,7 +3,7 @@
 	import { gameState } from '../store/store';
 </script>
 
-<div class="my-8 max-w-screen-sm sm:mx-auto">
+<div class="my-8 p-4 max-w-screen-sm sm:mx-auto">
 	<h2>What is {GAME_NAME}?</h2>
 	<p>
 		{GAME_NAME} is a clicker/idle game. It is a sequel to
@@ -47,8 +47,9 @@
 	<p>No</p>
 	<h2>What can I do if I experience a bug?</h2>
 	<p>
-		You can get in touch with me on <a class="italic underline" href="mailto:gumman@gumman.one">gumman@gumman.one</a
-		>, describe your bug and I'll see what I can do
+		You can get in touch with me on
+		<a class="italic underline" href="mailto:seedclicker@gumman.one">seedclicker@gumman.one</a>, describe your bug,
+		attach your game save if relevant, and I might look into it
 	</p>
 </div>
 
