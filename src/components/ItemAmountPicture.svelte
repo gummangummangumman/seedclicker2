@@ -9,7 +9,7 @@
 	export let isOutLine: boolean = false;
 </script>
 
-<div class="w-20 h-20 relative">
+<div class="w-20 relative">
 	<img
 		src={isOutLine ? '/items/mystery.png' : `/items/${item.name.replaceAll(' ', '_').toLowerCase()}.png`}
 		alt={item.name}

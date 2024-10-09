@@ -52,22 +52,31 @@
 		{:else}
 			<ItemAmountPicture {item} amount={$gameState.current.items[index][1]} isOutLine={isOutLine($gameState)} />
 		{/if}
-		<div>
+		<div class="w-full pr-20">
 			<span class="text-lg font-bold">{getName($gameState)}</span>
 			{#if !isOutLine($gameState)}
 				<br />
 				Cost: <strong>{format(getPrice($gameState), $settings.formatting)}</strong> seeds
 				{#if $gameState.current.items[index][1] > 0 && item.sps}
 					<br />
-					Generating
-					<strong>{format($gameState.current.items[index][1] * item.sps, $settings.formatting)}</strong>
-					<span title="seeds per second">sps</span>
+					<span class="text-sm">
+						Generating
+						<strong>{format($gameState.current.items[index][1] * item.sps, $settings.formatting)}</strong>
+						<span title="seeds per second">sps</span>
+					</span>
 				{/if}
 				{#if $gameState.current.items[index][1] > 0 && item.clickpower}
 					<br />
-					Giving
-					<strong>{format($gameState.current.items[index][1] * item.clickpower, $settings.formatting)}</strong
-					> clickpower
+					<span class="text-sm">
+						Giving
+						<strong
+							>{format(
+								$gameState.current.items[index][1] * item.clickpower,
+								$settings.formatting,
+							)}</strong
+						>
+						clickpower
+					</span>
 				{/if}
 			{/if}
 		</div>
