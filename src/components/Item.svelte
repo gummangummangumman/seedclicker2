@@ -47,10 +47,10 @@
 	className="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
 >
 	<div class="flex items-center space-x-4 mx-auto w-full">
-		{#if $settings.itemView == ItemView.Picture}
-			<ItemAmountPicture {item} amount={$gameState.current.items[index][1]} isOutLine={isOutLine($gameState)} />
-		{:else}
+		{#if $settings.itemView == ItemView.NoPicture}
 			<ItemAmount amount={$gameState.current.items[index][1]} />
+		{:else}
+			<ItemAmountPicture {item} amount={$gameState.current.items[index][1]} isOutLine={isOutLine($gameState)} />
 		{/if}
 		<div>
 			<span class="text-lg font-bold">{getName($gameState)}</span>
