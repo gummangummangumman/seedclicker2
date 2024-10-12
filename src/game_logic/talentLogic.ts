@@ -5,6 +5,14 @@ export function getTalentCost(gameState: GameState) {
 	return 15_000_000 * Math.pow(10, 0 + gameState.current.talents.length);
 }
 
+export function talentOwned(gameState: GameState, talent: Talent): Boolean {
+	return gameState.current.talents.includes(talent.name);
+}
+
+export function requirementFulfilled(gameState: GameState, talent: Talent): Boolean {
+	return !talent.requires || gameState.current.talents.includes(talent.requires);
+}
+
 export function canBuy(gameState: GameState, talent: Talent): boolean {
 	if (gameState.current.talents.includes(talent.name)) {
 		return false;

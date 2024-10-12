@@ -43,7 +43,7 @@
 
 <Button
 	on:click={() => buyItem($gameState)}
-	disabled={!canBuy($gameState)}
+	disabled={!canBuy($gameState) || isOutLine($gameState)}
 	className="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
 >
 	<div class="flex items-center space-x-4 mx-auto w-full">
