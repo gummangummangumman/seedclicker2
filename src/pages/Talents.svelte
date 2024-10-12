@@ -8,10 +8,10 @@
 
 <div class="my-8">
 	<p>It costs <strong>{format(getTalentCost($gameState), $settings.formatting)}</strong> seeds to upgrade.</p>
-	<div class="my-8 text-center flex space-x-4">
-		{#each talentTree.specs as spec}
-			<div class={`flex-1 flex flex-col`}>
-				{#each spec.talents as talent}
+	<div class="my-8">
+		{#each talentTree.levels as level}
+			<div class={`pb-2`}>
+				{#each level.talents as talent}
 					<Talent {talent} />
 				{/each}
 			</div>

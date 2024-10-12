@@ -16,11 +16,22 @@
 	function requirementFulfilled(gameState: GameState): Boolean {
 		return !talent.requires || gameState.current.talents.includes(talent.requires);
 	}
+
+	function getTitle(gameState: GameState): string | null {
+		if (!requirementFulfilled(gameState)) {
+			return `⚠️ requires ${talent.requires}`;
+		} else if (!owned(gameState) && !canBuy(gameState, talent)) {
+			return 'Can not afford';
+		}
+		return null;
+	}
 </script>
 
+<!-- //TODO Turn into mobile-friendly icons that show name and description on click -->
 <button
 	disabled={!canBuy($gameState, talent)}
 	on:click={() => ($gameState = buyTalent($gameState, talent))}
+	title={getTitle($gameState)}
 	class="
             {requirementFulfilled($gameState) || previouslyOwned($gameState) ? 'mt-2 border border-black' : 'hidden'}
             {owned($gameState) && 'bg-secondary'}

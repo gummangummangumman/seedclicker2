@@ -82,7 +82,7 @@
 					$gameState = addSeeds($gameState, 15_000, false);
 					break;
 				case 'æ':
-					$gameState = addSeeds($gameState, 500_000, false);
+					$gameState = addSeeds($gameState, $gameState.current.seeds * 10, false);
 					break;
 				case 'å':
 					$gameState = addSeeds($gameState, 5_000_000, false);
@@ -99,7 +99,7 @@
 </script>
 
 <svelte:head>
-	<title>Seedclicker 2 | {format($gameState.current.seeds, $settings.formatting)}</title>
+	<title>SC 2 | {format($gameState.current.seeds, $settings.formatting)}</title>
 </svelte:head>
 
 <section class="p-2 py-8 text-center bg-bg text-text {$settings.theme}">

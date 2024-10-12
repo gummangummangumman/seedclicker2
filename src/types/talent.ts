@@ -1,45 +1,81 @@
 import type { GameState } from './gameState';
+import { amountOf } from './item';
 
+/**
+ * Make sure the clickEffects and spsEffects are multiplicative!
+ * This way, the order of which they are added doesn't matter.
+ */
 export interface Talent {
 	name: string;
 	description: string;
 	requires?: string; //name of another talent
-	clickEffect?: (clickPower: number) => number;
-	spsEffect?: (sps: number) => number;
+	clickEffect?: (clickPower: number, gameState: GameState) => number;
+	spsEffect?: (sps: number, gameState: GameState) => number;
 }
 
-export interface Spec {
-	name: string;
+export interface TalentLevel {
 	talents: Talent[];
 }
 
 export interface TalentTree {
-	specs: Spec[];
+	levels: TalentLevel[];
 }
 
 export const talentTree: TalentTree = {
-	specs: [
+	levels: [
 		{
-			name: 'Click',
 			talents: [
-				{ name: 'Clicky Clara', description: '2x click power', clickEffect: (clickPower) => clickPower * 2 },
+				{ name: 'Clicky Clara', description: '3x click power', clickEffect: (clickPower) => clickPower * 3 },
+				{ name: 'Passive Peter', description: '3x seeds per second', spsEffect: (sps) => sps * 3 },
+			],
+		},
+		{
+			talents: [
 				{
 					name: 'Click god',
-					description: '3x click power',
+					description: '2x click power',
 					requires: 'Clicky Clara',
-					clickEffect: (clickPower) => clickPower * 3,
+					clickEffect: (clickPower) => clickPower * 2,
+				},
+				{
+					name: 'Friend of the hourglass',
+					description: '2x seeds per second',
+					requires: 'Passive Peter',
+					spsEffect: (sps) => sps * 2,
 				},
 			],
 		},
 		{
-			name: 'Idle',
 			talents: [
-				{ name: 'Passive Peter', description: '2x seeds per second', spsEffect: (sps) => sps * 2 },
 				{
-					name: 'Friend of the hourglass',
-					description: '3x seeds per second',
-					requires: 'Passive Peter',
-					spsEffect: (sps) => sps * 3,
+					name: 'Water',
+					description: '+100% of base clickpower each water item (water cans and sprinklers)',
+					requires: 'Click god',
+					clickEffect: (clickPower, gameState) => {
+						const totalWaterItems = amountOf('water can', gameState) + amountOf('sprinkler', gameState);
+						if (totalWaterItems == 0) {
+							return clickPower;
+						}
+						return clickPower * (2 * totalWaterItems);
+					},
+				},
+				{
+					name: '2',
+					description: '...',
+					requires: 'Click god',
+					clickEffect: (clickPower) => clickPower * 2,
+				},
+				{
+					name: '3',
+					description: '...',
+					requires: 'Friend of the hourglass',
+					spsEffect: (sps) => sps * 2,
+				},
+				{
+					name: '4',
+					description: '...',
+					requires: 'Friend of the hourglass',
+					spsEffect: (sps) => sps * 2,
 				},
 			],
 		},
@@ -47,7 +83,7 @@ export const talentTree: TalentTree = {
 };
 
 export function activeTalents(gameState: GameState): Talent[] {
-	return talentTree.specs
-		.flatMap((spec) => spec.talents)
+	return talentTree.levels
+		.flatMap((level) => level.talents)
 		.filter((talent) => gameState.current.talents.includes(talent.name));
 }

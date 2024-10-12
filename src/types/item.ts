@@ -1,3 +1,4 @@
+import type { GameState } from './gameState';
 import { Requirement } from './requirement';
 
 export interface Item {
@@ -45,3 +46,14 @@ export const items: Item[] = [
 		requirement: new Requirement(4_000_000_000, 10_000_000_000),
 	},
 ];
+
+/**
+ * @returns how many you currently have of the item
+ */
+export function amountOf(name: string, gameState: GameState): number {
+	const amount = gameState.current.items.find((item) => item[0].toLowerCase() == name.toLowerCase())?.[1];
+	if (!amount) {
+		return 0;
+	}
+	return amount;
+}
