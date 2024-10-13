@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { buyTalent, canBuy, requirementFulfilled, talentOwned } from '../game_logic/talentLogic';
-	import { gameState } from '../store/store';
-	import type { Talent } from '../types/talent';
-	import Button from './Button.svelte';
+	import { buyTalent, canBuy, requirementFulfilled, talentOwned } from '../../game_logic/talentLogic';
+	import { gameState } from '../../store/store';
+	import type { Talent } from '../../types/talent';
+	import Button from '../Button.svelte';
 
 	export let talent: Talent;
 </script>

@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { canBuy, requirementFulfilled, talentOwned } from '../game_logic/talentLogic';
-	import { gameState, settings } from '../store/store';
-	import type { GameState } from '../types/gameState';
-	import type { Talent } from '../types/talent';
-	import { isDarkMode } from '../util/background';
+	import { canBuy, requirementFulfilled, talentOwned } from '../../game_logic/talentLogic';
+	import { gameState, settings } from '../../store/store';
+	import type { GameState } from '../../types/gameState';
+	import type { Talent } from '../../types/talent';
+	import { isDarkMode } from '../../util/background';
 
 	export let talent: Talent;
 	export let onClick;

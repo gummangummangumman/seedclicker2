@@ -1,6 +1,7 @@
 <script lang="ts">
-	import TalentInfo from '../components/TalentInfo.svelte';
-	import TalentView from '../components/TalentView.svelte';
+	import EmptyTalentInfo from '../components/talents/EmptyTalentInfo.svelte';
+	import TalentInfo from '../components/talents/TalentInfo.svelte';
+	import TalentView from '../components/talents/TalentView.svelte';
 	import { getTalentCost } from '../game_logic/talentLogic';
 	import { gameState, settings } from '../store/store';
 	import { talentTree, type Talent } from '../types/talent';
@@ -15,9 +16,7 @@
 		{#if selectedTalent != null}
 			<TalentInfo talent={selectedTalent} />
 		{:else}
-			<div class="h-36">
-				<p>Choose wisely 🌻</p>
-			</div>
+			<EmptyTalentInfo />
 		{/if}
 		{#each talentTree.levels as level}
 			<div class={`pb-12`}>
