@@ -11,7 +11,7 @@
 
 <div class="w-20 relative">
 	<img
-		src={isOutLine ? '/items/mystery.png' : `/items/${item.name.replaceAll(' ', '_').toLowerCase()}.png`}
+		src={isOutLine ? '/mystery.png' : `/items/${item.name.replaceAll(' ', '_').toLowerCase()}.png`}
 		alt={item.name}
 		width="80px"
 		class="rounded-full border border-secondary {isDarkMode($settings) ? 'invert' : ''}"

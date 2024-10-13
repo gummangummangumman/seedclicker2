@@ -34,7 +34,11 @@
 			border rounded-full relative
         "
 >
-	<img src="/items/mystery.png" alt={talent.name} class={isDarkMode($settings) ? 'invert' : ''} />
+	<img
+		src={`/talents/${talent.name.replaceAll(' ', '_').toLowerCase()}.png`}
+		alt={talent.name}
+		class="rounded-full {isDarkMode($settings) ? 'invert' : ''}"
+	/>
 	<p class="absolute text-sm leading-tight">{talent.name}</p>
 </button>
 
