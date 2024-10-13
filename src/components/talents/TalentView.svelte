@@ -4,6 +4,7 @@
 	import type { GameState } from '../../types/gameState';
 	import type { Talent } from '../../types/talent';
 	import { isDarkMode } from '../../util/background';
+	import Button from '../Button.svelte';
 
 	export let talent: Talent;
 	export let onClick;
@@ -22,10 +23,10 @@
 	}
 </script>
 
-<button
+<Button
 	on:click={onClick}
 	title={getTitle($gameState)}
-	class="
+	className="
             {requirementFulfilled($gameState, talent) || previouslyOwned($gameState)
 		? 'mt-2 border border-black'
 		: 'hidden'}
@@ -40,10 +41,4 @@
 		class="rounded-full {isDarkMode($settings) ? 'invert' : ''}"
 	/>
 	<p class="absolute text-sm leading-tight">{talent.name}</p>
-</button>
-
-<style>
-	button:disabled {
-		border-color: gray;
-	}
-</style>
+</Button>

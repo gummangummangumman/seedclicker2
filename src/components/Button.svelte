@@ -13,7 +13,8 @@
 <button on:click class="relative {className}" {disabled} {...$$restProps}>
 	{#if !disabled}
 		<div
-			class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-white active:bg-black bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-15"
+			class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-white active:bg-black bg-fixed opacity-0 transition duration-300 ease-in-out hover:opacity-15
+			{className.includes('rounded-full') ? 'rounded-full' : ''}"
 		/>
 	{/if}
 	<slot></slot>
