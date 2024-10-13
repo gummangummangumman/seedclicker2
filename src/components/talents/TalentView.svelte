@@ -23,22 +23,23 @@
 	}
 </script>
 
-<Button
-	on:click={onClick}
-	title={getTitle($gameState)}
-	className="
-            {requirementFulfilled($gameState, talent) || previouslyOwned($gameState)
-		? 'mt-2 border border-black'
-		: 'hidden'}
+{#if !requirementFulfilled($gameState, talent) && !previouslyOwned($gameState)}
+	<div></div>
+{:else}
+	<Button
+		on:click={onClick}
+		title={getTitle($gameState)}
+		className="
             {talentOwned($gameState, talent) && 'bg-secondary'}
             {canBuy($gameState, talent) && 'bg-primary'}
-			border rounded-full relative
+			mt-2 border border-black rounded-full relative
         "
->
-	<img
-		src={`/talents/${talent.name.replaceAll(' ', '_').toLowerCase()}.png`}
-		alt={talent.name}
-		class="rounded-full {isDarkMode($settings) ? 'invert' : ''}"
-	/>
-	<p class="absolute text-sm leading-tight">{talent.name}</p>
-</Button>
+	>
+		<img
+			src={`/talents/${talent.name.replaceAll(' ', '_').toLowerCase()}.png`}
+			alt={talent.name}
+			class="rounded-full {isDarkMode($settings) ? 'invert' : ''}"
+		/>
+		<p class="absolute text-sm leading-tight">{talent.name}</p>
+	</Button>
+{/if}

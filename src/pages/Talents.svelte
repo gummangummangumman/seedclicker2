@@ -10,7 +10,7 @@
 	let selectedTalent: Talent | null = null;
 </script>
 
-<div class="my-8">
+<div class="my-8 max-w-screen-sm sm:mx-auto">
 	<p>It costs <strong>{format(getTalentCost($gameState), $settings.formatting)}</strong> seeds to upgrade.</p>
 	<div class="my-8">
 		{#if selectedTalent != null}
@@ -19,7 +19,7 @@
 			<EmptyTalentInfo />
 		{/if}
 		{#each talentTree.levels as level}
-			<div class={`pb-12`}>
+			<div class={`pb-12 flex justify-evenly`}>
 				{#each level.talents as talent}
 					<TalentView {talent} onClick={() => (selectedTalent = talent)} />
 				{/each}
