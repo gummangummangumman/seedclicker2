@@ -124,7 +124,7 @@
 			bind:this={loadText}
 			on:change={handleTextChange}
 			class="resize my-4 p-1 text-black"
-		/>
+		></textarea>
 		<br />
 		<p class="text-red-800 font-bold">
 			{errorMessage}
