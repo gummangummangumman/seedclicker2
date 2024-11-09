@@ -28,7 +28,7 @@
 		<strong>Theme</strong>
 		<select
 			class="p-2 ml-2 border border-secondary bg-primary rounded-md"
-			on:change={handleThemeChange}
+			onchange={handleThemeChange}
 			value={$settings.theme}
 		>
 			<option value={Theme.System}>System 🖥️</option>
@@ -40,7 +40,7 @@
 		<strong>Number formatting</strong>
 		<select
 			class="p-2 ml-2 border border-secondary bg-primary rounded-md"
-			on:change={handleFormattingChange}
+			onchange={handleFormattingChange}
 			value={$settings.formatting}
 		>
 			<option value={NumberFormatting.Normal}>Normal</option>
@@ -51,7 +51,7 @@
 		<strong>Item view</strong>
 		<select
 			class="p-2 ml-2 border border-secondary bg-primary rounded-md"
-			on:change={handleItemViewChange}
+			onchange={handleItemViewChange}
 			value={$settings.itemView}
 		>
 			<option value={ItemView.Picture}>With picture 🖼️</option>

@@ -58,7 +58,7 @@
 			component: SaveAndLoad,
 		},
 	];
-	let currentPage = pages[0];
+	let currentPage = $state(pages[0]);
 
 	setInterval(() => secondPassed(), 1000);
 
@@ -88,10 +88,10 @@
 					$gameState = addSeeds($gameState, 5_000_000, false);
 					break;
 				case 's':
-					console.log($gameState);
+					console.log($state.snapshot($gameState));
 					break;
 				case 'i':
-					console.log($settings);
+					console.log($state.snapshot($settings));
 					break;
 			}
 		});
@@ -109,7 +109,7 @@
 			{#if !page.requirement || page.requirement($gameState)}
 				<button
 					class="p-2 border border-secondary {currentPage == page ? 'bg-secondary' : 'hover:bg-primary'}"
-					on:click={() => (currentPage = page)}
+					onclick={() => (currentPage = page)}
 					title={page.description}
 				>
 					{page.name}
@@ -118,5 +118,5 @@
 		{/each}
 	</div>
 
-	<svelte:component this={currentPage.component} />
+	<currentPage.component />
 </section>

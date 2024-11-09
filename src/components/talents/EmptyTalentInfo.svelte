@@ -3,8 +3,8 @@
 
 	const MAX_SUNFLOWER_SIZE = 50;
 
-	let sunflowerSize = 16;
-	let seedSymbol = '🌱';
+	let sunflowerSize = $state(16);
+	let seedSymbol = $state('🌱');
 
 	function clickSunflower() {
 		if (sunflowerSize < MAX_SUNFLOWER_SIZE) {
@@ -20,7 +20,7 @@
 		Choose wisely <Button
 			disabled={seedSymbol == '🌻'}
 			style="font-size: {sunflowerSize}px"
-			on:click={clickSunflower}>{seedSymbol}</Button
+			onclick={clickSunflower}>{seedSymbol}</Button
 		>
 	</p>
 </div>

@@ -4,7 +4,11 @@
 	import type { Talent } from '../../types/talent';
 	import Button from '../Button.svelte';
 
-	export let talent: Talent;
+	interface Props {
+		talent: Talent;
+	}
+
+	let { talent }: Props = $props();
 </script>
 
 <div class="h-36 p-4">
@@ -12,8 +16,8 @@
 	<p class="font-bo">{talent.description}</p>
 	{#if canBuy($gameState, talent)}
 		<Button
-			on:click={() => ($gameState = buyTalent($gameState, talent))}
-			className="bg-primary p-2 px-4 mt-3 rounded-md"
+			onclick={() => ($gameState = buyTalent($gameState, talent))}
+			class="bg-primary p-2 px-4 mt-3 rounded-md"
 		>
 			Buy
 		</Button>

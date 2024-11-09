@@ -42,9 +42,9 @@
 </script>
 
 <Button
-	on:click={() => buyItem($gameState)}
+	onclick={() => buyItem($gameState)}
 	disabled={!canBuy($gameState) || isOutLine($gameState)}
-	className="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
+	class="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
 >
 	<div class="flex items-center space-x-4 mx-auto w-full">
 		{#if $settings.itemView == ItemView.NoPicture}

@@ -4,9 +4,13 @@
 	import { isDarkMode } from '../util/background';
 	import { format } from '../util/number_formatting';
 
-	export let item: Item;
-	export let amount: number = 0;
-	export let isOutLine: boolean = false;
+	interface Props {
+		item: Item;
+		amount?: number;
+		isOutLine?: boolean;
+	}
+
+	let { item, amount = 0, isOutLine = false }: Props = $props();
 </script>
 
 <div class="w-20 relative">

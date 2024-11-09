@@ -1,4 +1,5 @@
 <script lang="ts">
+	import type { MouseEventHandler } from 'svelte/elements';
 	import { canBuy, requirementFulfilled, talentOwned } from '../../game_logic/talentLogic';
 	import { gameState, settings } from '../../store/store';
 	import type { GameState } from '../../types/gameState';
@@ -6,8 +7,12 @@
 	import { isDarkMode } from '../../util/background';
 	import Button from '../Button.svelte';
 
-	export let talent: Talent;
-	export let onClick;
+	interface Props {
+		talent: Talent;
+		onclick: MouseEventHandler<HTMLButtonElement>;
+	}
+
+	let { talent, onclick }: Props = $props();
 
 	function previouslyOwned(gameState: GameState): Boolean {
 		return gameState.harvested.talents.includes(talent.name);
@@ -27,9 +32,9 @@
 	<div></div>
 {:else}
 	<Button
-		on:click={onClick}
+		{onclick}
 		title={getTitle($gameState)}
-		className="
+		class="
             {talentOwned($gameState, talent) && 'bg-secondary'}
             {canBuy($gameState, talent) && 'bg-primary'}
 			mt-2 border border-black rounded-full relative

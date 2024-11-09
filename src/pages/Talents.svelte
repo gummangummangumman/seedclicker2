@@ -7,7 +7,7 @@
 	import { talentTree, type Talent } from '../types/talent';
 	import { format } from '../util/number_formatting';
 
-	let selectedTalent: Talent | null = null;
+	let selectedTalent: Talent | null = $state(null);
 </script>
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
@@ -21,7 +21,7 @@
 		{#each talentTree.levels as level}
 			<div class={`pb-12 flex justify-evenly`}>
 				{#each level.talents as talent}
-					<TalentView {talent} onClick={() => (selectedTalent = talent)} />
+					<TalentView {talent} onclick={() => (selectedTalent = talent)} />
 				{/each}
 			</div>
 		{/each}

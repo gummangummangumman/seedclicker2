@@ -17,7 +17,7 @@
 	}
 </script>
 
-<button on:click={onClick}>
+<button onclick={onClick}>
 	<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + getClass($gameState.current.clicks)} />
 	<h1>
 		Seeds: <span title={$gameState.current.seeds.toString()}

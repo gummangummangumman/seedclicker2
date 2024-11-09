@@ -7,7 +7,7 @@
 	let loadFile: HTMLInputElement;
 	let loadText: HTMLTextAreaElement;
 
-	let errorMessage: string = '';
+	let errorMessage: string = $state('');
 
 	function hardReset() {
 		gameState.update(() => {
@@ -83,8 +83,8 @@
 		</p>
 	</div>
 	<Button
-		className="bg-primary border border-black p-2 cursor-copy"
-		on:click={() => {
+		class="bg-primary border border-black p-2 cursor-copy"
+		onclick={() => {
 			navigator.clipboard
 				.writeText(JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) }))
 				.then(() => {
@@ -98,8 +98,8 @@
 		Save to clipboard
 	</Button>
 	<Button
-		className="bg-primary border border-black p-2"
-		on:click={() => {
+		class="bg-primary border border-black p-2"
+		onclick={() => {
 			const blob = new Blob([JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) })], {
 				type: 'text/plain',
 			});
@@ -116,25 +116,25 @@
 	<br />
 	<div id="load" class="m-4 p-2 border border-secondary rounded-md">
 		<p>Load by pasting your save into the text field, or simply upload the file.</p>
-		<input type="file" id="loadfile" bind:this={loadFile} on:change={handleFileChange} />
+		<input type="file" id="loadfile" bind:this={loadFile} onchange={handleFileChange} />
 		<br />
 		<textarea
 			id="load_input"
 			placeholder="Save file"
 			bind:this={loadText}
-			on:change={handleTextChange}
+			onchange={handleTextChange}
 			class="resize my-4 p-1 text-black"
 		></textarea>
 		<br />
 		<p class="text-red-800 font-bold">
 			{errorMessage}
 		</p>
-		<Button className="bg-primary border border-black p-2" disabled={!!errorMessage} on:click={load}>Load</Button>
+		<Button class="bg-primary border border-black p-2" disabled={!!errorMessage} onclick={load}>Load</Button>
 		<br />
 	</div>
 	<Button
-		className="border border-black p-2 bg-red-600"
-		on:click={() => {
+		class="border border-black p-2 bg-red-600"
+		onclick={() => {
 			if (
 				window.confirm(
 					'Are you sure? It might be a good idea to save before doing this, in case you change your mind',
