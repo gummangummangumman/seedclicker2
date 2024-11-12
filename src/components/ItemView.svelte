@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Item } from '../types/item';
-	import { gameState, settings } from '../store/store';
+	import { store, updateGameState } from '../store/store.svelte';
 	import type { GameState } from '../types/gameState';
 	import { format } from '../util/number_formatting';
 	import Button from './Button.svelte';
@@ -15,8 +15,9 @@
 		if (gameState.current.seeds < price) {
 			return;
 		}
-		$gameState.current.seeds -= price;
-		$gameState.current.items[index][1]++;
+		gameState.current.seeds -= price;
+		gameState.current.items[index][1]++;
+		updateGameState(gameState);
 	}
 
 	function canBuy(gameState: GameState) {
@@ -42,37 +43,46 @@
 </script>
 
 <Button
-	onclick={() => buyItem($gameState)}
-	disabled={!canBuy($gameState) || isOutLine($gameState)}
+	onclick={() => buyItem(store.gameState)}
+	disabled={!canBuy(store.gameState) || isOutLine(store.gameState)}
 	class="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
 >
 	<div class="flex items-center space-x-4 mx-auto w-full">
-		{#if $settings.itemView == ItemView.NoPicture}
-			<ItemAmount amount={$gameState.current.items[index][1]} />
+		{#if store.settings.itemView == ItemView.NoPicture}
+			<ItemAmount amount={store.gameState.current.items[index][1]} />
 		{:else}
-			<ItemAmountPicture {item} amount={$gameState.current.items[index][1]} isOutLine={isOutLine($gameState)} />
+			<ItemAmountPicture
+				{item}
+				amount={store.gameState.current.items[index][1]}
+				isOutLine={isOutLine(store.gameState)}
+			/>
 		{/if}
 		<div class="w-full pr-20">
-			<span class="text-lg font-bold">{getName($gameState)}</span>
-			{#if !isOutLine($gameState)}
+			<span class="text-lg font-bold">{getName(store.gameState)}</span>
+			{#if !isOutLine(store.gameState)}
 				<br />
-				Cost: <strong>{format(getPrice($gameState), $settings.formatting)}</strong> seeds
-				{#if $gameState.current.items[index][1] > 0 && item.sps}
+				Cost: <strong>{format(getPrice(store.gameState), store.settings.formatting)}</strong> seeds
+				{#if store.gameState.current.items[index][1] > 0 && item.sps}
 					<br />
 					<span class="text-sm">
 						Generating
-						<strong>{format($gameState.current.items[index][1] * item.sps, $settings.formatting)}</strong>
+						<strong
+							>{format(
+								store.gameState.current.items[index][1] * item.sps,
+								store.settings.formatting,
+							)}</strong
+						>
 						<span title="seeds per second">sps</span>
 					</span>
 				{/if}
-				{#if $gameState.current.items[index][1] > 0 && item.clickpower}
+				{#if store.gameState.current.items[index][1] > 0 && item.clickpower}
 					<br />
 					<span class="text-sm">
 						Giving
 						<strong
 							>{format(
-								$gameState.current.items[index][1] * item.clickpower,
-								$settings.formatting,
+								store.gameState.current.items[index][1] * item.clickpower,
+								store.settings.formatting,
 							)}</strong
 						>
 						clickpower

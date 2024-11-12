@@ -3,7 +3,7 @@ import { Theme, type Settings } from '../types/settings';
 /**
  * Sets the background-color on `:root` level.
  * Necessary because the `<html>` tag produced by the svelte app does not cover the entire screen.
- * @param theme theme from $settings
+ * @param theme theme from settings
  */
 export function setBackground(theme: string = '') {
 	let bg = '';

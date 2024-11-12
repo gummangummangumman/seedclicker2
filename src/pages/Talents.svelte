@@ -3,7 +3,7 @@
 	import TalentInfo from '../components/talents/TalentInfo.svelte';
 	import TalentView from '../components/talents/TalentView.svelte';
 	import { getTalentCost } from '../game_logic/talentLogic';
-	import { gameState, settings } from '../store/store';
+	import { store } from '../store/store.svelte';
 	import { talentTree, type Talent } from '../types/talent';
 	import { format } from '../util/number_formatting';
 
@@ -11,7 +11,9 @@
 </script>
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
-	<p>It costs <strong>{format(getTalentCost($gameState), $settings.formatting)}</strong> seeds to upgrade.</p>
+	<p>
+		It costs <strong>{format(getTalentCost(store.gameState), store.settings.formatting)}</strong> seeds to upgrade.
+	</p>
 	<div class="my-8">
 		{#if selectedTalent != null}
 			<TalentInfo talent={selectedTalent} />

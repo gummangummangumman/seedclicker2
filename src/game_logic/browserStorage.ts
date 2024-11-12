@@ -1,4 +1,4 @@
-import { initialGameState } from '../store/store';
+import { initialGameState } from '../store/store.svelte';
 import type { GameState } from '../types/gameState';
 import { initialSettings, type Settings } from '../types/settings';
 

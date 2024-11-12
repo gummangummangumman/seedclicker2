@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { MouseEventHandler } from 'svelte/elements';
 	import { canBuy, requirementFulfilled, talentOwned } from '../../game_logic/talentLogic';
-	import { gameState, settings } from '../../store/store';
+	import { store } from '../../store/store.svelte';
 	import type { GameState } from '../../types/gameState';
 	import type { Talent } from '../../types/talent';
 	import { isDarkMode } from '../../util/background';
@@ -28,22 +28,22 @@
 	}
 </script>
 
-{#if !requirementFulfilled($gameState, talent) && !previouslyOwned($gameState)}
+{#if !requirementFulfilled(store.gameState, talent) && !previouslyOwned(store.gameState)}
 	<div></div>
 {:else}
 	<Button
 		{onclick}
-		title={getTitle($gameState)}
+		title={getTitle(store.gameState)}
 		class="
-            {talentOwned($gameState, talent) && 'bg-secondary'}
-            {canBuy($gameState, talent) && 'bg-primary'}
+            {talentOwned(store.gameState, talent) && 'bg-secondary'}
+            {canBuy(store.gameState, talent) && 'bg-primary'}
 			mt-2 border border-black rounded-full relative
         "
 	>
 		<img
 			src={`/talents/${talent.name.replaceAll(' ', '_').toLowerCase()}.png`}
 			alt={talent.name}
-			class="rounded-full {isDarkMode($settings) ? 'invert' : ''}"
+			class="rounded-full {isDarkMode(store.settings) ? 'invert' : ''}"
 		/>
 		<p class="absolute text-sm leading-tight">{talent.name}</p>
 	</Button>

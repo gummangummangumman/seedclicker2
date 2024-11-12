@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { gameState, settings } from '../store/store';
+	import { store, updateGameState, updateSettings } from '../store/store.svelte';
 	import { addSeeds, click, oneSecondPassing } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 	import { onMount } from 'svelte';
@@ -63,35 +63,35 @@
 	setInterval(() => secondPassed(), 1000);
 
 	function secondPassed() {
-		$gameState = oneSecondPassing($gameState);
-		saveGameToLocalStorage($gameState);
+		updateGameState(oneSecondPassing(store.gameState));
+		saveGameToLocalStorage(store.gameState);
 	}
 
 	onMount(() => {
-		$gameState = loadGameFromLocalStorage();
-		$settings = loadSettingsFromLocalStorage();
-		setBackground($settings.theme);
+		updateGameState(loadGameFromLocalStorage());
+		updateSettings(loadSettingsFromLocalStorage());
+		setBackground(store.settings.theme);
 		document.addEventListener('keyup', (event) => {
 			switch (event.key) {
 				case 'Enter':
 				case ' ':
-					$gameState = click($gameState);
+					updateGameState(click(store.gameState));
 					break;
 				//midlertidig juks :^)
 				case 'ø':
-					$gameState = addSeeds($gameState, 15_000, false);
+					updateGameState(addSeeds(store.gameState, 15_000, false));
 					break;
 				case 'æ':
-					$gameState = addSeeds($gameState, $gameState.current.seeds * 10, false);
+					updateGameState(addSeeds(store.gameState, store.gameState.current.seeds * 10, false));
 					break;
 				case 'å':
-					$gameState = addSeeds($gameState, 5_000_000, false);
+					updateGameState(addSeeds(store.gameState, 5_000_000, false));
 					break;
 				case 's':
-					console.log($state.snapshot($gameState));
+					console.log($state.snapshot(store.gameState));
 					break;
 				case 'i':
-					console.log($state.snapshot($settings));
+					console.log($state.snapshot(store.settings));
 					break;
 			}
 		});
@@ -99,14 +99,14 @@
 </script>
 
 <svelte:head>
-	<title>SC 2 | {format($gameState.current.seeds, $settings.formatting)}</title>
+	<title>SC 2 | {format(store.gameState.current.seeds, store.settings.formatting)}</title>
 </svelte:head>
 
-<section class="p-2 py-8 text-center bg-bg text-text {$settings.theme}">
+<section class="p-2 py-8 text-center bg-bg text-text {store.settings.theme}">
 	<SeedClicker />
 	<div class="my-2">
 		{#each pages as page}
-			{#if !page.requirement || page.requirement($gameState)}
+			{#if !page.requirement || page.requirement(store.gameState)}
 				<button
 					class="p-2 border border-secondary {currentPage == page ? 'bg-secondary' : 'hover:bg-primary'}"
 					onclick={() => (currentPage = page)}

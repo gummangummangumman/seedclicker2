@@ -1,34 +1,44 @@
 <script lang="ts">
-	import { gameState, settings } from '../store/store';
+	import { store } from '../store/store.svelte';
 	import { format, formatSeconds } from '../util/number_formatting';
 </script>
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
-	{#if $gameState.harvested.harvestCount > 0}
+	{#if store.gameState.harvested.harvestCount > 0}
 		<h3 class="font-bold underline text-lg">Unharvested stats</h3>
 	{/if}
-	<p>total seeds: <strong>{format($gameState.current.totalLifetimeSeeds, $settings.formatting)}</strong></p>
-	<p>peak seeds: <strong>{format($gameState.current.peakLifetimeSeeds, $settings.formatting)}</strong></p>
-	<p>clicks: <strong>{format($gameState.current.clicks, $settings.formatting)}</strong></p>
-	<p>Time spent playing: <strong>{formatSeconds($gameState.current.seconds)}</strong></p>
+	<p>total seeds: <strong>{format(store.gameState.current.totalLifetimeSeeds, store.settings.formatting)}</strong></p>
+	<p>peak seeds: <strong>{format(store.gameState.current.peakLifetimeSeeds, store.settings.formatting)}</strong></p>
+	<p>clicks: <strong>{format(store.gameState.current.clicks, store.settings.formatting)}</strong></p>
+	<p>Time spent playing: <strong>{formatSeconds(store.gameState.current.seconds)}</strong></p>
 
-	{#if $gameState.harvested.harvestCount > 0}
+	{#if store.gameState.harvested.harvestCount > 0}
 		<h3 class="pt-4 font-bold underline text-lg">All time</h3>
-		<p>Harvests: <strong>{format($gameState.harvested.harvestCount, $settings.formatting)}</strong></p>
+		<p>Harvests: <strong>{format(store.gameState.harvested.harvestCount, store.settings.formatting)}</strong></p>
 		<p>
 			Seeds:
 			<strong>
-				{format($gameState.harvested.seeds + $gameState.current.totalLifetimeSeeds, $settings.formatting)}
+				{format(
+					store.gameState.harvested.seeds + store.gameState.current.totalLifetimeSeeds,
+					store.settings.formatting,
+				)}
 			</strong>
 		</p>
+		store.gameState
 		<p>
 			Clicks:
-			<strong>{format($gameState.harvested.clicks + $gameState.current.clicks, $settings.formatting)}</strong>
+			<strong
+				>{format(
+					store.gameState.harvested.clicks + store.gameState.current.clicks,
+					store.settings.formatting,
+				)}</strong
+			>
 		</p>
+		store.gameState
 
 		<p class="pt-4">
 			Total time spent playing: <strong>
-				{formatSeconds($gameState.harvested.seconds + $gameState.current.seconds)}
+				{formatSeconds(store.gameState.harvested.seconds + store.gameState.current.seconds)}
 			</strong>
 		</p>
 	{/if}

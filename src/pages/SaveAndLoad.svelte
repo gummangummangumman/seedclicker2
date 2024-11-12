@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Button from '../components/Button.svelte';
-	import { gameState, initialGameState } from '../store/store';
+	import { store, initialGameState, updateGameState } from '../store/store.svelte';
 	import type { GameState } from '../types/gameState';
 	import { hash, verifyGameSave } from '../util/hash';
 
@@ -10,9 +10,7 @@
 	let errorMessage: string = $state('');
 
 	function hardReset() {
-		gameState.update(() => {
-			return structuredClone(initialGameState);
-		});
+		updateGameState(structuredClone(initialGameState));
 	}
 
 	function handleFileChange(event: Event) {
@@ -59,9 +57,7 @@
 				'Are you sure? Please note that this will remove your current progress and overwrite with your save file.',
 			)
 		) {
-			gameState.update(() => {
-				return save;
-			});
+			updateGameState(save);
 			loadFile.value = '';
 			loadText.value = '';
 		}
@@ -86,7 +82,7 @@
 		class="bg-primary border border-black p-2 cursor-copy"
 		onclick={() => {
 			navigator.clipboard
-				.writeText(JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) }))
+				.writeText(JSON.stringify({ ...store.gameState, antiCheatToken: hash(store.gameState) }))
 				.then(() => {
 					console.log('Copied to clipboard successfully!');
 				})
@@ -100,7 +96,7 @@
 	<Button
 		class="bg-primary border border-black p-2"
 		onclick={() => {
-			const blob = new Blob([JSON.stringify({ ...$gameState, antiCheatToken: hash($gameState) })], {
+			const blob = new Blob([JSON.stringify({ ...store.gameState, antiCheatToken: hash(store.gameState) })], {
 				type: 'text/plain',
 			});
 			const link = document.createElement('a');

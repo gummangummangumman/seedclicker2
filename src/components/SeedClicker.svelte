@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { gameState, settings } from '../store/store';
+	import { store, updateGameState } from '../store/store.svelte';
 	import { click, harvest_multiplier, total_clickpower, total_sps } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 
 	function onClick(this: HTMLButtonElement) {
-		$gameState = click($gameState);
+		updateGameState(click(store.gameState));
 		this.blur();
 	}
 
@@ -18,27 +18,29 @@
 </script>
 
 <button onclick={onClick}>
-	<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + getClass($gameState.current.clicks)} />
+	<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + getClass(store.gameState.current.clicks)} />
 	<h1>
-		Seeds: <span title={$gameState.current.seeds.toString()}
-			>{format($gameState.current.seeds, $settings.formatting)}</span
+		Seeds: <span title={store.gameState.current.seeds.toString()}
+			>{format(store.gameState.current.seeds, store.settings.formatting)}</span
 		>
 	</h1>
 	<h1>
 		<span title="Seeds per second">Sps</span>:
-		<span title={total_sps($gameState).toString()}>{format(total_sps($gameState), $settings.formatting)}</span>
+		<span title={total_sps(store.gameState).toString()}
+			>{format(total_sps(store.gameState), store.settings.formatting)}</span
+		>
 	</h1>
 	<h1>
 		Clickpower:
-		<span title={total_clickpower($gameState).toString()}
-			>{format(total_clickpower($gameState), $settings.formatting)}</span
+		<span title={total_clickpower(store.gameState).toString()}
+			>{format(total_clickpower(store.gameState), store.settings.formatting)}</span
 		>
 	</h1>
-	{#if $gameState.harvested.seeds > 0}
+	{#if store.gameState.harvested.seeds > 0}
 		<h2 class="text-sm">
 			Harvest multiplier:
-			<span title={harvest_multiplier($gameState.harvested.seeds).toString()}
-				>{format(harvest_multiplier($gameState.harvested.seeds), $settings.formatting)}</span
+			<span title={harvest_multiplier(store.gameState.harvested.seeds).toString()}
+				>{format(harvest_multiplier(store.gameState.harvested.seeds), store.settings.formatting)}</span
 			>
 		</h2>
 	{/if}

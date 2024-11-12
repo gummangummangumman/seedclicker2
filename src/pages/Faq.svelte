@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { GAME_NAME } from '../util/constants';
-	import { gameState } from '../store/store';
+	import { store } from '../store/store.svelte';
 </script>
 
 <div class="my-8 p-4 max-w-screen-sm sm:mx-auto">
@@ -28,7 +28,7 @@
 		<li>Gradual discovery of game upgrades ✨⬆️</li>
 		<li>Several game features that you have to unlock by playing! 🎮🌻</li>
 	</ul>
-	{#if $gameState.harvested.harvestCount > 0}
+	{#if store.gameState.harvested.harvestCount > 0}
 		<h2>Why is my harvest multiplier not working?</h2>
 		<p>
 			Harvest multiplier is not shown directly as SPS or clickpower, but it is applied. Additionally, the

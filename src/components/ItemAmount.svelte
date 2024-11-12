@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { settings } from '../store/store';
+	import { store } from '../store/store.svelte';
 	import { format } from '../util/number_formatting';
 
 	interface Props {
@@ -10,5 +10,5 @@
 </script>
 
 <span class="w-20 h-16 border border-secondary rounded-full flex items-center justify-center">
-	{amount == 0 ? '-' : format(amount, $settings.formatting)}
+	{amount == 0 ? '-' : format(amount, store.settings.formatting)}
 </span>

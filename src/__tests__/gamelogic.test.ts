@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import type { GameState } from '../types/gameState';
-import { initialGameState } from '../store/store';
+import { initialGameState } from '../store/store.svelte';
 import { click, harvest_multiplier, oneSecondPassing } from '../game_logic/gameLogic';
 
 describe('Harvest multiplier', () => {
