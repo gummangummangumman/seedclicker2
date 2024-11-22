@@ -2,7 +2,7 @@
 	import Button from '../components/Button.svelte';
 	import { store, initialGameState, updateGameState } from '../store/store.svelte';
 	import type { GameState } from '../types/gameState';
-	import { hash, verifyGameSave } from '../util/hash';
+	import { getSave, loadSave } from '../util/save';
 
 	let loadFile: HTMLInputElement;
 	let loadText: HTMLTextAreaElement;
@@ -41,15 +41,9 @@
 	function load() {
 		let save: GameState;
 		try {
-			save = JSON.parse(loadText.value);
-		} catch (e) {
-			errorMessage = '⚠️ Something went wrong trying to read the save! ⚠️';
-			return;
-		}
-		console.log('loading save', save);
-		//TODO first verify that save is a proper GameState object, so that the cheating errorMessage is justifiably given
-		if (!verifyGameSave(save)) {
-			errorMessage = '💀 Cheating detected! 💀';
+			save = loadSave(loadText.value);
+		} catch (e: any) {
+			errorMessage = e;
 			return;
 		}
 		if (
@@ -82,7 +76,7 @@
 		class="bg-primary border border-black p-2 cursor-copy"
 		onclick={() => {
 			navigator.clipboard
-				.writeText(JSON.stringify({ ...store.gameState, antiCheatToken: hash(store.gameState) }))
+				.writeText(getSave(store.gameState))
 				.then(() => {
 					console.log('Copied to clipboard successfully!');
 				})
@@ -96,7 +90,7 @@
 	<Button
 		class="bg-primary border border-black p-2"
 		onclick={() => {
-			const blob = new Blob([JSON.stringify({ ...store.gameState, antiCheatToken: hash(store.gameState) })], {
+			const blob = new Blob([getSave(store.gameState)], {
 				type: 'text/plain',
 			});
 			const link = document.createElement('a');
