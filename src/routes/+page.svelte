@@ -108,7 +108,9 @@
 		{#each pages as page}
 			{#if !page.requirement || page.requirement(store.gameState)}
 				<button
-					class="p-2 border border-secondary {currentPage == page ? 'bg-secondary' : 'hover:bg-primary'}"
+					class="p-2 border border-secondary {currentPage.name == page.name
+						? 'bg-secondary'
+						: 'hover:bg-primary'}"
 					onclick={() => (currentPage = page)}
 					title={page.description}
 				>
