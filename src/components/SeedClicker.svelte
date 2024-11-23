@@ -1,10 +1,10 @@
 <script lang="ts">
-	import { store, updateGameState } from '../store/store.svelte';
+	import { store } from '../store/store.svelte';
 	import { click, harvest_multiplier, total_clickpower, total_sps } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 
 	function onClick(this: HTMLButtonElement) {
-		updateGameState(click(store.gameState));
+		click();
 		this.blur();
 	}
 
@@ -26,15 +26,11 @@
 	</h1>
 	<h1>
 		<span title="Seeds per second">Sps</span>:
-		<span title={total_sps(store.gameState).toString()}
-			>{format(total_sps(store.gameState), store.settings.formatting)}</span
-		>
+		<span title={total_sps().toString()}>{format(total_sps(), store.settings.formatting)}</span>
 	</h1>
 	<h1>
 		Clickpower:
-		<span title={total_clickpower(store.gameState).toString()}
-			>{format(total_clickpower(store.gameState), store.settings.formatting)}</span
-		>
+		<span title={total_clickpower().toString()}>{format(total_clickpower(), store.settings.formatting)}</span>
 	</h1>
 	{#if store.gameState.harvested.seeds > 0}
 		<h2 class="text-sm">

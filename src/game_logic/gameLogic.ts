@@ -1,41 +1,39 @@
+import { store, updateGameState } from '../store/store.svelte';
 import type { GameState } from '../types/gameState';
 import { items } from '../types/item';
 import { activeTalents } from '../types/talent';
 import { HARVEST_BASE_SEEDS } from '../util/constants';
 
-/**
- * @returns the new gamestate
- */
-export function click(gameState: GameState): GameState {
+export function click() {
 	const newGameState = {
-		...gameState,
+		...store.gameState,
 		current: {
-			...gameState.current,
-			clicks: gameState.current.clicks + 1,
+			...store.gameState.current,
+			clicks: store.gameState.current.clicks + 1,
 		},
 	};
-	return addSeeds(newGameState, total_clickpower(gameState));
+	addSeeds(newGameState, total_clickpower());
 }
 
-export function total_sps(gameState: GameState) {
-	const spsFromItems: number = gameState.current.items.reduce(
+export function total_sps(): number {
+	const spsFromItems: number = store.gameState.current.items.reduce(
 		(accumulator, amountOfCurrentItem, index) => accumulator + (items[index].sps ?? 0) * amountOfCurrentItem[1],
 		0,
 	);
-	return activeTalents(gameState).reduce(
-		(sps, talent) => (sps = talent.spsEffect?.(sps, gameState) ?? sps),
+	return activeTalents(store.gameState).reduce(
+		(sps, talent) => (sps = talent.spsEffect?.(sps, store.gameState) ?? sps),
 		spsFromItems,
 	);
 }
 
-export function total_clickpower(gameState: GameState) {
-	const clickpowerFromItems: number = gameState.current.items.reduce(
+export function total_clickpower() {
+	const clickpowerFromItems: number = store.gameState.current.items.reduce(
 		(accumulator, amountOfCurrentItem, index) =>
 			accumulator + (items[index].clickpower ?? 0) * amountOfCurrentItem[1],
 		1,
 	);
-	return activeTalents(gameState).reduce(
-		(clickpower, talent) => (clickpower = talent.clickEffect?.(clickpower, gameState) ?? clickpower),
+	return activeTalents(store.gameState).reduce(
+		(clickpower, talent) => (clickpower = talent.clickEffect?.(clickpower, store.gameState) ?? clickpower),
 		clickpowerFromItems,
 	);
 }
@@ -47,24 +45,21 @@ export function harvest_multiplier(harvestedSeeds: number) {
 	return 1 + Math.log2(Math.max(1, harvestedSeeds / HARVEST_BASE_SEEDS));
 }
 
-export function oneSecondPassing(gameState: GameState): GameState {
+export function oneSecondPassing() {
 	const newGameState = {
-		...gameState,
+		...store.gameState,
 		current: {
-			...gameState.current,
-			seconds: gameState.current.seconds + 1,
+			...store.gameState.current,
+			seconds: store.gameState.current.seconds + 1,
 		},
 	};
-	return addSeeds(newGameState, total_sps(gameState));
+	addSeeds(newGameState, total_sps());
 }
 
-/**
- * @returns the new gamestate
- */
-export function addSeeds(gameState: GameState, seeds: number, applyMultiplier: boolean = true): GameState {
+export function addSeeds(gameState: GameState, seeds: number, applyMultiplier: boolean = true) {
 	seeds = applyMultiplier ? Math.floor(harvest_multiplier(gameState.harvested.seeds) * seeds) : seeds;
 	const newSeedAmount = gameState.current.seeds + seeds;
-	return {
+	updateGameState({
 		...gameState,
 		current: {
 			...gameState.current,
@@ -72,5 +67,5 @@ export function addSeeds(gameState: GameState, seeds: number, applyMultiplier: b
 			peakLifetimeSeeds: Math.max(gameState.current.peakLifetimeSeeds, newSeedAmount),
 			totalLifetimeSeeds: gameState.current.totalLifetimeSeeds + seeds,
 		},
-	};
+	});
 }

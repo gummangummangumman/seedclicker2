@@ -63,7 +63,7 @@
 	setInterval(() => secondPassed(), 1000);
 
 	function secondPassed() {
-		updateGameState(oneSecondPassing(store.gameState));
+		oneSecondPassing();
 		saveGameToLocalStorage(store.gameState);
 	}
 
@@ -75,17 +75,17 @@
 			switch (event.key) {
 				case 'Enter':
 				case ' ':
-					updateGameState(click(store.gameState));
+					click();
 					break;
 				//midlertidig juks :^)
 				case 'ø':
-					updateGameState(addSeeds(store.gameState, 15_000, false));
+					addSeeds(store.gameState, 15_000, false);
 					break;
 				case 'æ':
-					updateGameState(addSeeds(store.gameState, store.gameState.current.seeds * 10, false));
+					addSeeds(store.gameState, store.gameState.current.seeds * 10, false);
 					break;
 				case 'å':
-					updateGameState(addSeeds(store.gameState, 5_000_000, false));
+					addSeeds(store.gameState, 5_000_000, false);
 					break;
 				case 's':
 					console.log($state.snapshot(store.gameState));
