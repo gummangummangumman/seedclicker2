@@ -40,6 +40,27 @@
 	function isOutLine(gameState: GameState) {
 		return item.requirement?.shouldOnlyShowOutline(gameState);
 	}
+
+	/**
+	 * @returns tuple of [how many of this item you can afford to buy, total price]
+	 */
+	function amountCanBuy(gameState: GameState): [number, number] {
+		//TODO unit test this
+		//TODO move to gamelogic class, move out of
+		//TODO see if Geometric Sum Formula is usable even with the constant use of Math.floor() in getPrice. GSF should be more performant than doing a while loop
+		let amount = 0;
+		let totalPrice = 0;
+		let currentPrice = getPrice(gameState);
+		let numberOfItem = gameState.current.items[index][1];
+		while (gameState.current.seeds > totalPrice + currentPrice) {
+			totalPrice += currentPrice;
+			amount++;
+			numberOfItem++;
+			currentPrice = Math.floor(item.basePrice * Math.pow(item.priceScaling, numberOfItem));
+		}
+
+		return [amount, totalPrice];
+	}
 </script>
 
 <Button
@@ -91,4 +112,10 @@
 			{/if}
 		</div>
 	</div>
+</Button>
+<Button onclick={() => alert('not implemented')}>
+	Buy max (+{amountCanBuy(store.gameState)
+		.flatMap((num, i) => (i == 0 ? num + ') - ' : format(num, store.settings.formatting)))
+		.toString()
+		.replace(',', '')}
 </Button>
