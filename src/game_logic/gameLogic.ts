@@ -56,7 +56,15 @@ export function oneSecondPassing() {
 	addSeeds(newGameState, total_sps());
 }
 
-export function addSeeds(gameState: GameState, seeds: number, applyMultiplier: boolean = true) {
+/**
+ * @param gameState new gameState to overwrite the old one. can be left null to use current gamestate
+ * @param seeds seeds to add
+ * @param applyMultiplier whether to use the harvest multiplier or not - default is true.
+ */
+export function addSeeds(gameState: GameState | null, seeds: number, applyMultiplier: boolean = true) {
+	if (!gameState) {
+		gameState = store.gameState;
+	}
 	seeds = applyMultiplier ? Math.floor(harvest_multiplier(gameState.harvested.seeds) * seeds) : seeds;
 	const newSeedAmount = gameState.current.seeds + seeds;
 	updateGameState({
