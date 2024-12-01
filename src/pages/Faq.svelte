@@ -13,7 +13,8 @@
 			href="https://gumman.one/seedclicker/"
 		>
 			Seedclicker</a
-		>, which is a simple clicker game from ~2016. {GAME_NAME} was released almost a decade later, and is developed by
+		>, which is a simple clicker game from ~2016. {GAME_NAME} was released almost a decade later, and is a full rewrite
+		with new features. Both games are developed by
 		<a
 			class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
 			target="_blank"
@@ -31,12 +32,10 @@
 	{#if store.gameState.harvested.harvestCount > 0}
 		<h2>Why is my harvest multiplier not working?</h2>
 		<p>
-			Harvest multiplier is not shown directly as SPS or clickpower, but it is applied. Additionally, the
-			multiplication is always rounded down to the nearest whole number. For example if you have a <strong
-				>1.8</strong
-			>
-			harvest multiplier, <strong>2</strong> clickpower would only gr*nt you <strong>3</strong> seed as opposed to
-			3.6.
+			Harvest multiplier is not shown directly as SPS or clickpower, but it is applied. The multiplication is
+			always rounded down to the nearest whole number. For example if you have a <strong>1.8</strong>
+			harvest multiplier, <strong>2</strong> clickpower would only gr*nt you <strong>3</strong> seeds each click as
+			opposed to 3.6.
 		</p>
 		<h2>What determines the harvest multiplier I get on harvesting?</h2>
 		<p>Seeds collected. It doesn't matter whether they are spent on upgrades or not</p>
@@ -49,7 +48,7 @@
 	<p>
 		You can get in touch with me on
 		<a class="italic underline" href="mailto:seedclicker@gumman.one">seedclicker@gumman.one</a>, describe your bug,
-		attach your game save if relevant, and I might look into it
+		attach your game save if relevant, and I might look into it. No promises.
 	</p>
 </div>
 
