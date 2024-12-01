@@ -20,10 +20,7 @@ export function total_sps(): number {
 		(accumulator, amountOfCurrentItem, index) => accumulator + (items[index].sps ?? 0) * amountOfCurrentItem[1],
 		0,
 	);
-	return activeTalents(store.gameState).reduce(
-		(sps, talent) => (sps = talent.spsEffect?.(sps, store.gameState) ?? sps),
-		spsFromItems,
-	);
+	return activeTalents().reduce((sps, talent) => (sps = talent.spsEffect?.(sps) ?? sps), spsFromItems);
 }
 
 export function total_clickpower() {
@@ -32,8 +29,8 @@ export function total_clickpower() {
 			accumulator + (items[index].clickpower ?? 0) * amountOfCurrentItem[1],
 		1,
 	);
-	return activeTalents(store.gameState).reduce(
-		(clickpower, talent) => (clickpower = talent.clickEffect?.(clickpower, store.gameState) ?? clickpower),
+	return activeTalents().reduce(
+		(clickpower, talent) => (clickpower = talent.clickEffect?.(clickpower) ?? clickpower),
 		clickpowerFromItems,
 	);
 }

@@ -2,7 +2,6 @@
 	import type { MouseEventHandler } from 'svelte/elements';
 	import { canBuy, requirementFulfilled, talentOwned } from '../../game_logic/talentLogic';
 	import { store } from '../../store/store.svelte';
-	import type { GameState } from '../../types/gameState';
 	import type { Talent } from '../../types/talent';
 	import { isDarkMode } from '../../util/background';
 	import Button from '../Button.svelte';
@@ -14,29 +13,29 @@
 
 	let { talent, onclick }: Props = $props();
 
-	function previouslyOwned(gameState: GameState): Boolean {
-		return gameState.harvested.talents.includes(talent.name);
+	function previouslyOwned(): Boolean {
+		return store.gameState.harvested.talents.includes(talent.name);
 	}
 
-	function getTitle(gameState: GameState): string | null {
-		if (!requirementFulfilled(gameState, talent)) {
+	function getTitle(): string | null {
+		if (!requirementFulfilled(talent)) {
 			return `${talent.name} - ⚠️ requires ${talent.requires}`;
-		} else if (!talentOwned(gameState, talent) && !canBuy(gameState, talent)) {
+		} else if (!talentOwned(talent) && !canBuy(talent)) {
 			return `${talent.name} - ⚠️ can not afford`;
 		}
 		return talent.name;
 	}
 </script>
 
-{#if !requirementFulfilled(store.gameState, talent) && !previouslyOwned(store.gameState)}
+{#if !requirementFulfilled(talent) && !previouslyOwned()}
 	<div></div>
 {:else}
 	<Button
 		{onclick}
-		title={getTitle(store.gameState)}
+		title={getTitle()}
 		class="
-            {talentOwned(store.gameState, talent) && 'bg-secondary'}
-            {canBuy(store.gameState, talent) && 'bg-primary'}
+            {talentOwned(talent) && 'bg-secondary'}
+            {canBuy(talent) && 'bg-primary'}
 			mt-2 border border-black rounded-full relative
         "
 	>

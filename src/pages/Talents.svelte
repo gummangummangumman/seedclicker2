@@ -12,7 +12,7 @@
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
 	<p>
-		It costs <strong>{format(getTalentCost(store.gameState), store.settings.formatting)}</strong> seeds to upgrade.
+		It costs <strong>{format(getTalentCost(), store.settings.formatting)}</strong> seeds to upgrade.
 	</p>
 	<div class="my-8">
 		{#if selectedTalent != null}

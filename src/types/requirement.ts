@@ -1,4 +1,4 @@
-import type { GameState } from './gameState';
+import { store } from '../store/store.svelte';
 
 export class Requirement {
 	requirementToShowOutline: number; //peak lifetime seeds
@@ -9,15 +9,15 @@ export class Requirement {
 		this.requirementToBuy = requirementToBuy;
 	}
 
-	shouldHideFully(gameState: GameState) {
-		return this.requirementToShowOutline > gameState.current.peakLifetimeSeeds;
+	shouldHideFully() {
+		return this.requirementToShowOutline > store.gameState.current.peakLifetimeSeeds;
 	}
 
-	shouldOnlyShowOutline(gameState: GameState) {
+	shouldOnlyShowOutline() {
 		if (typeof this.requirementToBuy == 'number') {
-			return this.requirementToBuy > gameState.current.peakLifetimeSeeds;
+			return this.requirementToBuy > store.gameState.current.peakLifetimeSeeds;
 		}
-		const item = gameState.current.items.find((i) => i?.[0] == this.requirementToBuy);
+		const item = store.gameState.current.items.find((i) => i?.[0] == this.requirementToBuy);
 		if (!item) {
 			return false;
 		}

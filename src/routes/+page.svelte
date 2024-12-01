@@ -9,7 +9,6 @@
 	import Talents from '../pages/Talents.svelte';
 	import Harvest from '../pages/Harvest.svelte';
 	import SaveAndLoad from '../pages/SaveAndLoad.svelte';
-	import type { GameState } from '../types/gameState';
 	import SeedClicker from '../components/SeedClicker.svelte';
 	import {
 		loadGameFromLocalStorage,
@@ -29,13 +28,14 @@
 		{
 			name: 'Talents',
 			component: Talents,
-			requirement: (gameState: GameState) => gameState.current.peakLifetimeSeeds > 15_000_000,
+			requirement: () => store.gameState.current.peakLifetimeSeeds > 15_000_000,
 		},
 		{
 			name: 'Harvest',
 			component: Harvest,
-			requirement: (gameState: GameState) =>
-				gameState.harvested.harvestCount > 0 || gameState.current.peakLifetimeSeeds > HARVEST_BASE_SEEDS,
+			requirement: () =>
+				store.gameState.harvested.harvestCount > 0 ||
+				store.gameState.current.peakLifetimeSeeds > HARVEST_BASE_SEEDS,
 		},
 		{
 			name: '📈',
@@ -106,7 +106,7 @@
 	<SeedClicker />
 	<div class="my-2">
 		{#each pages as page}
-			{#if !page.requirement || page.requirement(store.gameState)}
+			{#if !page.requirement || page.requirement()}
 				<button
 					class="p-2 border border-secondary {currentPage.name == page.name
 						? 'bg-secondary'

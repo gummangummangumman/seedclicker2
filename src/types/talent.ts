@@ -1,4 +1,4 @@
-import type { GameState } from './gameState';
+import { store } from '../store/store.svelte';
 import { amountOf } from './item';
 
 /**
@@ -9,8 +9,8 @@ export interface Talent {
 	name: string;
 	description: string;
 	requires?: string; //name of another talent
-	clickEffect?: (clickPower: number, gameState: GameState) => number;
-	spsEffect?: (sps: number, gameState: GameState) => number;
+	clickEffect?: (clickPower: number) => number;
+	spsEffect?: (sps: number) => number;
 }
 
 export interface TalentLevel {
@@ -51,8 +51,8 @@ export const talentTree: TalentTree = {
 					name: 'Water',
 					description: '+100% of base clickpower each water item (water cans and sprinklers)',
 					requires: 'Click god',
-					clickEffect: (clickPower, gameState) => {
-						const totalWaterItems = amountOf('water can', gameState) + amountOf('sprinkler', gameState);
+					clickEffect: (clickPower) => {
+						const totalWaterItems = amountOf('water can') + amountOf('sprinkler');
 						if (totalWaterItems == 0) {
 							return clickPower;
 						}
@@ -82,8 +82,8 @@ export const talentTree: TalentTree = {
 	],
 };
 
-export function activeTalents(gameState: GameState): Talent[] {
+export function activeTalents(): Talent[] {
 	return talentTree.levels
 		.flatMap((level) => level.talents)
-		.filter((talent) => gameState.current.talents.includes(talent.name));
+		.filter((talent) => store.gameState.current.talents.includes(talent.name));
 }
