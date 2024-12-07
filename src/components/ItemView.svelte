@@ -109,9 +109,11 @@
 		</div>
 	</div>
 </Button>
-<Button onclick={() => alert('not implemented')}>
-	Buy max (+{amountCanBuy()
-		.flatMap((num, i) => (i == 0 ? num + ') - ' : format(num, store.settings.formatting)))
-		.toString()
-		.replace(',', '')}
-</Button>
+{#if !isOutLine()}
+	<Button onclick={() => alert('not implemented')}>
+		Buy max (+{amountCanBuy()
+			.flatMap((num, i) => (i == 0 ? num + ') - ' : format(num, store.settings.formatting)))
+			.toString()
+			.replace(',', '')}
+	</Button>
+{/if}
