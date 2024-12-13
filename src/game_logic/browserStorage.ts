@@ -47,5 +47,9 @@ export function loadSettingsFromLocalStorage(): Settings {
 	if (settings == null) {
 		return initialSettings;
 	}
-	return JSON.parse(settings!);
+	try {
+		return JSON.parse(settings!);
+	} catch (e: any) {
+		return initialSettings;
+	}
 }
