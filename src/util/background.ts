@@ -30,8 +30,13 @@ export function setBackground(theme: string = '') {
  * @returns True if player has chosen dark mode OR if user uses system theming, and their system uses darkmode
  */
 export function isDarkMode(settings: Settings): boolean {
-	return (
-		settings.theme == Theme.Dark ||
-		(settings.theme == Theme.System && window.matchMedia('(prefers-color-scheme: dark)').matches)
-	);
+	if (settings.theme == Theme.Dark) {
+		return true;
+	}
+
+	if (typeof window == 'undefined') {
+		return false;
+	}
+
+	return settings.theme == Theme.System && window.matchMedia('(prefers-color-scheme: dark)').matches;
 }

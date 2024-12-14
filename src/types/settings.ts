@@ -21,7 +21,7 @@ export enum ItemView {
 }
 
 export const initialSettings: Settings = {
-	theme: '',
+	theme: Theme.System,
 	formatting: NumberFormatting.Normal,
 	itemView: ItemView.Picture,
 };

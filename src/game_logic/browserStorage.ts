@@ -50,6 +50,8 @@ export function loadSettingsFromLocalStorage(): Settings {
 	try {
 		return JSON.parse(settings!);
 	} catch (e: any) {
+		console.error('Could not load settings from browser');
+		console.error(e);
 		return initialSettings;
 	}
 }
