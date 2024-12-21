@@ -42,12 +42,10 @@
 	}
 
 	/**
+	 * Naive version of of {@link maxItemsAmount}. I assume it's terrible for performance as it uses a loop.
 	 * @returns tuple of [how many of this item you can afford to buy, total price]
 	 */
-	function amountCanBuy(): [number, number] {
-		//TODO unit test this
-		//TODO move to gamelogic class, move out of
-		//TODO see if Geometric Sum Formula is usable even with the constant use of Math.floor() in getPrice. GSF should be more performant than doing a while loop
+	function naiveMaxItemsAmount(): [number, number] {
 		let amount = 0;
 		let totalPrice = 0;
 		let currentPrice = getPrice();
@@ -60,6 +58,24 @@
 		}
 
 		return [amount, totalPrice];
+	}
+
+	/**
+	 * Based on geometrical series.
+	 * Note that it is NOT entirely the same amount as you would get when buying them one by one, because it uses Math.floor on every item bought.
+	 * 
+	 * Theory: https://www.youtube.com/watch?v=zRKZ0-kOUZM / https://www.reddit.com/r/incremental_gamedev/comments/1hgqhln/comment/m2z9npu/
+	 * @returns tuple of [how many of this item you can afford to buy, total price]
+	 */
+	 function maxItemsAmount(): [number, number] {
+		//TODO move to gamelogic class
+		//TODO unit test this
+		let currentPrice = getPrice();
+
+		const numUpgradesAffordable = Math.floor(Math.log((store.gameState.current.seeds / currentPrice) * (item.priceScaling - 1) + 1) / Math.log(item.priceScaling));
+	    const totalCost = Math.floor((currentPrice * (Math.pow(item.priceScaling, numUpgradesAffordable) - 1)) / (item.priceScaling - 1));
+
+		return [numUpgradesAffordable, totalCost];
 	}
 </script>
 
@@ -111,7 +127,7 @@
 </Button>
 {#if !isOutLine()}
 	<Button onclick={() => alert('not implemented')}>
-		Buy max (+{amountCanBuy()
+		Buy max (+{maxItemsAmount()
 			.flatMap((num, i) => (i == 0 ? num + ') - ' : format(num, store.settings.formatting)))
 			.toString()
 			.replace(',', '')}
