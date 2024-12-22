@@ -1,7 +1,8 @@
 import { store, updateGameState } from '../store/store.svelte';
-import { type Item } from '../types/item';
+import { items, type Item } from '../types/item';
 
-export function getItemPrice(itemIndex: number, item: Item) {
+export function getItemPrice(itemIndex: number) {
+	const item = items[itemIndex];
 	const numberOfItems = store.gameState.current.items[itemIndex];
 	return Math.floor(item.basePrice * Math.pow(item.priceScaling, numberOfItems[1]));
 }
@@ -11,10 +12,11 @@ export function getItemPrice(itemIndex: number, item: Item) {
  * Naive version of of {@link maxItemsAmount}. I assume it's terrible for performance as it uses a loop.
  * @returns tuple of [how many of this item you can afford to buy, total price]
  */
-function naiveMaxItemsAmount(itemIndex: number, item: Item): [number, number] {
+function naiveMaxItemsAmount(itemIndex: number): [number, number] {
+	const item = items[itemIndex];
 	let amount = 0;
 	let totalPrice = 0;
-	let currentPrice = getItemPrice(itemIndex, item);
+	let currentPrice = getItemPrice(itemIndex);
 	let numberOfItem = store.gameState.current.items[itemIndex][1];
 	while (store.gameState.current.seeds > totalPrice + currentPrice) {
 		totalPrice += currentPrice;
@@ -33,9 +35,9 @@ function naiveMaxItemsAmount(itemIndex: number, item: Item): [number, number] {
  * Theory: https://www.youtube.com/watch?v=zRKZ0-kOUZM / https://www.reddit.com/r/incremental_gamedev/comments/1hgqhln/comment/m2z9npu/
  * @returns tuple of [how many of this item you can afford to buy, total price]
  */
-export function maxItemsAmount(itemIndex: number, item: Item): [number, number] {
-	//TODO unit test this
-	let currentPrice = getItemPrice(itemIndex, item);
+export function maxItemsAmount(itemIndex: number): [number, number] {
+	const item = items[itemIndex];
+	let currentPrice = getItemPrice(itemIndex);
 
 	const numUpgradesAffordable = Math.floor(
 		Math.log((store.gameState.current.seeds / currentPrice) * (item.priceScaling - 1) + 1) /
@@ -48,8 +50,8 @@ export function maxItemsAmount(itemIndex: number, item: Item): [number, number] 
 	return [numUpgradesAffordable, totalCost];
 }
 
-export function buyItem(itemIndex: number, item: Item) {
-	const price = getItemPrice(itemIndex, item);
+export function buyItem(itemIndex: number) {
+	const price = getItemPrice(itemIndex);
 	if (store.gameState.current.seeds < price) {
 		return;
 	}
@@ -59,8 +61,8 @@ export function buyItem(itemIndex: number, item: Item) {
 	updateGameState(newGameState);
 }
 
-export function buyMaxOfItem(itemIndex: number, item: Item) {
-	const result = maxItemsAmount(itemIndex, item);
+export function buyMaxOfItem(itemIndex: number) {
+	const result = maxItemsAmount(itemIndex);
 
 	let newGameState = store.gameState;
 	newGameState.current.seeds -= result[1];

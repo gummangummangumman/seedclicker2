@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { Item } from '../types/item';
-	import { store, updateGameState } from '../store/store.svelte';
+	import { store } from '../store/store.svelte';
 	import { format } from '../util/number_formatting';
 	import Button from './Button.svelte';
 	import ItemAmountPicture from './ItemAmountPicture.svelte';
@@ -11,11 +11,11 @@
 	export let index: number;
 
 	function buySingle() {
-		buyItem(index, item);
+		buyItem(index);
 	}
 
 	function buyMax() {
-		buyMaxOfItem(index, item);
+		buyMaxOfItem(index);
 	}
 
 	function canBuy() {
@@ -23,7 +23,7 @@
 	}
 
 	function getPrice() {
-		return getItemPrice(index, item);
+		return getItemPrice(index);
 	}
 
 	function getName() {
@@ -39,7 +39,7 @@
 	}
 
 	function maxAmount(): [number, number] {
-		return maxItemsAmount(index, item);
+		return maxItemsAmount(index);
 	}
 </script>
 
