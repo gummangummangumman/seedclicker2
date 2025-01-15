@@ -29,7 +29,7 @@
 		<span title={total_sps().toString()}>{format(total_sps(), store.settings.formatting)}</span>
 	</h1>
 	<h1>
-		Clickpower:
+		<span title="Clickpower">Cp</span>:
 		<span title={total_clickpower().toString()}>{format(total_clickpower(), store.settings.formatting)}</span>
 	</h1>
 	{#if store.gameState.harvested.seeds > 0}

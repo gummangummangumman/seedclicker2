@@ -5,6 +5,7 @@
 	import Button from './Button.svelte';
 	import ItemAmountPicture from './ItemAmountPicture.svelte';
 	import ItemAmount from './ItemAmount.svelte';
+	import MaxBuy from './MaxBuy.svelte';
 	import { ItemView } from '../types/settings';
 	import { buyItem, buyMaxOfItem, getItemPrice, maxItemsAmount } from '../game_logic/itemLogic';
 	export let item: Item;
@@ -43,57 +44,54 @@
 	}
 </script>
 
-<Button
-	onclick={() => buySingle()}
-	disabled={!canBuy() || isOutLine()}
-	class="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
->
-	<div class="flex items-center space-x-4 mx-auto w-full">
-		{#if store.settings.itemView == ItemView.NoPicture}
-			<ItemAmount amount={store.gameState.current.items[index][1]} />
-		{:else}
-			<ItemAmountPicture {item} amount={store.gameState.current.items[index][1]} isOutLine={isOutLine()} />
-		{/if}
-		<div class="w-full pr-20">
-			<span class="text-lg font-bold">{getName()}</span>
-			{#if !isOutLine()}
-				<br />
-				Cost: <strong>{format(getPrice(), store.settings.formatting)}</strong> seeds
-				{#if store.gameState.current.items[index][1] > 0 && item.sps}
-					<br />
-					<span class="text-sm">
-						Generating
-						<strong
-							>{format(
-								store.gameState.current.items[index][1] * item.sps,
-								store.settings.formatting,
-							)}</strong
-						>
-						<span title="seeds per second">sps</span>
-					</span>
-				{/if}
-				{#if store.gameState.current.items[index][1] > 0 && item.clickpower}
-					<br />
-					<span class="text-sm">
-						Giving
-						<strong
-							>{format(
-								store.gameState.current.items[index][1] * item.clickpower,
-								store.settings.formatting,
-							)}</strong
-						>
-						clickpower
-					</span>
-				{/if}
+<div class="flex">
+	<Button
+		onclick={() => buySingle()}
+		disabled={!canBuy() || isOutLine()}
+		class="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
+	>
+		<div class="flex items-center space-x-4 mx-auto w-full">
+			{#if store.settings.itemView == ItemView.NoPicture}
+				<ItemAmount amount={store.gameState.current.items[index][1]} />
+			{:else}
+				<ItemAmountPicture {item} amount={store.gameState.current.items[index][1]} isOutLine={isOutLine()} />
 			{/if}
+			<div class="w-full pr-20">
+				<span class="text-lg font-bold">{getName()}</span>
+				{#if !isOutLine()}
+					<br />
+					🫰<strong>{format(getPrice(), store.settings.formatting)}</strong>
+					{#if store.gameState.current.items[index][1] > 0 && item.sps}
+						<br />
+						<span class="text-sm">
+							⏱️
+							<strong
+								>{format(
+									store.gameState.current.items[index][1] * item.sps,
+									store.settings.formatting,
+								)}</strong
+							>
+							<span title="seeds per second">sps</span>
+						</span>
+					{/if}
+					{#if store.gameState.current.items[index][1] > 0 && item.clickpower}
+						<br />
+						<span class="text-sm">
+							💪
+							<strong
+								>{format(
+									store.gameState.current.items[index][1] * item.clickpower,
+									store.settings.formatting,
+								)}</strong
+							>
+							cp
+						</span>
+					{/if}
+				{/if}
+			</div>
 		</div>
-	</div>
-</Button>
-{#if !isOutLine()}
-	<Button onclick={() => buyMax()}>
-		Buy max (+{maxAmount()
-			.flatMap((num, i) => (i == 0 ? num + ') - ' : format(num, store.settings.formatting)))
-			.toString()
-			.replace(',', '')}
 	</Button>
-{/if}
+	{#if !isOutLine()}
+		<MaxBuy amount={maxAmount()[0]} cost={maxAmount()[1]} onclick={() => buyMax()} />
+	{/if}
+</div>
