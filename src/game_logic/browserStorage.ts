@@ -44,7 +44,8 @@ export function loadSettingsFromLocalStorage(): Settings {
 		return initialSettings;
 	}
 	const settings = localStorage.getItem(LOCALSTORAGE_SETTINGS_NAME);
-	if (settings == null) {
+	if (settings == null || settings == '') {
+		console.log('No save found in browser - starting new game');
 		return initialSettings;
 	}
 	try {
