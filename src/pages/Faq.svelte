@@ -24,6 +24,7 @@
 	<h2>What is new compared to Seedclicker?</h2>
 	<ul class="list-disc list-inside">
 		<li>Save files 💾</li>
+		<li>Offline progress 🕒</li>
 		<li>Mobile friendly design 📱</li>
 		<li>Dark mode 🌙</li>
 		<li>Gradual discovery of game upgrades ✨⬆️</li>
@@ -43,7 +44,10 @@
 	<h2>Do I have to click with my mouse?</h2>
 	<p>If you play on a computer, you can also use the space or enter key to click</p>
 	<h2>Will my game collect seeds while I don't have the game open?</h2>
-	<p>No</p>
+	<p>
+		Yes, as long as you have some sps. You'll be greeted with a welcome screen upon opening the game again, saying
+		how many seeds you've earned.
+	</p>
 	<h2>What can I do if I experience a bug?</h2>
 	<p>
 		You can get in touch with me on
