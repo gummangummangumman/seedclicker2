@@ -12,8 +12,11 @@ describe('Harvest multiplier', () => {
 	it('30k should be 2', () => {
 		expect(harvest_multiplier(30_000)).toBe(2);
 	});
-	it('120k should be 4', () => {
-		expect(harvest_multiplier(120_000)).toBe(4);
+	it('60k should be 4', () => {
+		expect(harvest_multiplier(60_000)).toBe(4);
+	});
+	it('120k should be 8', () => {
+		expect(harvest_multiplier(120_000)).toBe(8);
 	});
 });
 
