@@ -80,3 +80,10 @@ function simpleHash(str: string): string {
 	}
 	return hash.toString();
 }
+
+/**
+ * Date.now() with seconds instead of ms
+ */
+export function timestampSeconds() {
+	return Math.floor(Date.now() / 1000);
+}

@@ -13,6 +13,7 @@ export interface CurrentGameState {
 	clickPower: number;
 	seconds: number;
 	talents: string[];
+	lastTimeStampInSeconds: number;
 }
 
 export interface HarvestedGameState {

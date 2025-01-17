@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { store, updateGameState, updateSettings } from '../store/store.svelte';
-	import { addSeeds, click, oneSecondPassing } from '../game_logic/gameLogic';
+	import { addSeeds, click, offlineProgress, oneSecondPassing } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
 	import { onMount } from 'svelte';
 	import Stats from '../pages/Stats.svelte';
@@ -19,6 +19,7 @@
 	import Settings from '../pages/Settings.svelte';
 	import Faq from '../pages/Faq.svelte';
 	import { setBackground } from '../util/background';
+	import Button from '../components/Button.svelte';
 
 	const pages: Page[] = [
 		{
@@ -59,6 +60,7 @@
 		},
 	];
 	let currentPage = $state(pages[0]);
+	let offlineProgressAdded: number | null = $state(null);
 
 	setInterval(() => secondPassed(), 1000);
 
@@ -95,6 +97,11 @@
 					break;
 			}
 		});
+
+		const offlineAdded = offlineProgress(store.gameState);
+		if (offlineAdded > 0) {
+			offlineProgressAdded = offlineAdded;
+		}
 	});
 </script>
 
@@ -119,6 +126,10 @@
 			{/if}
 		{/each}
 	</div>
+	{#if offlineProgressAdded}
+		<!--//TODO make a big popup. Own component.-->
+		<Button onclick={() => (offlineProgressAdded = 0)}>added {offlineProgressAdded}</Button>
+	{/if}
 
 	<currentPage.component />
 </section>

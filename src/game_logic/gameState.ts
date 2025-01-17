@@ -1,5 +1,6 @@
 import type { CurrentGameState, HarvestedGameState } from '../types/gameState';
 import { items } from '../types/item';
+import { timestampSeconds } from '../util/save';
 
 export const initialCurrentGameState: CurrentGameState = {
 	clicks: 0,
@@ -10,6 +11,7 @@ export const initialCurrentGameState: CurrentGameState = {
 	clickPower: 1,
 	seconds: 0,
 	talents: [],
+	lastTimeStampInSeconds: timestampSeconds(),
 };
 
 export const initialHarvestedGameState: HarvestedGameState = {
