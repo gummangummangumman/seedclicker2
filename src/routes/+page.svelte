@@ -19,7 +19,8 @@
 	import Settings from '../pages/Settings.svelte';
 	import Faq from '../pages/Faq.svelte';
 	import { setBackground } from '../util/background';
-	import Button from '../components/Button.svelte';
+	import OfflineProgressPopup from '../components/OfflineProgressPopup.svelte';
+	import type { OfflineProgress } from '../types/offlineProgress';
 
 	const pages: Page[] = [
 		{
@@ -60,7 +61,7 @@
 		},
 	];
 	let currentPage = $state(pages[0]);
-	let offlineProgressAdded: number | null = $state(null);
+	let offlineProgressAdded: OfflineProgress | null = $state(null);
 
 	setInterval(() => secondPassed(), 1000);
 
@@ -98,10 +99,7 @@
 			}
 		});
 
-		const offlineAdded = offlineProgress(store.gameState);
-		if (offlineAdded > 0) {
-			offlineProgressAdded = offlineAdded;
-		}
+		offlineProgressAdded = offlineProgress(store.gameState);
 	});
 </script>
 
@@ -109,7 +107,7 @@
 	<title>SC 2 | {format(store.gameState.current.seeds, store.settings.formatting)}</title>
 </svelte:head>
 
-<section class="p-2 py-8 text-center bg-bg text-text {store.settings.theme}">
+<section class="py-8 text-center bg-bg text-text {store.settings.theme}">
 	<SeedClicker />
 	<div class="my-2">
 		{#each pages as page}
@@ -127,8 +125,7 @@
 		{/each}
 	</div>
 	{#if offlineProgressAdded}
-		<!--//TODO make a big popup. Own component.-->
-		<Button onclick={() => (offlineProgressAdded = 0)}>added {offlineProgressAdded}</Button>
+		<OfflineProgressPopup offlineProgress={offlineProgressAdded} onClose={() => (offlineProgressAdded = null)} />
 	{/if}
 
 	<currentPage.component />

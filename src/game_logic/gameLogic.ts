@@ -1,6 +1,7 @@
 import { store, updateGameState } from '../store/store.svelte';
 import type { GameState } from '../types/gameState';
 import { items } from '../types/item';
+import type { OfflineProgress } from '../types/offlineProgress';
 import { activeTalents } from '../types/talent';
 import { HARVEST_BASE_SEEDS, OFFLINE_PROGRESS_MARGIN_SECONDS } from '../util/constants';
 import { timestampSeconds } from '../util/save';
@@ -55,7 +56,7 @@ export function oneSecondPassing() {
 	addSeeds(newGameState, total_sps());
 }
 
-export function addOfflineSeconds(seconds: number): number {
+export function addOfflineSeconds(seconds: number): OfflineProgress {
 	const newGameState = {
 		...store.gameState,
 		current: {
@@ -65,7 +66,10 @@ export function addOfflineSeconds(seconds: number): number {
 	};
 	const seedsToAdd = total_sps() * seconds;
 	addSeeds(newGameState, seedsToAdd);
-	return seedsToAdd;
+	return {
+		seedsEarned: seedsToAdd,
+		secondsElapsed: seconds,
+	};
 }
 
 /**
@@ -94,12 +98,11 @@ export function addSeeds(gameState: GameState | null, seeds: number, applyMultip
  * @param save gameState right after loading a save from browserStorage
  * @returns number of seeds added
  */
-export function offlineProgress(save: GameState): number {
+export function offlineProgress(save: GameState): OfflineProgress | null {
 	const secondsPassed = timestampSeconds() - save.current.lastTimeStampInSeconds - OFFLINE_PROGRESS_MARGIN_SECONDS;
-	console.log(`calculating offline for ${secondsPassed}`);
 	if (secondsPassed > 0) {
 		return addOfflineSeconds(secondsPassed);
 	} else {
-		return 0;
+		return null;
 	}
 }

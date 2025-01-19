@@ -45,8 +45,8 @@
 	<p>If you play on a computer, you can also use the space or enter key to click</p>
 	<h2>Will my game collect seeds while I don't have the game open?</h2>
 	<p>
-		Yes, as long as you have some sps. You'll be greeted with a welcome screen upon opening the game again, saying
-		how many seeds you've earned.
+		Yes, as long as you have some <span title="Seeds per second">sps</span>. You'll be greeted with a welcome screen
+		upon opening the game again, saying how many seeds you've earned.
 	</p>
 	<h2>What can I do if I experience a bug?</h2>
 	<p>
