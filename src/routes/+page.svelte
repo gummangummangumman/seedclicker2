@@ -15,7 +15,7 @@
 		loadSettingsFromLocalStorage,
 		saveGameToLocalStorage,
 	} from '../game_logic/browserStorage';
-	import { HARVEST_BASE_SEEDS } from '../util/constants';
+	import { BASE_COST_TALENT, BASE_COST_HARVEST } from '../util/constants';
 	import Settings from '../pages/Settings.svelte';
 	import Faq from '../pages/Faq.svelte';
 	import { setBackground } from '../util/background';
@@ -30,14 +30,14 @@
 		{
 			name: 'Talents',
 			component: Talents,
-			requirement: () => store.gameState.current.peakLifetimeSeeds > 15_000_000,
+			requirement: () => store.gameState.current.peakLifetimeSeeds >= BASE_COST_TALENT,
 		},
 		{
 			name: 'Harvest',
 			component: Harvest,
 			requirement: () =>
 				store.gameState.harvested.harvestCount > 0 ||
-				store.gameState.current.peakLifetimeSeeds > HARVEST_BASE_SEEDS,
+				store.gameState.current.totalLifetimeSeeds > BASE_COST_HARVEST,
 		},
 		{
 			name: '📈',

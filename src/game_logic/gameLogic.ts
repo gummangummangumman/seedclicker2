@@ -3,7 +3,7 @@ import type { GameState } from '../types/gameState';
 import { items } from '../types/item';
 import type { OfflineProgress } from '../types/offlineProgress';
 import { activeTalents } from '../types/talent';
-import { HARVEST_BASE_SEEDS, OFFLINE_PROGRESS_MARGIN_SECONDS } from '../util/constants';
+import { BASE_COST_HARVEST, OFFLINE_PROGRESS_MARGIN_SECONDS } from '../util/constants';
 import { timestampSeconds } from '../util/save';
 
 export function click() {
@@ -37,11 +37,12 @@ export function total_clickpower() {
 	);
 }
 
+//TODO nerf harvest multiplier by a lot.
 /**
- * Starts going from 1 at {@link HARVEST_BASE_SEEDS} and doubles for every 2x
+ * Starts going from 1 at {@link BASE_COST_HARVEST} and doubles for every 2x
  */
 export function harvest_multiplier(harvestedSeeds: number) {
-	return Math.max(1, harvestedSeeds / HARVEST_BASE_SEEDS);
+	return Math.max(1, harvestedSeeds / BASE_COST_HARVEST);
 }
 
 export function oneSecondPassing() {

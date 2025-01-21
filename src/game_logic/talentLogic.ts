@@ -1,8 +1,9 @@
 import { store, updateGameState } from '../store/store.svelte';
 import type { Talent } from '../types/talent';
+import { BASE_COST_TALENT } from '../util/constants';
 
 export function getTalentCost() {
-	return 15_000_000 * Math.pow(10, 0 + store.gameState.current.talents.length);
+	return BASE_COST_TALENT * Math.pow(10, 0 + store.gameState.current.talents.length);
 }
 
 export function talentOwned(talent: Talent): Boolean {
