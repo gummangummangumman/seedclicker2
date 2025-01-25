@@ -26,7 +26,7 @@ export const items: Item[] = [
 	{
 		name: 'Plantation',
 		basePrice: 5_000_000,
-		sps: 20,
+		sps: 100,
 		priceScaling: 1.2,
 		requirement: new Requirement(100_000, 1_000_000),
 	},
@@ -35,7 +35,7 @@ export const items: Item[] = [
 		basePrice: 5_000_000_000,
 		sps: 1_000,
 		priceScaling: 1.2,
-		requirement: new Requirement(180_000, 'Plantation'),
+		requirement: new Requirement(750_000, 'Plantation'),
 	},
 	{
 		name: 'Garden gnome',

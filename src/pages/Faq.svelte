@@ -46,8 +46,15 @@
 	<h2>Will my game collect seeds while I don't have the game open?</h2>
 	<p>
 		Yes, as long as you have some <span title="Seeds per second">sps</span>. You'll be greeted with a welcome screen
-		upon opening the game again, saying how many seeds you've earned.
+		upon opening the game again, saying how many seeds you've earned since last visit.
 	</p>
+	{#if store.gameState.harvested.talents.length > 0 || store.gameState.current.talents.length > 0}
+		<h2>How do talents multiplications work?</h2>
+		<p>
+			Talents are always multiplicative, never additive. This means if you have 2 talents that both double your
+			clickpower, you will have 4x. If you add another talent that adds 50%, you will have 4x+(50% * 4x) = 6x.
+		</p>
+	{/if}
 	<h2>What can I do if I experience a bug?</h2>
 	<p>
 		You can get in touch with me on

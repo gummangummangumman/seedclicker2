@@ -1,5 +1,5 @@
 import { store, updateGameState } from '../store/store.svelte';
-import { items, type Item } from '../types/item';
+import { items } from '../types/item';
 
 export function getItemPrice(itemIndex: number) {
 	const item = items[itemIndex];

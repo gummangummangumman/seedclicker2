@@ -37,12 +37,12 @@ export function total_clickpower() {
 	);
 }
 
-//TODO nerf harvest multiplier by a lot.
 /**
- * Starts going from 1 at {@link BASE_COST_HARVEST} and doubles for every 2x
+ * Starts going from 1 at {@link BASE_COST_HARVEST} and doubles for every 4x
  */
 export function harvest_multiplier(harvestedSeeds: number) {
-	return Math.max(1, harvestedSeeds / BASE_COST_HARVEST);
+	const rate = Math.sqrt(harvestedSeeds / BASE_COST_HARVEST);
+	return Math.max(1, rate);
 }
 
 export function oneSecondPassing() {

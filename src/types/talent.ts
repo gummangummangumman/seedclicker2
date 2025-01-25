@@ -25,7 +25,7 @@ export const talentTree: TalentTree = {
 	levels: [
 		{
 			talents: [
-				{ name: 'Clicky Clara', description: '3x click power', clickEffect: (clickPower) => clickPower * 3 },
+				{ name: 'Clicky Clara', description: '5x click power', clickEffect: (clickPower) => clickPower * 5 },
 				{ name: 'Passive Peter', description: '3x seeds per second', spsEffect: (sps) => sps * 3 },
 			],
 		},
@@ -49,14 +49,11 @@ export const talentTree: TalentTree = {
 			talents: [
 				{
 					name: 'Water',
-					description: '+100% of base clickpower each water item (water cans and sprinklers)',
+					description: '+3% of base clickpower each water item (water cans and sprinklers)',
 					requires: 'Click god',
 					clickEffect: (clickPower) => {
 						const totalWaterItems = amountOf('water can') + amountOf('sprinkler');
-						if (totalWaterItems == 0) {
-							return clickPower;
-						}
-						return clickPower * (2 * totalWaterItems);
+						return clickPower + clickPower * 0.03 * totalWaterItems;
 					},
 				},
 				{
