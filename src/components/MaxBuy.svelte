@@ -3,6 +3,7 @@
 	import { store } from '../store/store.svelte';
 	import { format } from '../util/number_formatting';
 	import Button from './Button.svelte';
+	import CostEmoji from './CostEmoji.svelte';
 	export let amount: number;
 	export let cost: number;
 	export let onclick: MouseEventHandler<HTMLButtonElement>;
@@ -15,5 +16,5 @@
 	{onclick}
 >
 	<strong class="text-lg">+{format(amount, store.settings.formatting)}</strong><br />
-	🫰<span class="text-xs"><strong>{format(cost, store.settings.formatting)}</strong></span>
+	<CostEmoji /><span class="text-xs"><strong>{format(cost, store.settings.formatting)}</strong></span>
 </Button>

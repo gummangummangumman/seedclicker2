@@ -8,6 +8,7 @@
 	import MaxBuy from './MaxBuy.svelte';
 	import { ItemView } from '../types/settings';
 	import { buyItem, buyMaxOfItem, getItemPrice, maxItemsAmount } from '../game_logic/itemLogic';
+	import CostEmoji from './CostEmoji.svelte';
 	export let item: Item;
 	export let index: number;
 
@@ -60,7 +61,7 @@
 				<span class="text-lg font-bold">{getName()}</span>
 				{#if !isOutLine()}
 					<br />
-					🫰<strong>{format(getPrice(), store.settings.formatting)}</strong>
+					<CostEmoji /> <strong>{format(getPrice(), store.settings.formatting)}</strong>
 					{#if store.gameState.current.items[index][1] > 0 && item.sps}
 						<br />
 						<span class="text-sm">
