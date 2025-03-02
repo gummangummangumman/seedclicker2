@@ -8,6 +8,18 @@
 	import { format } from '../util/number_formatting';
 
 	let selectedTalent: Talent | null = $state(null);
+
+	function colSpanForLevel(talents: Talent[]) {
+		switch (talents.length) {
+			case 1:
+				return 'col-span-4';
+			case 2:
+				return 'col-span-2';
+			case 4:
+			default:
+				return '';
+		}
+	}
 </script>
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
@@ -20,12 +32,14 @@
 		{:else}
 			<EmptyTalentInfo />
 		{/if}
-		{#each talentTree.levels as level}
-			<div class={`pb-12 flex justify-evenly`}>
+		<div class="grid grid-cols-4 gap-x-4 gap-y-16 pb-12">
+			{#each talentTree.levels as level}
 				{#each level.talents as talent}
-					<TalentView {talent} onclick={() => (selectedTalent = talent)} />
+					<div class={colSpanForLevel(level.talents)}>
+						<TalentView {talent} onclick={() => (selectedTalent = talent)} />
+					</div>
 				{/each}
-			</div>
-		{/each}
+			{/each}
+		</div>
 	</div>
 </div>

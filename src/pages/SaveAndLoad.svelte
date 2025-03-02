@@ -63,13 +63,13 @@
 		<p>Seedclicker 2 will do its best to save your game automatically in your browser.</p>
 		<p>
 			This is a convenient way to store your progress, but not the safest. For example, you might clear your
-			browser data, change your device or browser, or you simply want to play on your computer at work and your
+			browser data, change your device or browser, or you simply want to play on your computer at work and on your
 			phone in the weekends. This is where saving manually comes in handy.
 		</p>
 		<p class="italic text-sm">
 			Tip: Make a backup save every so often, especially when you've made progress you don't want to lose. Upload
-			your save file to an online cloud storage or a chatting application, or anywhere accessible to you from
-			several devices.
+			your save file to somewhere accessible to you from several devices, like an online cloud storage or a
+			chatting application.
 		</p>
 	</div>
 	<Button
@@ -90,9 +90,7 @@
 	<Button
 		class="bg-primary border border-black p-2"
 		onclick={() => {
-			const blob = new Blob([getSave(store.gameState)], {
-				type: 'text/plain',
-			});
+			const blob = new Blob([getSave(store.gameState)], { type: 'text/plain' });
 			const link = document.createElement('a');
 			link.href = URL.createObjectURL(blob);
 			link.download = 'save.seed'; //filename

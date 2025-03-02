@@ -21,7 +21,7 @@
 	}
 </script>
 
-<div class="my-8">
+<div class="my-8 mx-2">
 	<p class="italic mb-4">Settings are saved locally, they are not part of a game save.</p>
 	<!-- //TODO consider making a <table> or similar to have good looking centering -->
 	<p>

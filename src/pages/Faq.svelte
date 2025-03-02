@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { GAME_NAME } from '../util/constants';
+	import { GAME_NAME, GAME_SUPPORT_EMAIL } from '../util/constants';
 	import { store } from '../store/store.svelte';
 </script>
 
-<div class="my-8 p-4 max-w-screen-sm sm:mx-auto">
+<div class="my-8 mx-4 max-w-screen-sm sm:mx-auto">
 	<h2>What is {GAME_NAME}?</h2>
 	<p>
 		{GAME_NAME} is a clicker/idle game. It is a sequel to
@@ -14,12 +14,7 @@
 		>
 			Seedclicker</a
 		>, which is a simple clicker game from ~2016. {GAME_NAME} was released almost a decade later, and is a full rewrite
-		with new features. Both games are developed by
-		<a
-			class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600"
-			target="_blank"
-			href="https://gumman.one/">GuMMaN</a
-		>.
+		with new features. Both games are developed by GuMMaN.
 	</p>
 	<h2>What is new compared to Seedclicker?</h2>
 	<ul class="list-disc list-inside">
@@ -58,7 +53,7 @@
 	<h2>What can I do if I experience a bug?</h2>
 	<p>
 		You can get in touch with me on
-		<a class="italic underline" href="mailto:seedclicker@gumman.one">seedclicker@gumman.one</a>, describe your bug,
+		<a class="italic underline" href={`mailto:${GAME_SUPPORT_EMAIL}`}>{GAME_SUPPORT_EMAIL}</a>, describe your bug,
 		attach your game save if relevant, and I might look into it. No promises.
 	</p>
 </div>
