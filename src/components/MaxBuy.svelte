@@ -16,5 +16,5 @@
 	{onclick}
 >
 	<strong class="text-lg">+{format(amount, store.settings.formatting)}</strong><br />
-	<CostEmoji /><span class="text-xs"><strong>{format(cost, store.settings.formatting)}</strong></span>
+	💰 <span class="text-xs"><strong>{format(cost, store.settings.formatting)}</strong></span>
 </Button>
