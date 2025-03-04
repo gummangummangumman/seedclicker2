@@ -15,12 +15,14 @@
 		loadSettingsFromLocalStorage,
 		saveGameToLocalStorage,
 	} from '../game_logic/browserStorage';
-	import { BASE_COST_TALENT, BASE_COST_HARVEST } from '../util/constants';
+	import { BASE_COST_TALENT, BASE_COST_HARVEST, SEED_LIMIT_UNLOCK_DAILIES } from '../util/constants';
 	import Settings from '../pages/Settings.svelte';
 	import Faq from '../pages/Faq.svelte';
 	import { setBackground } from '../util/background';
 	import OfflineProgressPopup from '../components/OfflineProgressPopup.svelte';
 	import type { OfflineProgress } from '../types/offlineProgress';
+	import Plantation from '../pages/Plantation.svelte';
+	import Daily from '../pages/Daily.svelte';
 
 	const pages: Page[] = [
 		{
@@ -38,6 +40,16 @@
 			requirement: () =>
 				store.gameState.harvested.harvestCount > 0 ||
 				store.gameState.current.totalLifetimeSeeds > BASE_COST_HARVEST,
+		},
+		{
+			name: 'Plantation',
+			component: Plantation,
+			requirement: () => store.gameState.current.items[5][1] > 0,
+		},
+		{
+			name: 'Daily',
+			component: Daily,
+			requirement: () => store.gameState.current.totalLifetimeSeeds > SEED_LIMIT_UNLOCK_DAILIES,
 		},
 		{
 			name: '📈',

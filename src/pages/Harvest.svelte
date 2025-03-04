@@ -26,7 +26,7 @@
 </script>
 
 <div class="my-8 mx-2 max-w-screen-sm sm:mx-auto">
-	<p>Harvest your seeds and abandon all of your earthly upgrades for deeper knowledge about the seed.</p>
+	<p>Harvest your seeds and abandon all of your earthly upgrades for greater mastery of the seed.</p>
 
 	<p>
 		Current income multiplier is <strong>

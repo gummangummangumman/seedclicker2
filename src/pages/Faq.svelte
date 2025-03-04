@@ -25,6 +25,11 @@
 		<li>Gradual discovery of game upgrades ✨⬆️</li>
 		<li>Several game features that you have to unlock by playing! 🎮🌻</li>
 	</ul>
+	<h2>What do the abbreviations mean?</h2>
+	<ul class="list-disc list-inside">
+		<li><strong>Cp</strong> - Clickpower, seeds awarded per click</li>
+		<li><strong>Sps</strong> - Seeds per second</li>
+	</ul>
 	{#if store.gameState.harvested.harvestCount > 0}
 		<h2>Why is my harvest multiplier not working?</h2>
 		<p>
