@@ -1,10 +1,12 @@
 import { store, updateGameState } from '../store/store.svelte';
 import { items } from '../types/item';
+import { activeTalents } from '../types/talent';
 
 export function getItemPrice(itemIndex: number) {
 	const item = items[itemIndex];
 	const numberOfItems = store.gameState.current.items[itemIndex];
-	return Math.floor(item.basePrice * Math.pow(item.priceScaling, numberOfItems[1]));
+	const price = item.basePrice * Math.pow(item.priceScaling, numberOfItems[1]);
+	return Math.floor(activeTalents().reduce((sps, talent) => (sps = talent.costEffect?.(sps, item) ?? sps), price));
 }
 
 /**

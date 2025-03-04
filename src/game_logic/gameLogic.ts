@@ -22,7 +22,11 @@ export function total_sps(): number {
 		(accumulator, amountOfCurrentItem, index) => accumulator + (items[index].sps ?? 0) * amountOfCurrentItem[1],
 		0,
 	);
-	return activeTalents().reduce((sps, talent) => (sps = talent.spsEffect?.(sps) ?? sps), spsFromItems);
+	const withTalentsApplied = activeTalents().reduce(
+		(sps, talent) => (sps = talent.spsEffect?.(sps) ?? sps),
+		spsFromItems,
+	);
+	return Math.floor(withTalentsApplied);
 }
 
 export function total_clickpower() {
@@ -31,10 +35,11 @@ export function total_clickpower() {
 			accumulator + (items[index].clickpower ?? 0) * amountOfCurrentItem[1],
 		1,
 	);
-	return activeTalents().reduce(
+	const withTalentsApplied = activeTalents().reduce(
 		(clickpower, talent) => (clickpower = talent.clickEffect?.(clickpower) ?? clickpower),
 		clickpowerFromItems,
 	);
+	return Math.floor(withTalentsApplied);
 }
 
 /**

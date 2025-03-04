@@ -1,8 +1,8 @@
 import { store } from '../store/store.svelte';
-import { amountOf } from './item';
+import { amountOf, type Item } from './item';
 
 /**
- * Make sure the clickEffects and spsEffects are multiplicative!
+ * Make sure all effects are multiplicative!
  * This way, the order of which they are added doesn't matter.
  */
 export interface Talent {
@@ -11,6 +11,7 @@ export interface Talent {
 	requires?: string; //name of another talent
 	clickEffect?: (clickPower: number) => number;
 	spsEffect?: (sps: number) => number;
+	costEffect?: (cost: number, item: Item) => number;
 }
 
 export interface TalentLevel {
@@ -57,7 +58,18 @@ export const talentTree: TalentTree = {
 					},
 				},
 				{ name: '2', description: '2x cp', requires: 'Click god', clickEffect: (clickPower) => clickPower * 2 },
-				{ name: '3', description: '2x sps', requires: 'Friend of the hourglass', spsEffect: (sps) => sps * 2 },
+				{
+					name: 'Bargaining Barry',
+					description: 'All items that give sps are 90% cheaper',
+					requires: 'Friend of the hourglass',
+					costEffect: (cost, item) => {
+						if (item.sps) {
+							return cost / 10;
+						} else {
+							return cost;
+						}
+					},
+				},
 				{ name: '4', description: '2x sps', requires: 'Friend of the hourglass', spsEffect: (sps) => sps * 2 },
 			],
 		},
