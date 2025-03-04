@@ -20,17 +20,21 @@
 <button onclick={onClick}>
 	<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + getClass(store.gameState.current.clicks)} />
 	<h1>
-		Seeds: <span title={store.gameState.current.seeds.toString()}
-			>{format(store.gameState.current.seeds, store.settings.formatting)}</span
-		>
+		Seeds: <span title={store.gameState.current.seeds.toString()} class="text-base">
+			{format(store.gameState.current.seeds, store.settings.formatting)}
+		</span>
 	</h1>
 	<h1>
 		<span title="Seeds per second">Sps</span>:
-		<span title={total_sps().toString()}>{format(total_sps(), store.settings.formatting)}</span>
+		<span title={total_sps().toString()} class="text-base">
+			{format(total_sps(), store.settings.formatting)}
+		</span>
 	</h1>
 	<h1>
 		<span title="Clickpower">Cp</span>:
-		<span title={total_clickpower().toString()}>{format(total_clickpower(), store.settings.formatting)}</span>
+		<span title={total_clickpower().toString()} class="text-base">
+			{format(total_clickpower(), store.settings.formatting)}
+		</span>
 	</h1>
 	{#if store.gameState.harvested.seeds > 0}
 		<h2 class="text-sm">
@@ -52,5 +56,9 @@
 	}
 	.crazy {
 		transform: scaleY(-1);
+	}
+	h1 {
+		font-size: 0.875rem;
+		line-height: 1.25rem;
 	}
 </style>

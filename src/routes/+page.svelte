@@ -24,7 +24,7 @@
 	import Plantation from '../pages/Plantation.svelte';
 	import Daily from '../pages/Daily.svelte';
 
-	const pages: Page[] = [
+	const gameplayPages: Page[] = [
 		{
 			name: 'Items',
 			component: Items,
@@ -51,6 +51,8 @@
 			component: Daily,
 			requirement: () => store.gameState.current.totalLifetimeSeeds > SEED_LIMIT_UNLOCK_DAILIES,
 		},
+	];
+	const miscPages: Page[] = [
 		{
 			name: '📈',
 			description: 'Stats',
@@ -72,7 +74,7 @@
 			component: SaveAndLoad,
 		},
 	];
-	let currentPage = $state(pages[0]);
+	let currentPage = $state(gameplayPages[0]);
 	let offlineProgressAdded: OfflineProgress | null = $state(null);
 
 	setInterval(() => secondPassed(), 1000);
@@ -121,8 +123,8 @@
 
 <section class="py-8 text-center bg-bg text-text {store.settings.theme}">
 	<SeedClicker />
-	<div class="my-2">
-		{#each pages as page}
+	<div class="m-2">
+		{#each gameplayPages as page}
 			{#if !page.requirement || page.requirement()}
 				<button
 					class="p-2 border border-secondary {currentPage.name == page.name
@@ -134,6 +136,18 @@
 					{page.name}
 				</button>
 			{/if}
+		{/each}
+		<br />
+		{#each miscPages as page}
+			<button
+				class="p-2 border border-secondary {currentPage.name == page.name
+					? 'bg-secondary'
+					: 'hover:bg-primary'}"
+				onclick={() => (currentPage = page)}
+				title={page.description}
+			>
+				{page.name}
+			</button>
 		{/each}
 	</div>
 	{#if offlineProgressAdded}

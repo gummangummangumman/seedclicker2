@@ -56,9 +56,9 @@ export const talentTree: TalentTree = {
 						return clickPower + clickPower * 0.03 * totalWaterItems;
 					},
 				},
-				{ name: '2', description: '...', requires: 'Click god', clickEffect: (clickPower) => clickPower * 2 },
-				{ name: '3', description: '...', requires: 'Friend of the hourglass', spsEffect: (sps) => sps * 2 },
-				{ name: '4', description: '...', requires: 'Friend of the hourglass', spsEffect: (sps) => sps * 2 },
+				{ name: '2', description: '2x cp', requires: 'Click god', clickEffect: (clickPower) => clickPower * 2 },
+				{ name: '3', description: '2x sps', requires: 'Friend of the hourglass', spsEffect: (sps) => sps * 2 },
+				{ name: '4', description: '2x sps', requires: 'Friend of the hourglass', spsEffect: (sps) => sps * 2 },
 			],
 		},
 	],
