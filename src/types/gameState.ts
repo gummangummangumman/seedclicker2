@@ -1,6 +1,7 @@
 export interface GameState {
 	current: CurrentGameState;
 	harvested: HarvestedGameState;
+	lastCollectedDailyDate?: string;
 	antiCheatToken?: string;
 }
 

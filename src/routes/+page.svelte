@@ -104,6 +104,9 @@
 				case 'å':
 					addSeeds(store.gameState, 5_000_000, false);
 					break;
+				case 'p':
+					updateGameState({ ...store.gameState, lastCollectedDailyDate: '' });
+					break;
 				case 's':
 					console.log($state.snapshot(store.gameState));
 					break;
