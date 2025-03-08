@@ -18,7 +18,12 @@
 </script>
 
 <button onclick={onClick}>
-	<img src="gumman.jpg" alt="sunflower" class={'rounded-3xl ' + getClass(store.gameState.current.clicks)} />
+	<img
+		src="{store.gameState.lastCollectedDaily.choice}.jpg"
+		width="184px"
+		alt="sunflower"
+		class={'rounded-3xl ' + getClass(store.gameState.current.clicks)}
+	/>
 	<h1>
 		Seeds: <span title={store.gameState.current.seeds.toString()} class="text-base">
 			{format(store.gameState.current.seeds, store.settings.formatting)}

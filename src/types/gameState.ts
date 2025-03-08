@@ -1,7 +1,7 @@
 export interface GameState {
 	current: CurrentGameState;
 	harvested: HarvestedGameState;
-	lastCollectedDailyDate?: string;
+	lastCollectedDaily: LastCollectedDaily;
 	antiCheatToken?: string;
 }
 
@@ -23,4 +23,15 @@ export interface HarvestedGameState {
 	seeds: number;
 	seconds: number;
 	talents: string[];
+}
+
+export interface LastCollectedDaily {
+	date?: string;
+	choice: DailyChoice;
+}
+
+export enum DailyChoice {
+	gumman = 'gumman',
+	pongo = 'pongo',
+	lorrison = 'lorrison',
 }

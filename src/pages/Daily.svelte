@@ -5,6 +5,7 @@
 	import { collectDaily } from '../game_logic/gameLogic';
 	import { store } from '../store/store.svelte';
 	import { formatSeconds, format } from '../util/number_formatting';
+	import { DailyChoice } from '../types/gameState';
 
 	const date = new Date();
 	const currentDay = date.toDateString();
@@ -12,9 +13,11 @@
 	let rewarded: number | null = $state(null);
 	let chosen: string | null = $state(null);
 
-	const treasureChests = ['gumman', 'lorrison', 'pongo'].sort(() => Math.random() - 0.5);
-	function collect(treasure: string) {
-		rewarded = collectDaily(date);
+	const treasureChests = [DailyChoice.gumman, DailyChoice.lorrison, DailyChoice.pongo].sort(
+		() => Math.random() - 0.5,
+	);
+	function collect(treasure: DailyChoice) {
+		rewarded = collectDaily(date, treasure);
 		chosen = treasure;
 	}
 
@@ -43,14 +46,14 @@
 </script>
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
-	{#if currentDay != store.gameState.lastCollectedDailyDate}
+	{#if currentDay != store.gameState.lastCollectedDaily.date}
 		<p>Choose wisely.</p>
 		<div
 			id="treasure-chest-container"
 			class="mt-2"
 			style="animation-play-state: {isHoveringAChest ? 'paused' : 'running'};"
 		>
-			{#each treasureChests as treasure, index}
+			{#each treasureChests as treasure}
 				<div class="treasure-button">
 					<Button
 						onmouseover={() => (isHoveringAChest = true)}

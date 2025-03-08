@@ -1,10 +1,13 @@
-import type { GameState } from '../types/gameState';
+import { DailyChoice, type GameState } from '../types/gameState';
 import { initialSettings, type Settings } from '../types/settings';
 import { initialHarvestedGameState, initialCurrentGameState } from '../game_logic/gameState';
 
 export const initialGameState: GameState = {
 	current: structuredClone(initialCurrentGameState),
 	harvested: structuredClone(initialHarvestedGameState),
+	lastCollectedDaily: {
+		choice: DailyChoice.gumman,
+	},
 };
 
 // needs to be wrapped in a class, as exported values cannot be directly reassigned

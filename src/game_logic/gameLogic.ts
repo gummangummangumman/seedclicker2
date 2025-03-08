@@ -1,5 +1,5 @@
 import { store, updateGameState } from '../store/store.svelte';
-import type { GameState } from '../types/gameState';
+import type { DailyChoice, GameState } from '../types/gameState';
 import { items } from '../types/item';
 import type { OfflineProgress } from '../types/offlineProgress';
 import { activeTalents } from '../types/talent';
@@ -22,10 +22,20 @@ export function click() {
  *
  * @returns the amount of seeds rewarded
  */
-export function collectDaily(date: Date): number {
+export function collectDaily(date: Date, treasure: DailyChoice): number {
 	const totalSeeds = store.gameState.current.seeds + store.gameState.harvested.seeds;
 	const rewarded = Math.floor(totalSeeds * 0.1); //10% of total seeds ever
-	addSeeds({ ...store.gameState, lastCollectedDailyDate: date.toDateString() }, rewarded, false);
+	addSeeds(
+		{
+			...store.gameState,
+			lastCollectedDaily: {
+				date: date.toDateString(),
+				choice: treasure,
+			},
+		},
+		rewarded,
+		false,
+	);
 	return rewarded;
 }
 
