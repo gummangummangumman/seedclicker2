@@ -10,6 +10,7 @@
 
 	let rewarded: number | null = $state(null);
 
+	const treasureChests = ['gumman', 'lorrison', 'pongo'];
 	function collect() {
 		rewarded = collectDaily(date);
 	}
@@ -34,7 +35,19 @@
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
 	{#if currentDay != store.gameState.lastCollectedDailyDate}
-		<Button class="bg-primary p-2 px-4 mt-3 rounded-md border border-secondary" onclick={collect}>Collect</Button>
+		<p>Choose wisely.</p>
+		<div id="treasureChestHolder" class="mt-2">
+			{#each treasureChests as treasure, index}
+				<Button onclick={collect} class="bg-primary border border-black rounded-full absolute">
+					<img
+						src={`/${treasure}.jpg`}
+						width="100px"
+						alt={treasure + ' treasure chest'}
+						class="rounded-full"
+					/>
+				</Button>
+			{/each}
+		</div>
 	{:else if rewarded != null}
 		<p>Yay! You got {format(rewarded, store.settings.formatting)} seeds!</p>
 	{:else}
