@@ -2,6 +2,7 @@
 	import { store } from '../store/store.svelte';
 	import { click, harvest_multiplier, total_clickpower, total_sps } from '../game_logic/gameLogic';
 	import { format } from '../util/number_formatting';
+	import { getCurrencyName, getLongSpsName, getSpsName } from '../game_logic/dailyLogic';
 
 	function onClick(this: HTMLButtonElement) {
 		click();
@@ -25,12 +26,13 @@
 		class={'rounded-3xl ' + getClass(store.gameState.current.clicks)}
 	/>
 	<h1>
-		Seeds: <span title={store.gameState.current.seeds.toString()} class="text-base">
+		{getCurrencyName()}:
+		<span title={store.gameState.current.seeds.toString()} class="text-base">
 			{format(store.gameState.current.seeds, store.settings.formatting)}
 		</span>
 	</h1>
 	<h1>
-		<span title="Seeds per second">Sps</span>:
+		<span title={getLongSpsName()}>{getSpsName()}</span>:
 		<span title={total_sps().toString()} class="text-base">
 			{format(total_sps(), store.settings.formatting)}
 		</span>

@@ -17,28 +17,6 @@ export function click() {
 	addSeeds(newGameState, total_clickpower());
 }
 
-/**
- * Awards you seeds for the daily reward
- *
- * @returns the amount of seeds rewarded
- */
-export function collectDaily(date: Date, treasure: DailyChoice): number {
-	const totalSeeds = store.gameState.current.seeds + store.gameState.harvested.seeds;
-	const rewarded = Math.floor(totalSeeds * 0.1); //10% of total seeds ever
-	addSeeds(
-		{
-			...store.gameState,
-			lastCollectedDaily: {
-				date: date.toDateString(),
-				choice: treasure,
-			},
-		},
-		rewarded,
-		false,
-	);
-	return rewarded;
-}
-
 export function total_sps(): number {
 	const spsFromItems: number = store.gameState.current.items.reduce(
 		(accumulator, amountOfCurrentItem, index) => accumulator + (items[index].sps ?? 0) * amountOfCurrentItem[1],

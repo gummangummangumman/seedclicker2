@@ -2,7 +2,7 @@
 	import { onDestroy } from 'svelte';
 	import Button from '../components/Button.svelte';
 	import CurrentDayDisplay from '../components/CurrentDayDisplay.svelte';
-	import { collectDaily } from '../game_logic/gameLogic';
+	import { collectDaily, getCurrencyName } from '../game_logic/dailyLogic';
 	import { store } from '../store/store.svelte';
 	import { formatSeconds, format } from '../util/number_formatting';
 	import { DailyChoice } from '../types/gameState';
@@ -11,14 +11,12 @@
 	const currentDay = date.toDateString();
 
 	let rewarded: number | null = $state(null);
-	let chosen: string | null = $state(null);
 
 	const treasureChests = [DailyChoice.gumman, DailyChoice.lorrison, DailyChoice.pongo].sort(
 		() => Math.random() - 0.5,
 	);
 	function collect(treasure: DailyChoice) {
 		rewarded = collectDaily(date, treasure);
-		chosen = treasure;
 	}
 
 	function secondsToNextDay(): number {
@@ -73,9 +71,17 @@
 		</div>
 	{:else if rewarded != null}
 		<p class="text-xl">Great choice! 👏</p>
-		<p>You are rewarded with <strong>{format(rewarded, store.settings.formatting)}</strong> seeds!</p>
+		<p>
+			You are rewarded with <strong>{format(rewarded, store.settings.formatting)}</strong>
+			{getCurrencyName().toLowerCase()}!
+		</p>
 		<br />
-		<img src="{chosen}.jpg" class="mx-auto" width="100px" alt={chosen} />
+		<img
+			src="{store.gameState.lastCollectedDaily.choice}.jpg"
+			class="mx-auto"
+			width="100px"
+			alt={store.gameState.lastCollectedDaily.choice}
+		/>
 	{:else}
 		✅ <CurrentDayDisplay {date} /> ✅
 		<p>Come back again in</p>

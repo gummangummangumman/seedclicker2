@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { getCurrencyName } from '../game_logic/dailyLogic';
 	import { store } from '../store/store.svelte';
 	import type { OfflineProgress } from '../types/offlineProgress';
 	import { format, formatSeconds } from '../util/number_formatting';
@@ -13,8 +14,8 @@
 		<br />
 		<p>You were gone for <strong>{formatSeconds(offlineProgress.secondsElapsed)}</strong>.</p>
 		<p>
-			You earned <strong>{format(offlineProgress.seedsEarned, store.settings.formatting)}</strong> seeds while you
-			were gone.
+			You earned <strong>{format(offlineProgress.seedsEarned, store.settings.formatting)}</strong>
+			{getCurrencyName()} while you were gone.
 		</p>
 		<Button onclick={onClose} class="my-2 p-2 bg-primary border border-black">Cool</Button>
 	</div>

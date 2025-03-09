@@ -2,6 +2,7 @@
 	import EmptyTalentInfo from '../components/talents/EmptyTalentInfo.svelte';
 	import TalentInfo from '../components/talents/TalentInfo.svelte';
 	import TalentView from '../components/talents/TalentView.svelte';
+	import { getCurrencyName } from '../game_logic/dailyLogic';
 	import { getTalentCost } from '../game_logic/talentLogic';
 	import { store } from '../store/store.svelte';
 	import { talentTree, type Talent } from '../types/talent';
@@ -24,7 +25,8 @@
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
 	<p>
-		It costs <strong>{format(getTalentCost(), store.settings.formatting)}</strong> seeds to upgrade.
+		It costs <strong>{format(getTalentCost(), store.settings.formatting)}</strong>
+		{getCurrencyName().toLowerCase()} to upgrade.
 	</p>
 	<div class="my-8">
 		{#if selectedTalent != null}

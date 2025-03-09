@@ -8,6 +8,7 @@
 	import MaxBuy from './MaxBuy.svelte';
 	import { ItemView } from '../types/settings';
 	import { buyItem, buyMaxOfItem, getItemPrice, maxItemsAmount } from '../game_logic/itemLogic';
+	import { getLongSpsName, getSpsName } from '../game_logic/dailyLogic';
 	export let item: Item;
 	export let index: number;
 
@@ -71,7 +72,7 @@
 									store.settings.formatting,
 								)}</strong
 							>
-							<span title="seeds per second">sps</span>
+							<span title={getLongSpsName()}>{getSpsName()}</span>
 						</span>
 					{/if}
 					{#if store.gameState.current.items[index][1] > 0 && item.clickpower}

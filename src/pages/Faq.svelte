@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { GAME_NAME, GAME_SUPPORT_EMAIL } from '../util/constants';
 	import { store } from '../store/store.svelte';
+	import { getCurrencyName, getLongSpsName, getSpsName } from '../game_logic/dailyLogic';
 </script>
 
 <div class="my-8 mx-4 max-w-screen-sm sm:mx-auto">
@@ -27,26 +28,27 @@
 	</ul>
 	<h2>What do the abbreviations mean?</h2>
 	<ul class="list-disc list-inside">
-		<li><strong>Cp</strong> - Clickpower, seeds awarded per click</li>
-		<li><strong>Sps</strong> - Seeds per second</li>
+		<li><strong>Cp</strong> - Clickpower, {getCurrencyName()} awarded per click</li>
+		<li><strong>{getSpsName()}</strong> - {getLongSpsName()}</li>
 	</ul>
 	{#if store.gameState.harvested.harvestCount > 0}
 		<h2>Why is my harvest multiplier not working?</h2>
 		<p>
-			Harvest multiplier is not shown directly as SPS or clickpower, but it is applied. The multiplication is
-			always rounded down to the nearest whole number. For example if you have a <strong>1.8</strong>
-			harvest multiplier, <strong>2</strong> clickpower would only gr*nt you <strong>3</strong> seeds each click as
-			opposed to 3.6.
+			Harvest multiplier is not shown directly as {getSpsName()} or clickpower, but it is applied. The multiplication
+			is always rounded down to the nearest whole number. For example if you have a <strong>1.8</strong>
+			harvest multiplier, <strong>2</strong> clickpower would only gr*nt you <strong>3</strong>
+			{getCurrencyName().toLowerCase()} each click as opposed to 3.6.
 		</p>
 		<h2>What determines the harvest multiplier I get on harvesting?</h2>
-		<p>Seeds collected. It doesn't matter whether they are spent on upgrades or not</p>
+		<p>{getCurrencyName()} collected. It doesn't matter whether they are spent on upgrades or not</p>
 	{/if}
 	<h2>Do I have to click with my mouse?</h2>
 	<p>If you play on a computer, you can also use the space or enter key to click</p>
-	<h2>Will my game collect seeds while I don't have the game open?</h2>
+	<h2>Will my game collect {getCurrencyName().toLowerCase()} while I don't have the game open?</h2>
 	<p>
-		Yes, as long as you have some <span title="Seeds per second">sps</span>. You'll be greeted with a welcome screen
-		upon opening the game again, saying how many seeds you've earned since last visit.
+		Yes, as long as you have some <span title={getLongSpsName()}>{getSpsName()}</span>. You'll be greeted with a
+		welcome screen upon opening the game again, saying how many {getCurrencyName().toLowerCase()} you've earned since
+		last visit.
 	</p>
 	{#if store.gameState.harvested.talents.length > 0 || store.gameState.current.talents.length > 0}
 		<h2>How do talents multiplications work?</h2>

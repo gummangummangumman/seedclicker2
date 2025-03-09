@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Button from '../components/Button.svelte';
 	import HarvestQuote from '../components/HarvestQuote.svelte';
+	import { getCurrencyName } from '../game_logic/dailyLogic';
 	import { harvest_multiplier } from '../game_logic/gameLogic';
 	import { initialCurrentGameState } from '../game_logic/gameState';
 	import { store, updateGameState } from '../store/store.svelte';
@@ -26,7 +27,10 @@
 </script>
 
 <div class="my-8 mx-2 max-w-screen-sm sm:mx-auto">
-	<p>Harvest your seeds and abandon all of your earthly upgrades for greater mastery of the seed.</p>
+	<p>
+		Harvest your {getCurrencyName().toLowerCase()} and abandon all of your earthly upgrades for greater mastery of the
+		seed.
+	</p>
 
 	<p>
 		Current income multiplier is <strong>
