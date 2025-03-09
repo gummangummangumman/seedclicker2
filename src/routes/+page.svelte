@@ -107,7 +107,7 @@
 				case 'p':
 					updateGameState({
 						...store.gameState,
-						lastCollectedDaily: { ...store.gameState.lastCollectedDaily, date: '' },
+						daily: { ...store.gameState.daily, date: '' },
 					});
 					break;
 				case 's':

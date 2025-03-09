@@ -13,7 +13,7 @@ export function collectDaily(date: Date, treasure: DailyChoice): number {
 	addSeeds(
 		{
 			...store.gameState,
-			lastCollectedDaily: {
+			daily: {
 				date: date.toDateString(),
 				choice: treasure,
 			},
@@ -28,7 +28,7 @@ export function collectDaily(date: Date, treasure: DailyChoice): number {
  * @returns name of currency to show for players
  */
 export function getCurrencyName(): string {
-	switch (store.gameState.lastCollectedDaily.choice) {
+	switch (store.gameState.daily.choice) {
 		case DailyChoice.lorrison:
 			return 'Karma';
 		case DailyChoice.pongo:
@@ -43,7 +43,7 @@ export function getCurrencyName(): string {
  * @returns short version of Sps
  */
 export function getSpsName(): string {
-	switch (store.gameState.lastCollectedDaily.choice) {
+	switch (store.gameState.daily.choice) {
 		case DailyChoice.lorrison:
 			return 'Kps';
 		case DailyChoice.pongo:
@@ -58,7 +58,7 @@ export function getSpsName(): string {
  * @returns long version - like Seeds per second
  */
 export function getLongSpsName(): string {
-	switch (store.gameState.lastCollectedDaily.choice) {
+	switch (store.gameState.daily.choice) {
 		case DailyChoice.lorrison:
 			return 'Karma per second';
 		case DailyChoice.pongo:

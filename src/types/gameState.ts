@@ -1,7 +1,7 @@
 export interface GameState {
 	current: CurrentGameState;
 	harvested: HarvestedGameState;
-	lastCollectedDaily: LastCollectedDaily;
+	daily: DailyGameState;
 	antiCheatToken?: string;
 }
 
@@ -25,9 +25,10 @@ export interface HarvestedGameState {
 	talents: string[];
 }
 
-export interface LastCollectedDaily {
+export interface DailyGameState {
 	date?: string;
 	choice: DailyChoice;
+	totalCollections: number;
 }
 
 export enum DailyChoice {

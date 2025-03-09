@@ -11,11 +11,13 @@
 	const currentDay = date.toDateString();
 
 	let rewarded: number | null = $state(null);
+	let recentlySwitched: Boolean = $state(false);
 
 	const treasureChests = [DailyChoice.gumman, DailyChoice.lorrison, DailyChoice.pongo].sort(
 		() => Math.random() - 0.5,
 	);
 	function collect(treasure: DailyChoice) {
+		recentlySwitched = store.gameState.daily.choice != treasure;
 		rewarded = collectDaily(date, treasure);
 	}
 
@@ -43,8 +45,8 @@
 	});
 </script>
 
-<div class="my-8 max-w-screen-sm sm:mx-auto">
-	{#if currentDay != store.gameState.lastCollectedDaily.date}
+<div class="my-8 mx-2 max-w-screen-sm sm:mx-auto">
+	{#if currentDay != store.gameState.daily.date}
 		<p>Choose wisely.</p>
 		<div
 			id="treasure-chest-container"
@@ -71,17 +73,17 @@
 		</div>
 	{:else if rewarded != null}
 		<p class="text-xl">Great choice! 👏</p>
+		{#if recentlySwitched}
+			<p>
+				You have entered <strong>{store.gameState.daily.choice.toUpperCase()} MODE</strong>. You now prefer to
+				call your seeds for <strong>{getCurrencyName().toUpperCase()}</strong>.
+			</p>
+		{/if}
+		<br />
 		<p>
 			You are rewarded with <strong>{format(rewarded, store.settings.formatting)}</strong>
 			{getCurrencyName().toLowerCase()}!
 		</p>
-		<br />
-		<img
-			src="{store.gameState.lastCollectedDaily.choice}.jpg"
-			class="mx-auto"
-			width="100px"
-			alt={store.gameState.lastCollectedDaily.choice}
-		/>
 	{:else}
 		✅ <CurrentDayDisplay {date} /> ✅
 		<p>Come back again in</p>

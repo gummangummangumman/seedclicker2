@@ -1,4 +1,4 @@
-import type { CurrentGameState, HarvestedGameState } from '../types/gameState';
+import { DailyChoice, type CurrentGameState, type DailyGameState, type HarvestedGameState } from '../types/gameState';
 import { items } from '../types/item';
 import { timestampSeconds } from '../util/save';
 
@@ -20,4 +20,9 @@ export const initialHarvestedGameState: HarvestedGameState = {
 	seeds: 0,
 	seconds: 0,
 	talents: [],
+};
+
+export const initialDailyGameState: DailyGameState = {
+	choice: DailyChoice.gumman,
+	totalCollections: 0,
 };

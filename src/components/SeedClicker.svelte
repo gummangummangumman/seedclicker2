@@ -20,7 +20,7 @@
 
 <button onclick={onClick}>
 	<img
-		src="{store.gameState.lastCollectedDaily.choice}.jpg"
+		src="{store.gameState.daily.choice}.jpg"
 		width="184px"
 		alt="sunflower"
 		class={'rounded-3xl ' + getClass(store.gameState.current.clicks)}
