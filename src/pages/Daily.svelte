@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onDestroy } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import Button from '../components/Button.svelte';
 	import CurrentDayDisplay from '../components/CurrentDayDisplay.svelte';
 	import { collectDaily, getCurrencyName } from '../game_logic/dailyLogic';
@@ -40,8 +40,19 @@
 
 	let isHoveringAChest = $state(false);
 
+	onMount(() => {
+		//TODO consider using window.onfocus for seed collection instead of this
+		window.onfocus = () => {
+			const realSecondsLeft = secondsToNextDay();
+			if (secondsLeft > realSecondsLeft + 3) {
+				secondsLeft = realSecondsLeft;
+			}
+		};
+	});
+
 	onDestroy(() => {
 		clearInterval(interval);
+		window.onfocus = null;
 	});
 </script>
 
