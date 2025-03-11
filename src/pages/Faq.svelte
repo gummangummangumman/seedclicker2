@@ -50,6 +50,12 @@
 		welcome screen upon opening the game again, saying how many {getCurrencyName().toLowerCase()} you've earned since
 		last visit.
 	</p>
+	<h2>I didn't seem to get enough {getCurrencyName().toLowerCase()} after being in another tab?</h2>
+	<p>
+		The rewarding of {getCurrencyName().toLowerCase()} every second is unfortunately the least reliable when running
+		the game in an inactive tab. If you want to be guaranteed progress, I suggest you either keep it as your active tab
+		or close the website fully.
+	</p>
 	{#if store.gameState.harvested.talents.length > 0 || store.gameState.current.talents.length > 0}
 		<h2>How do talents multiplications work?</h2>
 		<p>

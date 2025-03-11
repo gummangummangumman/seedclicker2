@@ -120,6 +120,10 @@
 		});
 
 		offlineProgressAdded = offlineProgress(store.gameState);
+
+		window.onfocus = () => {
+			offlineProgressAdded = offlineProgress(store.gameState);
+		};
 	});
 </script>
 

@@ -40,19 +40,20 @@
 
 	let isHoveringAChest = $state(false);
 
+	function handleFocus() {
+		const realSecondsLeft = secondsToNextDay();
+		if (secondsLeft > realSecondsLeft + 3) {
+			secondsLeft = realSecondsLeft;
+		}
+	}
+
 	onMount(() => {
-		//TODO consider using window.onfocus for seed collection instead of this
-		window.onfocus = () => {
-			const realSecondsLeft = secondsToNextDay();
-			if (secondsLeft > realSecondsLeft + 3) {
-				secondsLeft = realSecondsLeft;
-			}
-		};
+		window.addEventListener('focus', handleFocus);
 	});
 
 	onDestroy(() => {
 		clearInterval(interval);
-		window.onfocus = null;
+		window.removeEventListener('focus', handleFocus);
 	});
 </script>
 
