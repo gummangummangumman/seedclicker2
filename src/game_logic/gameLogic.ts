@@ -71,9 +71,9 @@ export function addOfflineSeconds(seconds: number): OfflineProgress {
 		},
 	};
 	const seedsToAdd = total_sps() * seconds;
-	addSeeds(newGameState, seedsToAdd);
+	const seedsAdded = addSeeds(newGameState, seedsToAdd);
 	return {
-		seedsEarned: seedsToAdd,
+		seedsEarned: seedsAdded,
 		secondsElapsed: seconds,
 	};
 }
@@ -82,8 +82,10 @@ export function addOfflineSeconds(seconds: number): OfflineProgress {
  * @param gameState new gameState to overwrite the old one. can be left null to use current gamestate
  * @param seeds seeds to add
  * @param applyMultiplier whether to use the harvest multiplier or not - default is true.
+ *
+ * @returns how many seeds were actually added after adding multiplier
  */
-export function addSeeds(gameState: GameState | null, seeds: number, applyMultiplier: boolean = true) {
+export function addSeeds(gameState: GameState | null, seeds: number, applyMultiplier: boolean = true): number {
 	if (!gameState) {
 		gameState = store.gameState;
 	}
@@ -98,6 +100,7 @@ export function addSeeds(gameState: GameState | null, seeds: number, applyMultip
 			totalLifetimeSeeds: gameState.current.totalLifetimeSeeds + seeds,
 		},
 	});
+	return seeds;
 }
 
 /**
