@@ -20,7 +20,7 @@
 	<p>Time spent playing: <strong>{formatSeconds(store.gameState.current.seconds)}</strong></p>
 
 	{#if store.gameState.harvested.harvestCount > 0}
-		<h3 class="pt-8 font-bold text-lg">All time</h3>
+		<h3 class="mt-8 font-bold text-lg">All time</h3>
 		<p>Harvests: <strong>{format(store.gameState.harvested.harvestCount, store.settings.formatting)}</strong></p>
 		<p>
 			{getCurrencyName()}:
@@ -45,5 +45,9 @@
 				{formatSeconds(store.gameState.harvested.seconds + store.gameState.current.seconds)}
 			</strong>
 		</p>
+	{/if}
+
+	{#if store.gameState.daily.totalCollections > 0}
+		<p class="mt-8">Dailies collected: <strong>{store.gameState.daily.totalCollections}</strong></p>
 	{/if}
 </div>
