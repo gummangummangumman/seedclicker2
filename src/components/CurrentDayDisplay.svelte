@@ -42,7 +42,6 @@
 	let currentLocale: string | null = $state(null);
 	function randomiseLocale() {
 		currentLocale = randomLocales[Math.floor(Math.random() * randomLocales.length)];
-		console.log(currentLocale);
 	}
 </script>
 

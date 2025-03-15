@@ -11,6 +11,7 @@ export interface CurrentGameState {
 	peakLifetimeSeeds: number;
 	totalLifetimeSeeds: number;
 	items: [string, number][]; //name, amount
+	plantedCrops: [string, number][]; //crop name, time planted
 	clickPower: number;
 	seconds: number;
 	talents: string[];

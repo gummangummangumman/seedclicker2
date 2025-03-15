@@ -1,5 +1,5 @@
 import { store, updateGameState } from '../store/store.svelte';
-import type { DailyChoice, GameState } from '../types/gameState';
+import type { GameState } from '../types/gameState';
 import { items } from '../types/item';
 import type { OfflineProgress } from '../types/offlineProgress';
 import { activeTalents } from '../types/talent';

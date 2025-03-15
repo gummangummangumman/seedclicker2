@@ -27,7 +27,7 @@ export const items: Item[] = [
 		name: 'Plantation',
 		basePrice: 5_000_000,
 		sps: 100,
-		priceScaling: 1.2,
+		priceScaling: 5,
 		requirement: new Requirement(100_000, 1_000_000),
 	},
 	{

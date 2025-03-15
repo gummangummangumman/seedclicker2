@@ -16,6 +16,7 @@ export function collectDaily(date: Date, treasure: DailyChoice): number {
 			daily: {
 				date: date.toDateString(),
 				choice: treasure,
+				totalCollections: store.gameState.daily.totalCollections + 1,
 			},
 		},
 		rewarded,

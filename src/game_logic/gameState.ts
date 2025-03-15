@@ -8,6 +8,7 @@ export const initialCurrentGameState: CurrentGameState = {
 	peakLifetimeSeeds: 0,
 	totalLifetimeSeeds: 0,
 	items: items.map((item) => [item.name, 0]) as [string, number][],
+	plantedCrops: [],
 	clickPower: 1,
 	seconds: 0,
 	talents: [],
