@@ -49,7 +49,7 @@ export const talentTree: TalentTree = {
 		{
 			talents: [
 				{
-					name: 'Water',
+					name: 'Aquatic Blessing',
 					description: '+3% of base clickpower each water item (water cans and sprinklers)',
 					requires: 'Click god',
 					clickEffect: (clickPower) => {
@@ -57,7 +57,12 @@ export const talentTree: TalentTree = {
 						return clickPower + clickPower * 0.03 * totalWaterItems;
 					},
 				},
-				{ name: '2', description: '2x cp', requires: 'Click god', clickEffect: (clickPower) => clickPower * 2 },
+				{
+					name: 'Finger Fury',
+					description: '2x cp',
+					requires: 'Click god',
+					clickEffect: (clickPower) => clickPower * 2,
+				},
 				{
 					name: 'Bargaining Barry',
 					description: 'All items that give sps are 90% cheaper',
@@ -70,7 +75,16 @@ export const talentTree: TalentTree = {
 						}
 					},
 				},
-				{ name: '4', description: '2x sps', requires: 'Friend of the hourglass', spsEffect: (sps) => sps * 2 },
+				{
+					name: 'All rounder',
+					description: '2x sps, 2x cp, 50% cheaper items',
+					requires: 'Friend of the hourglass',
+					spsEffect: (sps) => sps * 2,
+					clickEffect: (clickpower) => clickpower * 2,
+					costEffect: (cost) => {
+						return cost / 2;
+					},
+				},
 			],
 		},
 	],

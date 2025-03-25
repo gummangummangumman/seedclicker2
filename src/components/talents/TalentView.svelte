@@ -44,6 +44,6 @@
 			alt={talent.name}
 			class="rounded-full {isDarkMode(store.settings) ? 'invert' : ''}"
 		/>
-		<p class="absolute text-sm leading-tight">{talent.name}</p>
+		<p class="absolute text-sm leading-tight mt-1">{talent.name}</p>
 	</Button>
 {/if}
