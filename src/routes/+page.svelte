@@ -160,7 +160,7 @@
 			</button>
 		{/each}
 	</div>
-	{#if offlineProgressAdded}
+	{#if offlineProgressAdded && offlineProgressAdded.seedsEarned > 0}
 		<OfflineProgressPopup offlineProgress={offlineProgressAdded} onClose={() => (offlineProgressAdded = null)} />
 	{/if}
 
