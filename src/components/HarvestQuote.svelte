@@ -100,8 +100,14 @@
 			source: 'Vera Nazarian',
 		},
 		{
-			quote: 'Så la meg få slippe å leve lenger nå, i mitt neste liv vil jeg bli en blomst som du kan lukte på',
-			source: 'Lars Kilevold',
+			quote: 'Wherever life plants you, bloom with grace',
+		},
+		{
+			quote: 'I want to be like a sunflower; so that even on the darkest days I will stand tall and find the sunlight',
+		},
+		{
+			quote: 'Normalize being a friendly sunflower',
+			source: 'Kveldsmat',
 		},
 	];
 
