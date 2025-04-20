@@ -2,10 +2,20 @@ import { store, updateGameState } from '../store/store.svelte';
 import { items } from '../types/item';
 import { activeTalents } from '../types/talent';
 
-export function getItemPrice(itemIndex: number) {
+/**
+ * Only cares about {@link maxAmount}!
+ */
+function canBuy(itemIndex: number): boolean {
+	return !items[itemIndex].maxAmount || store.gameState.current.items[itemIndex][1] < items[itemIndex].maxAmount;
+}
+
+export function getItemPrice(itemIndex: number): number {
 	const item = items[itemIndex];
 	const numberOfItems = store.gameState.current.items[itemIndex];
 	const price = item.basePrice * Math.pow(item.priceScaling, numberOfItems[1]);
+	if (!canBuy(itemIndex)) {
+		return 0;
+	}
 	return Math.floor(activeTalents().reduce((sps, talent) => (sps = talent.costEffect?.(sps, item) ?? sps), price));
 }
 
@@ -41,9 +51,13 @@ export function maxItemsAmount(itemIndex: number): [number, number] {
 	const item = items[itemIndex];
 	let currentPrice = getItemPrice(itemIndex);
 
-	const numUpgradesAffordable = Math.floor(
+	let numUpgradesAffordable = Math.floor(
 		Math.log((store.gameState.current.seeds / currentPrice) * (item.priceScaling - 1) + 1) /
 			Math.log(item.priceScaling),
+	);
+	numUpgradesAffordable = Math.min(
+		numUpgradesAffordable,
+		(item.maxAmount ?? Number.MAX_VALUE) - store.gameState.current.items[itemIndex][1],
 	);
 	const totalCost = Math.floor(
 		(currentPrice * (Math.pow(item.priceScaling, numUpgradesAffordable) - 1)) / (item.priceScaling - 1),
@@ -55,6 +69,9 @@ export function maxItemsAmount(itemIndex: number): [number, number] {
 export function buyItem(itemIndex: number) {
 	const price = getItemPrice(itemIndex);
 	if (store.gameState.current.seeds < price) {
+		return;
+	}
+	if (!canBuy(itemIndex)) {
 		return;
 	}
 	let newGameState = store.gameState;

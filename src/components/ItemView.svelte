@@ -21,7 +21,7 @@
 	}
 
 	function canBuy() {
-		return store.gameState.current.seeds >= getPrice();
+		return store.gameState.current.seeds >= getPrice() && getPrice() != 0;
 	}
 
 	function getPrice() {
@@ -60,8 +60,10 @@
 			<div class="w-full pr-20">
 				<span class="text-lg font-bold">{getName()}</span>
 				{#if !isOutLine()}
-					<br />
-					💰 <strong>{format(getPrice(), store.settings.formatting)}</strong>
+					{#if getPrice() != 0}
+						<br />
+						💰 <strong>{format(getPrice(), store.settings.formatting)}</strong>
+					{/if}
 					{#if store.gameState.current.items[index][1] > 0 && item.sps}
 						<br />
 						<span class="text-sm">

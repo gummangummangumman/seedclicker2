@@ -8,6 +8,7 @@ export interface Item {
 	clickpower?: number;
 	priceScaling: number;
 	requirement?: Requirement;
+	maxAmount?: number;
 }
 
 export const items: Item[] = [
@@ -29,6 +30,7 @@ export const items: Item[] = [
 		sps: 100,
 		priceScaling: 5,
 		requirement: new Requirement(100_000, 1_000_000),
+		maxAmount: 9,
 	},
 	{
 		name: 'Sun',
