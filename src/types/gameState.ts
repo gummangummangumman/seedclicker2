@@ -1,3 +1,5 @@
+import type { PlantedCrop } from './plantation';
+
 export interface GameState {
 	current: CurrentGameState;
 	harvested: HarvestedGameState;
@@ -11,7 +13,7 @@ export interface CurrentGameState {
 	peakLifetimeSeeds: number;
 	totalLifetimeSeeds: number;
 	items: [string, number][]; //name, amount
-	plantedCrops: [string, number][]; //crop name, time planted
+	plantedCrops: [PlantedCrop]; //crop name, time planted, time when grown //TODO consider making a type PlantedCrop
 	clickPower: number;
 	seconds: number;
 	talents: string[];

@@ -19,7 +19,12 @@ export function plantCrops(crop: Crop) {
 		console.error('Could not plant more crops, no more empty plantations!');
 		return;
 	}
-	store.gameState.current.plantedCrops.push([crop.name, timestampSeconds()]);
+	const currentTime = timestampSeconds();
+	store.gameState.current.plantedCrops.push({
+		name: crop.name,
+		plantedTime: currentTime,
+		finishTime: currentTime + crop.growTime,
+	});
 }
 
 export function cancelCrop(index: number) {
@@ -27,7 +32,12 @@ export function cancelCrop(index: number) {
 }
 
 export function collectCrop(index: number) {
-	const name = store.gameState.current.plantedCrops[index][0];
+	const plantedCrop = store.gameState.current.plantedCrops[index];
+	if (plantedCrop.finishTime > timestampSeconds()) {
+		console.warn('Can not collect crop before finish time: ' + plantedCrop.finishTime);
+		return;
+	}
+	const name = plantedCrop.name;
 	const crop = getCrop(name);
 	crop?.onCollect();
 	store.gameState.current.plantedCrops.splice(index, 1);

@@ -1,15 +1,46 @@
 <script lang="ts">
 	import Button from '../components/Button.svelte';
-	import { amountOfPlantations, cancelCrop, canPlantCrops, plantCrops } from '../game_logic/plantationLogic';
+	import {
+		amountOfPlantations,
+		cancelCrop,
+		canPlantCrops,
+		collectCrop,
+		plantCrops,
+	} from '../game_logic/plantationLogic';
 	import { store } from '../store/store.svelte';
-	import { crops } from '../types/plantation';
+	import { crops, type PlantedCrop } from '../types/plantation';
 	import { formatSeconds } from '../util/number_formatting';
-	const plantationCountAsArray = new Array(amountOfPlantations()).fill(null);
-	let filledArray = $derived(
-		plantationCountAsArray.map((value, index) => {
+	import { timestampSeconds } from '../util/save';
+
+	const arrayWithPlantationLength: null[] = new Array(amountOfPlantations()).fill(null);
+	let plantedCrops: (PlantedCrop | null)[] = $derived(
+		arrayWithPlantationLength.map((value, index) => {
 			return store.gameState.current.plantedCrops[index] ?? null;
 		}),
 	);
+
+	function cancel(index: number) {
+		const plantedCrop = plantedCrops[index];
+		if (plantedCrop == null) {
+			console.warn("attempt to cancel crop index that doesn't exist: " + index);
+			return;
+		}
+		if (timePassed(plantedCrop.plantedTime) > 180) {
+			if (!window.confirm('are you sure?')) {
+				return;
+			}
+		}
+		cancelCrop(index);
+	}
+
+	function timePassed(plantedTime: number): number {
+		return timestampSeconds() - plantedTime;
+	}
+
+	function timeLeft(grownTime: number): number {
+		const diffSeconds = grownTime - timestampSeconds();
+		return Math.max(0, diffSeconds);
+	}
 </script>
 
 <div class="my-8 max-w-screen-sm sm:mx-auto">
@@ -30,15 +61,23 @@
 		{/each}
 	</div>
 
-	<div id="plantations" class="mt-8">
-		{#each filledArray as plantation, index}
+	<div id="plantations" class="mt-8 grid grid-cols-3 gap-4">
+		{#each plantedCrops as plantation, index}
 			{#if plantation == null}
 				<p>idle</p>
 			{:else}
-				<p>
-					{plantation}
-					<Button onclick={() => cancelCrop(index)}>cancel</Button>
-				</p>
+				<div>
+					<p>
+						{plantation.name}
+					</p>
+					<br />
+					{#if timeLeft(plantation.finishTime) > 0}
+						<Button onclick={() => cancel(index)}>cancel</Button>
+						<p>{formatSeconds(timeLeft(plantation.finishTime))}</p>
+					{:else}
+						<Button onclick={() => collectCrop(index)}>collect</Button>
+					{/if}
+				</div>
 			{/if}
 		{/each}
 	</div>

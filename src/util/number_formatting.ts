@@ -52,6 +52,9 @@ export function format(num: number, format: NumberFormatting, digits: number = 3
  * @returns hh:mm:ss
  */
 export function formatSeconds(seconds: number) {
+	if (seconds < 0) {
+		return '00:00:00';
+	}
 	return `${Math.floor(seconds / 3600)
 		.toString()
 		.padStart(2, '0')}:${Math.floor((seconds % 3600) / 60)
