@@ -13,7 +13,7 @@ export interface CurrentGameState {
 	peakLifetimeSeeds: number;
 	totalLifetimeSeeds: number;
 	items: [string, number][]; //name, amount
-	plantedCrops: [PlantedCrop]; //crop name, time planted, time when grown //TODO consider making a type PlantedCrop
+	plantedCrops: PlantedCrop[]; //crop name, time planted, time when grown
 	clickPower: number;
 	seconds: number;
 	talents: string[];
