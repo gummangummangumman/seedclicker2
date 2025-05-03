@@ -3,7 +3,6 @@
 	import { store } from '../store/store.svelte';
 	import { format } from '../util/number_formatting';
 	import Button from './Button.svelte';
-	import CostEmoji from './CostEmoji.svelte';
 	export let amount: number;
 	export let cost: number;
 	export let onclick: MouseEventHandler<HTMLButtonElement>;

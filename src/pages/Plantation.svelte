@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Button from '../components/Button.svelte';
+	import PlantationCrop from '../components/PlantationCrop.svelte';
 	import {
 		amountOfPlantations,
 		cancelCrop,
@@ -36,14 +37,9 @@
 	function timePassed(plantedTime: number): number {
 		return timestampSeconds() - plantedTime;
 	}
-
-	function timeLeft(grownTime: number): number {
-		const diffSeconds = grownTime - timestampSeconds();
-		return Math.max(0, diffSeconds);
-	}
 </script>
 
-<div class="my-8 max-w-screen-sm sm:mx-auto">
+<div class="my-8 mx-4 max-w-screen-sm sm:mx-auto">
 	<p>You have {amountOfPlantations()} plantation{amountOfPlantations() > 1 ? 's' : ''}.</p>
 
 	<div id="crop-types">
@@ -52,7 +48,7 @@
 				<Button
 					disabled={!canPlantCrops()}
 					onclick={() => plantCrops(crop)}
-					class="bg-primary p-2 px-4 mt-3 rounded-md border border-secondary"
+					class="bg-primary p-2 px-4 mt-3 rounded-md border border-black disabled:bg-bg"
 				>
 					<p>Plant {crop.name}</p>
 					<p>⏱️ {formatSeconds(crop.growTime / 60)}</p>
@@ -63,22 +59,7 @@
 
 	<div id="plantations" class="mt-8 grid grid-cols-3 gap-4">
 		{#each plantedCrops as plantation, index}
-			{#if plantation == null}
-				<p>idle</p>
-			{:else}
-				<div>
-					<p>
-						{plantation.name}
-					</p>
-					<br />
-					{#if timeLeft(plantation.finishTime) > 0}
-						<Button onclick={() => cancel(index)}>cancel</Button>
-						<p>{formatSeconds(timeLeft(plantation.finishTime))}</p>
-					{:else}
-						<Button onclick={() => collectCrop(index)}>collect</Button>
-					{/if}
-				</div>
-			{/if}
+			<PlantationCrop {plantation} onCancel={() => cancel(index)} onCollect={() => collectCrop(index)} />
 		{/each}
 	</div>
 </div>
