@@ -71,6 +71,7 @@
 						onmouseover={() => (isHoveringAChest = true)}
 						onmouseleave={() => (isHoveringAChest = false)}
 						onclick={() => collect(treasure)}
+						custom={true}
 						class="bg-primary border border-black rounded-full absolute"
 					>
 						<img

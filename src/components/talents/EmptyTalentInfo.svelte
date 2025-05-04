@@ -19,6 +19,7 @@
 	<p>
 		Choose wisely <Button
 			disabled={seedSymbol == '🌻'}
+			custom={true}
 			style="font-size: {sunflowerSize}px"
 			onclick={clickSunflower}>{seedSymbol}</Button
 		>

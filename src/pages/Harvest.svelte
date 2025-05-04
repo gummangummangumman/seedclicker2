@@ -46,13 +46,7 @@
 
 	<HarvestQuote />
 
-	<Button
-		class="p-2 border bg-primary border-secondary rounded-md"
-		onclick={harvest}
-		disabled={store.gameState.current.totalLifetimeSeeds == 0}
-	>
-		Harvest
-	</Button>
+	<Button onclick={harvest} disabled={store.gameState.current.totalLifetimeSeeds == 0}>Harvest</Button>
 </div>
 
 <style>

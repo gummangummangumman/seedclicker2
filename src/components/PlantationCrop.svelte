@@ -12,23 +12,26 @@
 		onCollect?: MouseEventHandler<HTMLButtonElement>;
 	}
 	let { plantation, onCancel, onCollect }: Props = $props();
+	let secondsLeft = $state(timeLeft(plantation?.finishTime ?? 0));
+	const interval = setInterval(() => {
+		secondsLeft = timeLeft(plantation?.finishTime ?? 0);
+	}, 1000);
 
 	function timeLeft(grownTime: number): number {
 		const diffSeconds = grownTime - timestampSeconds();
 		return Math.max(0, diffSeconds);
 	}
 
-	let secondsLeft = $state(timeLeft(plantation?.finishTime ?? 0));
-	const interval = setInterval(() => {
+	$effect(() => {
 		secondsLeft = timeLeft(plantation?.finishTime ?? 0);
-	}, 1000);
+	});
 
 	onDestroy(() => {
 		clearInterval(interval);
 	});
 </script>
 
-<div class="relative border rounded-lg p-1">
+<div class="h-32 relative border border-secondary rounded-lg p-1">
 	{#if plantation == null}
 		<p>idle</p>
 	{:else}
@@ -39,7 +42,11 @@
 			<br />
 			{#if secondsLeft > 0}
 				<div class="absolute right-1 top-1">
-					<Button onclick={onCancel} class="bg-primary border border-secondary w-6 h-6 rounded-full text-sm">
+					<Button
+						onclick={onCancel}
+						custom={true}
+						class="bg-primary border border-black w-6 h-6 rounded-full text-sm"
+					>
 						x
 					</Button>
 				</div>

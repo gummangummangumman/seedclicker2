@@ -73,7 +73,7 @@
 		</p>
 	</div>
 	<Button
-		class="bg-primary border border-black p-2 cursor-copy"
+		class="cursor-copy"
 		onclick={() => {
 			navigator.clipboard
 				.writeText(getSave(store.gameState))
@@ -88,7 +88,6 @@
 		Save to clipboard
 	</Button>
 	<Button
-		class="bg-primary border border-black p-2"
 		onclick={() => {
 			const blob = new Blob([getSave(store.gameState)], { type: 'text/plain' });
 			const link = document.createElement('a');
@@ -117,11 +116,11 @@
 		<p class="text-red-800 font-bold">
 			{errorMessage}
 		</p>
-		<Button class="bg-primary border border-black p-2" disabled={!!errorMessage} onclick={load}>Load</Button>
+		<Button disabled={!!errorMessage} onclick={load}>Load</Button>
 		<br />
 	</div>
 	<Button
-		class="border border-black p-2 bg-red-600"
+		class="bg-red-600"
 		onclick={() => {
 			if (
 				window.confirm(

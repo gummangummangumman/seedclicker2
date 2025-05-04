@@ -45,13 +45,9 @@
 	<div id="crop-types">
 		{#each crops as crop}
 			{#if crop.requirement == undefined || crop.requirement()}
-				<Button
-					disabled={!canPlantCrops()}
-					onclick={() => plantCrops(crop)}
-					class="bg-primary p-2 px-4 mt-3 rounded-md border border-black disabled:bg-bg"
-				>
+				<Button disabled={!canPlantCrops()} onclick={() => plantCrops(crop)} class="px-4 mt-3">
 					<p>Plant {crop.name}</p>
-					<p>⏱️ {formatSeconds(crop.growTime / 60)}</p>
+					<p>⏱️ {formatSeconds(crop.growTime)}</p>
 				</Button>
 			{/if}
 		{/each}

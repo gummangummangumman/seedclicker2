@@ -33,10 +33,11 @@
 	<Button
 		{onclick}
 		title={getTitle()}
+		custom={true}
 		class="
             {talentOwned(talent) && 'bg-secondary'}
             {canBuy(talent) && 'bg-primary'}
-			mt-2 border border-black rounded-full relative
+			mt-2 border border-black rounded-full
         "
 	>
 		<img

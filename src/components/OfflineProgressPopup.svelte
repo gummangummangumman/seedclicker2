@@ -17,6 +17,6 @@
 			You earned <strong>{format(offlineProgress.seedsEarned, store.settings.formatting)}</strong>
 			{getCurrencyName()} while you were gone.
 		</p>
-		<Button onclick={onClose} class="my-2 p-2 bg-primary border border-black">Cool</Button>
+		<Button onclick={onClose} class="my-2">Cool</Button>
 	</div>
 </div>

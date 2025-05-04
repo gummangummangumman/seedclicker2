@@ -7,7 +7,6 @@
 		--bg-light: 170, 255, 170;
 		--bg-dark: 0, 20, 0;
 
-
 		--bg: var(--bg-light);
 		--primary: 136, 255, 136;
 		--secondary: 0, 102, 0;
@@ -26,7 +25,7 @@
 .theme-dark {
 	--bg: var(--bg-dark);
 	--primary: 0, 36, 3;
-	--secondary: 0, 50, 3;
+	--secondary: 3, 60, 7;
 	--text: 255, 255, 255;
 }
 

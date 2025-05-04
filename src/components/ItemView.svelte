@@ -46,11 +46,7 @@
 </script>
 
 <div class="flex">
-	<Button
-		onclick={() => buySingle()}
-		disabled={!canBuy() || isOutLine()}
-		class="block relative w-full bg-primary border border-black disabled:bg-bg p-2 rounded-md my-1"
-	>
+	<Button onclick={() => buySingle()} disabled={!canBuy() || isOutLine()} class="block w-full my-1">
 		<div class="flex items-center space-x-4 mx-auto w-full">
 			{#if store.settings.itemView == ItemView.NoPicture}
 				<ItemAmount amount={store.gameState.current.items[index][1]} />

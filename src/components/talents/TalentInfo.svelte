@@ -14,9 +14,7 @@
 	<h1>{talent.name}</h1>
 	<p class="font-bo">{talent.description}</p>
 	{#if canBuy(talent)}
-		<Button onclick={() => buyTalent(talent)} class="bg-primary p-2 px-4 mt-3 rounded-md border border-secondary">
-			Buy
-		</Button>
+		<Button onclick={() => buyTalent(talent)} class="px-4 mt-3">Buy</Button>
 	{:else if talentOwned(talent)}
 		<p class="pt-3 text-lg">✅</p>
 	{:else if !requirementFulfilled(talent)}
