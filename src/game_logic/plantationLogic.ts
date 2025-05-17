@@ -42,6 +42,7 @@ export function cancelCrop(index: number) {
 	store.gameState.current.plantedCrops.splice(index, 1);
 }
 
+//TODO return some feedback to display what happened when it was collected
 export function collectCrop(index: number) {
 	const plantedCrop = store.gameState.current.plantedCrops[index];
 	if (plantedCrop.finishTime > timestampSeconds()) {
