@@ -5,6 +5,8 @@
 	import { timestampSeconds } from '../util/save';
 	import Button from './Button.svelte';
 	import { onDestroy } from 'svelte';
+	import { isDarkMode } from '../util/background';
+	import { store } from '../store/store.svelte';
 
 	interface Props {
 		plantation: PlantedCrop | null;
@@ -31,15 +33,28 @@
 	});
 </script>
 
-<div class="h-32 relative border border-secondary rounded-lg p-1">
+<div class="h-64 relative border border-secondary rounded-lg p-2">
 	{#if plantation == null}
-		<p>idle</p>
+		<p>Empty plantation</p>
+		<img
+			src={`/items/plantation.png`}
+			alt={'plantation'}
+			width="80px"
+			class="rounded-full border border-secondary block mx-auto my-8 {isDarkMode(store.settings) ? 'invert' : ''}"
+		/>
 	{:else}
 		<div>
-			<p>
+			<p class="mx-5">
 				{plantation.name}
 			</p>
-			<br />
+			<img
+				src={`/crops/${plantation.name.replaceAll(' ', '_').toLowerCase()}.png`}
+				alt={plantation.name}
+				width="80px"
+				class="rounded-full border border-secondary block mx-auto my-8 {isDarkMode(store.settings)
+					? 'invert'
+					: ''}"
+			/>
 			{#if secondsLeft > 0}
 				<div class="absolute right-1 top-1">
 					<Button

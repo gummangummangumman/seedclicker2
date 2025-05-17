@@ -2,7 +2,7 @@ import { store } from '../store/store.svelte';
 import { DailyChoice } from './gameState';
 
 export enum CropName {
-	BabySunflower = 'Baby Sunflower',
+	BabySunflower = 'Baby Sunflowers',
 	BananaTrees = 'Banana trees',
 }
 
