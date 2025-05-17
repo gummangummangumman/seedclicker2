@@ -14,6 +14,7 @@ export interface CurrentGameState {
 	totalLifetimeSeeds: number;
 	items: [string, number][]; //name, amount
 	plantedCrops: PlantedCrop[]; //crop name, time planted, time when grown
+	cropsCollected: number;
 	clickPower: number;
 	seconds: number;
 	talents: string[];
@@ -24,6 +25,7 @@ export interface HarvestedGameState {
 	harvestCount: number;
 	clicks: number;
 	seeds: number;
+	cropsCollected: number;
 	seconds: number;
 	talents: string[];
 }

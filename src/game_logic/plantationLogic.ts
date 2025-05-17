@@ -52,4 +52,5 @@ export function collectCrop(index: number) {
 	const crop = getCrop(name);
 	crop?.onCollect();
 	store.gameState.current.plantedCrops.splice(index, 1);
+	store.gameState.current.cropsCollected++;
 }
