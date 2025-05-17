@@ -8,7 +8,7 @@ export enum CropName {
 
 export interface Crop {
 	name: CropName;
-	growTime: number; // in seconds
+	growTime: number; // in seconds, before talents are applied
 	onCollect: () => void;
 	requirement?: () => boolean;
 }

@@ -6,6 +6,7 @@
 		cancelCrop,
 		canPlantCrops,
 		collectCrop,
+		getGrowTime,
 		plantCrops,
 	} from '../game_logic/plantationLogic';
 	import { store } from '../store/store.svelte';
@@ -47,7 +48,7 @@
 			{#if crop.requirement == undefined || crop.requirement()}
 				<Button disabled={!canPlantCrops()} onclick={() => plantCrops(crop)} class="px-4 mt-3 mx-1">
 					<p>Plant {crop.name}</p>
-					<p>⏱️ {formatSeconds(crop.growTime)}</p>
+					<p>⏱️ {formatSeconds(getGrowTime(crop))}</p>
 				</Button>
 			{/if}
 		{/each}

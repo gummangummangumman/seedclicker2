@@ -1,5 +1,6 @@
 import { store } from '../store/store.svelte';
 import { amountOf, type Item } from './item';
+import type { Crop } from './plantation';
 
 /**
  * Make sure all effects are multiplicative!
@@ -12,6 +13,7 @@ export interface Talent {
 	clickEffect?: (clickPower: number) => number;
 	spsEffect?: (sps: number) => number;
 	costEffect?: (cost: number, item: Item) => number;
+	cropTimeEffect?: (growTime: number, crop: Crop) => number;
 }
 
 export interface TalentLevel {
@@ -84,6 +86,16 @@ export const talentTree: TalentTree = {
 					costEffect: (cost) => {
 						return cost / 2;
 					},
+				},
+			],
+		},
+		{
+			talents: [
+				{
+					name: 'Blessed crop water',
+					description: 'Crop grow time is halved',
+					requires: 'Aquatic Blessing',
+					cropTimeEffect: (seconds, crop) => seconds / 2,
 				},
 			],
 		},

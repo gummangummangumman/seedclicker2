@@ -1,5 +1,6 @@
 import { store } from '../store/store.svelte';
 import { crops, type Crop } from '../types/plantation';
+import { activeTalents } from '../types/talent';
 import { timestampSeconds } from '../util/save';
 
 export function amountOfPlantations() {
@@ -14,6 +15,16 @@ export function getCrop(cropName: string): Crop | undefined {
 	return crops.find((crop) => crop.name == cropName);
 }
 
+/**
+ * With talents applied
+ */
+export function getGrowTime(crop: Crop): number {
+	return activeTalents().reduce(
+		(growTime, talent) => (growTime = talent.cropTimeEffect?.(growTime, crop) ?? growTime),
+		crop.growTime,
+	);
+}
+
 export function plantCrops(crop: Crop) {
 	if (!canPlantCrops()) {
 		console.error('Could not plant more crops, no more empty plantations!');
@@ -23,7 +34,7 @@ export function plantCrops(crop: Crop) {
 	store.gameState.current.plantedCrops.push({
 		name: crop.name,
 		plantedTime: currentTime,
-		finishTime: currentTime + crop.growTime,
+		finishTime: currentTime + getGrowTime(crop),
 	});
 }
 
