@@ -75,7 +75,7 @@
 						class="bg-primary border border-black rounded-full absolute"
 					>
 						<img
-							src={`/${treasure}.jpg`}
+							src={`${treasure}.jpg`}
 							width="100px"
 							alt={treasure + ' treasure chest'}
 							class="rounded-full"

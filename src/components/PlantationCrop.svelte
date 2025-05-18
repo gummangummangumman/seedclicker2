@@ -37,7 +37,7 @@
 	{#if plantation == null}
 		<p>Empty plantation</p>
 		<img
-			src={`/items/plantation.png`}
+			src={`items/plantation.png`}
 			alt={'plantation'}
 			width="80px"
 			class="rounded-full border border-secondary block mx-auto my-8 {isDarkMode(store.settings) ? 'invert' : ''}"
@@ -48,7 +48,7 @@
 				{plantation.name}
 			</p>
 			<img
-				src={`/crops/${plantation.name.replaceAll(' ', '_').toLowerCase()}.png`}
+				src={`crops/${plantation.name.replaceAll(' ', '_').toLowerCase()}.png`}
 				alt={plantation.name}
 				width="80px"
 				class="rounded-full border border-secondary block mx-auto my-8 {isDarkMode(store.settings)

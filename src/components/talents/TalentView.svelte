@@ -41,7 +41,7 @@
         "
 	>
 		<img
-			src={`/talents/${talent.name.replaceAll(' ', '_').toLowerCase()}.png`}
+			src={`talents/${talent.name.replaceAll(' ', '_').toLowerCase()}.png`}
 			alt={talent.name}
 			class="rounded-full {isDarkMode(store.settings) ? 'invert' : ''}"
 		/>
