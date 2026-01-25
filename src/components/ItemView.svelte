@@ -9,8 +9,10 @@
 	import { ItemView } from '../types/settings';
 	import { buyItem, buyMaxOfItem, getItemPrice, maxItemsAmount } from '../game_logic/itemLogic';
 	import { getLongSpsName, getSpsName } from '../game_logic/dailyLogic';
-	export let item: Item;
-	export let index: number;
+
+	let { item, index }: { item: Item; index: number } = $props();
+
+	const canBuy = $derived(store.gameState.current.seeds >= getPrice() && getPrice() != 0);
 
 	function buySingle() {
 		buyItem(index);
@@ -18,10 +20,6 @@
 
 	function buyMax() {
 		buyMaxOfItem(index);
-	}
-
-	function canBuy() {
-		return store.gameState.current.seeds >= getPrice() && getPrice() != 0;
 	}
 
 	function getPrice() {
@@ -46,7 +44,7 @@
 </script>
 
 <div class="flex">
-	<Button onclick={() => buySingle()} disabled={!canBuy() || isOutLine()} class="block w-full my-1">
+	<Button onclick={() => buySingle()} disabled={!canBuy || isOutLine()} class="block w-full my-1">
 		<div class="flex items-center space-x-4 mx-auto w-full">
 			{#if store.settings.itemView == ItemView.NoPicture}
 				<ItemAmount amount={store.gameState.current.items[index][1]} />
